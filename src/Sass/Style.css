@@ -19,6 +19,27 @@ body {
   font-family: "Poppins";
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "ElMessiri";
+}
+
+/* transparent background on autocomplete inputs*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-color: transparent;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+@media (max-width: 800px) {
+  .container {
+    width: 90% !important;
+  }
 }/*# sourceMappingURL=Style.css.map */
