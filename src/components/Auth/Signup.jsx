@@ -42,6 +42,14 @@ const Signup = () => {
             delete userData.confirmPassword;
             delete userData.terms;
             userData.timestamp = serverTimestamp();
+            // MORE RELATED DATA ADDED
+            userData.bio = '';
+            userData.avatar = '';
+            userData.fav = [];
+            userData.properties = [];
+            userData.requests = [];
+            userData.reviews = [];
+            userData.history = [];
             await setDoc(doc(db, 'users', user.uid), userData);
             navigate('/');
         } catch (error) {
