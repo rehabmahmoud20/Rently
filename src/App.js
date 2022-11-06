@@ -28,7 +28,7 @@ function App() {
                         element={<ForgetPassword />}
                     />
                     <Route path="favourits" element={<Favourits />} />
-                    <Route path="profile" element={<Profile />} />
+                    <Route path="profile/*" element={<Profile />} />
                     <Route path="rental-details" element={<RentalDetails />} />
                     <Route path="rental-list" element={<RentalList />} />
                     <Route path="about" element={<About />} />
