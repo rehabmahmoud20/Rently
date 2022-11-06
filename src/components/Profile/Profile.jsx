@@ -17,7 +17,7 @@ const Profile = () => {
                 <Route path="history" element={<HistoryContent />} />
                 <Route path="inbox" element={<InboxContent />} />
                 <Route path="payment-method" element={<PaymentContent />} />
-                <Route path="personal-info" element={<PersonalInfoContent />} />
+                <Route path="/" element={<PersonalInfoContent />} />
                 <Route path="properties" element={<PropertiesContent />} />
             </Routes>
         </section>

@@ -10,7 +10,7 @@ import Avatar from './Avatar';
 const SideMenu = () => {
     return (
         <aside
-            className="h-screen w-fit sm:w-56 select-none shadow-lg shadow-zinc-400 transition-all"
+            className="h-screen w-fit sm:min-w-max select-none shadow-lg shadow-zinc-400 transition-all"
             aria-label="Sidebar"
         >
             <Avatar />

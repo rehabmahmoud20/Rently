@@ -5,7 +5,7 @@ const PersonalInfo = () => {
     return (
         <li>
             <Link
-                to="/profile/personal-info"
+                to="/profile/"
                 className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
                 <BiUser className="flex-shrink-0 w-10 sm:w-5 h-6 sm:h-5 text-gray-600 transition-all duration-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
