@@ -11,7 +11,7 @@ import Profile from './components/Profile/Profile';
 import Favourits from './components/Favourits/Favourits';
 import Home from './components/Home/Home';
 import RentalDetails from './components/Rental/RentalDetails';
-import RentalList from './components/Rental/RentalList';
+import RentalList from "./components/Rental/RentalList/RentalList";
 import FAQ from './components/FAQ/FAQ';
 import About from './components/About/About';
 
