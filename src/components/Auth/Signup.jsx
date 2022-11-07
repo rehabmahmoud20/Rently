@@ -12,6 +12,7 @@ import {
     createUserWithEmailAndPassword,
     updateProfile,
 } from 'firebase/auth';
+import GoogleAuth from './GoogleAuth';
 const Signup = () => {
     // S H O W    P A S S W O R D
     const [showPassword, setShowPassword] = useState(false);
@@ -296,11 +297,9 @@ const Signup = () => {
                 >
                     Sign up
                 </button>
-                <div className="text-sm mt-5 text-center font-medium text-gray-900 dark:text-gray-300 mb-10">
-                    Sign up with Google{' '}
-                    <IoLogoGoogle className="inline cursor-pointer text-xl text-cyan-600 ml-1" />
-                </div>
+                {/* S I G N    I N    W I T H    G O O G L E */}
             </form>
+            <GoogleAuth page={'Sign up'} />
         </div>
     );
 };

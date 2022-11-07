@@ -6,6 +6,7 @@ import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 // A U T H E N T I C A T I O N
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import GoogleAuth from './GoogleAuth';
 const Signin = () => {
     // S H O W    P A S S W O R D
     const [showPassword, setShowPassword] = useState(false);
@@ -134,7 +135,9 @@ const Signin = () => {
                 >
                     Sign in
                 </button>
+                {/* S I G N    I N    W I T H    G O O G L E */}
             </form>
+            <GoogleAuth page={'Sign in'} />
         </div>
     );
 };
