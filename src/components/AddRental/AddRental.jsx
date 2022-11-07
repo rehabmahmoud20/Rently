@@ -1,5 +1,9 @@
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
+// firbase
+import { collection, addDoc, getDocs } from "firebase/firestore";
+import { db } from "../../firebase.config";
+import { useState } from "react";
 
 // rental options
 const options = [
@@ -7,6 +11,45 @@ const options = [
   { value: "Appartment", label: "Appartment" },
 ];
 const AddRental = () => {
+  const [image, setImage] = useState([]);
+  // convert images to base64
+  const convert2Base64 = (files) => {  
+    for(const file of files) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage([...reader.result.toString()]);
+      };
+      reader.readAsDataURL(file);
+    }
+   
+    console.log(image)
+  };
+  // handle sending data to the backend
+  const sendData = (dataTobesent) => {
+    const collecRef = collection(db, "rentals");
+    // get the data
+    getDocs(collecRef).then((snapshot) => {
+      console.log(snapshot.docs);
+      let rentals = [];
+      snapshot.docs.forEach((doc) => {
+        rentals.push({ ...doc.data(), id: doc.id });
+      });
+      console.log(rentals);
+    });
+    //////////////////////////////////////////////////////////////
+const {Area,AvailableRooms,Elevator,Floor,Furnashed,Parking,Pet,Price,Rooms,WIFI,adress,id,date,images,insurance,airConditioner,rentalName,separateRooms,rentalType} = dataTobesent;
+  console.log(images)
+  // addDoc(collecRef,{
+  //   address:adress,
+  //   id:id,
+  //   name:rentalName,
+  //   price:Price,
+
+  // })
+
+  };
+  // sendData();
+
   const {
     register,
     handleSubmit,
@@ -15,8 +58,14 @@ const AddRental = () => {
   } = useForm();
   return (
     <section className="container mx-auto py-12">
+      {image ? <img src={image} width="450" /> : null}
+
       <form
         onSubmit={handleSubmit((data) => {
+          // sendData(data);
+          // convert2Base64(data.images)
+          // console.log(data.images);
+
           console.log(data);
         })}
       >
@@ -28,14 +77,16 @@ const AddRental = () => {
             <div className="relative z-0 mb-6 w-full group">
               <input
                 type="text"
-                name="floating_text"
+                name="rentalName"
                 id="floating_text"
                 placeholder=" "
                 className="my-2 block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-cyan-600 focus:outline-none focus:ring-0 focus:border-cyan-600 peer"
-                {...register("name", { required: "This is required" })}
+                {...register("rentalName", { required: "This is required" })}
               />
               {errors.name?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.name.message}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                  {errors.name.message}
+                </p>
               )}
               <label
                 htmlFor="floating_text"
@@ -55,7 +106,9 @@ const AddRental = () => {
                 {...register("adress", { required: "This is required" })}
               />
               {errors.adress?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.adress.message}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                  {errors.adress.message}
+                </p>
               )}
               <label
                 htmlFor="floating_adress"
@@ -77,7 +130,9 @@ const AddRental = () => {
                 {...register("id", { required: "This is required" })}
               />
               {errors.id?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.id.message}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                  {errors.id.message}
+                </p>
               )}
               <label
                 htmlFor="floating_adress"
@@ -97,7 +152,9 @@ const AddRental = () => {
                 {...register("insurance", { required: "This is required" })}
               />
               {errors.insurance?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.insurance.message}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                  {errors.insurance.message}
+                </p>
               )}
               <label
                 htmlFor="floating_adress"
@@ -117,7 +174,9 @@ const AddRental = () => {
                 {...register("Price", { required: "This is required" })}
               />
               {errors.Price?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.Price.message}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                  {errors.Price.message}
+                </p>
               )}
               <label
                 htmlFor="floating_adress"
@@ -130,7 +189,6 @@ const AddRental = () => {
         </section>
         {/* ===================================================== rental information ================================================ */}
         <section className="rental-information">
-          
           <div className="grid md:grid-cols-4 md:gap-10">
             {/* Area */}
             <div className="relative z-0 mb-6 w-full group">
@@ -143,7 +201,9 @@ const AddRental = () => {
                 {...register("Area", { required: "This is required" })}
               />
               {errors.Area?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.Area.message}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                  {errors.Area.message}
+                </p>
               )}
               <label
                 htmlFor="floating_Area"
@@ -165,7 +225,9 @@ const AddRental = () => {
                 {...register("Rooms", { required: "This is required" })}
               />
               {errors.Rooms?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.Rooms.message}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                  {errors.Rooms.message}
+                </p>
               )}
               <label
                 htmlFor="floating_Rooms"
@@ -188,7 +250,9 @@ const AddRental = () => {
                 })}
               />
               {errors.AvailableRooms?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.AvailableRooms.message}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                  {errors.AvailableRooms.message}
+                </p>
               )}
 
               <label
@@ -214,10 +278,14 @@ const AddRental = () => {
                 })}
               />
               {errors.Floor?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.Floor.message}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                  {errors.Floor.message}
+                </p>
               )}
               {errors.Floor?.type === "max" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.Floor.message}</p>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                  {errors.Floor.message}
+                </p>
               )}
               <label
                 htmlFor="floating_Floor"
@@ -233,33 +301,36 @@ const AddRental = () => {
             <div>
               <label className="text-sm text-gray-500 ">Rental type</label>
               <Controller
-                name="select"
+                name="rentalType"
                 control={control}
                 render={({ field }) => (
-                  <Select {...field} options={options} className="my-4 text-cyan-600 " />
+                  <Select
+                    {...field}
+                    options={options}
+                    className="my-4 text-cyan-600 "
+                  />
                 )}
               />
             </div>
-           
+
             {/* date */}
             <div className="relative ">
               <label className="text-sm text-gray-500 ">Available date</label>
 
               <input
-               
                 type="date"
                 name="date"
                 className="my-4   border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full   p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-600 dark:focus:border-cyan-600 datepicker-input"
                 placeholder="Select date"
-                {...register("date" , { required: "This is required"})}
-
+                {...register("date", { required: "This is required" })}
               />
-               {errors.date?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.date.message}</p>
+              {errors.date?.type === "required" && (
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                  {errors.date.message}
+                </p>
               )}
             </div>
           </div>
-
         </section>
         {/* ===================================================== rental Features ================================================ */}
         <section className="grid md:grid-cols-4 md:gap-10 mb-5">
@@ -286,9 +357,9 @@ const AddRental = () => {
               id="air-conditioner"
               type="checkbox"
               value=""
-              name="air-conditioner"
+              name="airConditioner"
               className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-              {...register("air-conditioner")}
+              {...register("airConditioner")}
             />
             <label
               htmlFor="air-conditioner"
@@ -384,77 +455,73 @@ const AddRental = () => {
             </label>
           </div>
         </section>
-  {/* gender */}
-            <label className="text-sm text-gray-500 ">Gender</label>
+        {/* gender */}
+        <label className="text-sm text-gray-500 ">Gender</label>
 
-            <div className="flex items-center my-4 ">
-              <input
-                id="male"
-                type="radio"
-                value="male"
-                name="gender"
-                className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                {...register("male")}
-              
-              />
-              <label
-                htmlFor="male"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                Male
-              </label>
-            </div>
-            {/* f e m a l e */}
-            <div className="mb-5">
-            <input
-                id="female"
-                type="radio"
-                value="female"
-                name="gender"
-                className=" w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                {...register("female")}
-              />
-              <label
-                htmlFor="female"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                Female
-              </label>
-            </div>
-             
-         {/* images */}
-
-         <div className="relative z-0 mb-6 w-full group">
-            <label
-              className="text-sm text-gray-500  "
-              htmlFor="file_input"
-            >
-              Upload rental photos
-            </label>
-            <input
-              className="mt-4 w-1/4 block text-sm text-gray-900 bg-cyan-600 rounded-lg   hover:bg-cyan-700 text-white cursor-pointer dark:text-gray-400 focus:outline-none  dark:placeholder-gray-400"
-              id="file_input"
-              type="file"
-              name="images"
-              multiple
-              {...register("images", { required: "This is required" })}
-            />
-             {errors.images?.type === "required" && (
-            <p className="mt-2 text-sm text-red-600 dark:text-red-500">{errors.images.message}</p>
-          )}
-          </div>
-            
-           
-        <div className="  mx-auto w-fit">
-        <button
-          type="submit"
-          className=" text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-3 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm w-full sm:w-auto px-8 py-2 text-center "
-
-        >
-          Submit
-        </button>
+        <div className="flex items-center my-4 ">
+          <input
+            id="male"
+            type="radio"
+            value="male"
+            name="gender"
+            className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
+            {...register("male")}
+          />
+          <label
+            htmlFor="male"
+            className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            Male
+          </label>
         </div>
-      
+        {/* f e m a l e */}
+        <div className="mb-5">
+          <input
+            id="female"
+            type="radio"
+            value="female"
+            name="gender"
+            className=" w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
+            {...register("female")}
+          />
+          <label
+            htmlFor="female"
+            className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            Female
+          </label>
+        </div>
+
+        {/* images */}
+
+        <div className="relative z-0 mb-6 w-full group">
+          <label className="text-sm text-gray-500  " htmlFor="file_input">
+            Upload rental photos
+          </label>
+          <input
+            className="mt-4 w-1/4 block text-sm text-gray-900 bg-cyan-600 rounded-lg   hover:bg-cyan-700 text-white cursor-pointer dark:text-gray-400 focus:outline-none  dark:placeholder-gray-400"
+            id="file_input"
+            type="file"
+            name="images"
+            accept="image/*"
+            multiple
+            {...register("images", { required: "This is required" })}
+          />
+          {errors.images?.type === "required" && (
+            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+              {errors.images.message}
+            </p>
+          )}
+        </div>
+
+        <div className="  mx-auto w-fit">
+          <button
+            type="submit"
+            className=" text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-3 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm w-full sm:w-auto px-8 py-2 text-center "
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </section>
   );
