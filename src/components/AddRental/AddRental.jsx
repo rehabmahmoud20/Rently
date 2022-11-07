@@ -20,8 +20,9 @@ const AddRental = () => {
           console.log(data);
         })}
       >
+        {/* text-3xl text-gray-800 */}
         <section className="about-rental">
-          <h2 className="text-5xl mb-6">Rental information</h2>
+          <h2 className=" mb-6 text-3xl text-gray-800">Rental information</h2>
           <div className="grid md:grid-cols-2 md:gap-10">
             {/* RENTAL NAME */}
             <div className="relative z-0 mb-6 w-full group">

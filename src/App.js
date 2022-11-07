@@ -15,10 +15,12 @@ import RentalList from "./components/Rental/RentalList/RentalList";
 import FAQ from "./components/FAQ/FAQ";
 import About from "./components/About/About";
 import AddRental from "./components/AddRental/AddRental";
+import NavbarComponent from "./components/Shared/NavbarComponent";
 
 function App() {
   return (
     <BrowserRouter>
+    <NavbarComponent/>
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
