@@ -1,3 +1,81 @@
+<<<<<<< HEAD
 button:active {
     transform: scale(0.95);
 } /*# sourceMappingURL=rentalList.css.map */
+=======
+nav .wrap:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: silver;
+  left: 0px;
+}
+
+nav {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 3;
+}
+nav .wrap {
+  position: relative;
+}
+nav .wrap:after {
+  top: 51px;
+}
+
+.filter {
+  position: fixed;
+  top: 62px;
+  left: 0px;
+  width: 100%;
+  z-index: 3;
+  background-color: white;
+}
+
+.products-list {
+  width: 100%;
+  position: relative;
+  margin-top: 144px;
+  z-index: 1;
+}
+.products-list #map {
+  height: calc(100vh - 144px);
+  position: fixed;
+  top: 144px;
+  width: 31.6666666667%;
+  right: 34.5px;
+}
+.products-list #map .leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+.card-top {
+  height: 250px;
+}
+
+.heart-wrapper {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 15;
+}
+.heart-wrapper .heart-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.carousel .flex-col {
+  padding: 0px;
+  position: relative;
+}
+
+/*# sourceMappingURL=rentalList.css.map */
+>>>>>>> hesham
