@@ -10,6 +10,7 @@ root.render(
     <Provider store={Store}>
         <React.StrictMode>
             <App />
+            <script src="../path/to/flowbite/dist/flowbite.js"></script>
         </React.StrictMode>
     </Provider>
 );

@@ -2,7 +2,7 @@
 import './Sass/Style.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Signup from './components/Auth/Signup';
 import Signin from './components/Auth/Signin';
 import ForgetPassword from './components/Auth/ForgetPassword';
@@ -14,11 +14,13 @@ import RentalList from './components/Rental/RentalList/RentalList';
 import FAQ from './components/FAQ/FAQ';
 import About from './components/About/About';
 import AddRental from './components/AddRental/AddRental';
+import NavbarComponent from './components/Shared/NavbarComponent';
 import { UseAuthStatus } from './components/Hooks/useAuthStatus';
 function App() {
     const { isLoggedIn } = UseAuthStatus();
     return (
         <BrowserRouter>
+            <NavbarComponent />
             <main>
                 <Routes>
                     <Route path="/" element={<Home />} />
