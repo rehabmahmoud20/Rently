@@ -1,31 +1,3 @@
-<<<<<<< HEAD
-button:active {
-    transform: scale(0.95);
-} /*# sourceMappingURL=rentalList.css.map */
-=======
-nav .wrap:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  background-color: silver;
-  left: 0px;
-}
-
-nav {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  z-index: 3;
-}
-nav .wrap {
-  position: relative;
-}
-nav .wrap:after {
-  top: 51px;
-}
-
 .filter {
   position: fixed;
   top: 62px;
@@ -77,5 +49,8 @@ nav .wrap:after {
   position: relative;
 }
 
+button:active {
+  transform: scale(0.95);
+}
+
 /*# sourceMappingURL=rentalList.css.map */
->>>>>>> hesham
