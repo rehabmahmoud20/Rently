@@ -24,12 +24,33 @@ input:-webkit-autofill:active {
     background-color: transparent;
     transition: background-color 5000s ease-in-out 0s;
 }
-
 .container {
-    @media (max-width: 800px) {
+    width: 85% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 85% !important;
+}
+@media (max-width: 800px) {
+    .container {
         width: 90% !important;
+        max-width: 90% !important;
     }
 }
-option{
+
+option {
     background-color: aqua !important;
+}
+
+/* scroll bar style */
+::-webkit-scrollbar {
+    width: 7px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #1f2937;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #374151;
 }

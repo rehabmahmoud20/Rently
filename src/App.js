@@ -10,17 +10,17 @@ import ForgetPassword from "./components/Auth/ForgetPassword";
 import Profile from "./components/Profile/Profile";
 import Favourits from "./components/Favourits/Favourits";
 import Home from "./components/Home/Home";
-import RentalDetails from "./components/Rental/RentalDetails";
+import RentalDetails from "./components/Rental/RentalDetails/RentalDetails";
 import RentalList from "./components/Rental/RentalList/RentalList";
 import FAQ from "./components/FAQ/FAQ";
 import About from "./components/About/About";
 import AddRental from "./components/AddRental/AddRental";
 import NavbarComponent from "./components/Shared/NavbarComponent";
-
+import Footer from "./components/Shared/Footer";
 function App() {
   return (
     <BrowserRouter>
-    <NavbarComponent/>
+      <NavbarComponent />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -39,6 +39,7 @@ function App() {
         {/* toast container "alert from react toastify" don't add it again ❗*/}
         <ToastContainer autoClose={5000} />
       </main>
+      <Footer />
     </BrowserRouter>
   );
 }

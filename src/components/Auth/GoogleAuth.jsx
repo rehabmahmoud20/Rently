@@ -43,8 +43,8 @@ const GoogleAuth = (props) => {
             {props.page} with Google{' '}
             <GoogleIcon
                 onClick={googleAuthHandler}
-                width="30px"
-                height="30px"
+                width="25px"
+                height="25px"
                 className="inline cursor-pointer ml-1"
             />
         </div>

@@ -1,10 +1,18 @@
 import { Link } from 'react-router-dom';
 import { BiLogOut } from 'react-icons/bi';
-
+import { getAuth } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 const Logout = () => {
+    const auth = getAuth();
+    const navigate = useNavigate();
+    const logoutHandler = () => {
+        auth.signOut();
+        navigate('/');
+    };
     return (
         <li>
             <Link
+                onClick={logoutHandler}
                 to="/"
                 className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
