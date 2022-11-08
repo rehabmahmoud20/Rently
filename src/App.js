@@ -33,7 +33,7 @@ function App() {
           <Route path="forget-password" element={<ForgetPassword />} />
           <Route path="favourits" element={<Favourits />} />
           {isLoggedIn && <Route path="profile/*" element={<Profile />} />}
-          <Route path="rental-details" element={<RentalDetails />} />
+          <Route path="rental-details/:id" element={<RentalDetails />} />
           <Route path="rental-list" element={<RentalList />} />
           <Route path="add-rental" element={<AddRental />} />
           <Route path="about" element={<About />} />

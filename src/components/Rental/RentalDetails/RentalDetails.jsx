@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useReducer, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { Carousel, Button, Card, Rating } from "flowbite-react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { HiOutlineLocationMarker } from "react-icons/hi";
@@ -15,9 +15,39 @@ import { VscPerson } from "react-icons/vsc";
 import { BsSnow, BsWifi } from "react-icons/bs";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import egyptflag from "../../../assets/images/icons8-egypt-48.png";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../firebase.config";
 import "./rentalDetails.css";
+
+// Initial Property State
+const initialState = {
+  loading: true,
+  data: [],
+  error: ""
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "loading":
+      return {
+        loading: true
+      }
+    case "success":
+      return {
+        loading: false,
+        data: action.payload
+      }
+    case "failed":
+      return {
+        loading: false,
+        error: action.payload
+      }
+  }
+}
 const RentalDetails = () => {
   const [addToFav, setAddToFav] = useState(false);
+  const [rental, dispatch] = useReducer(reducer, initialState);
+  const params = useParams();
   const [rentalGallery, setRentalGallery] = useState([
     "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     "https://images.unsplash.com/photo-1523217582562-09d0def993a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
@@ -33,6 +63,17 @@ const RentalDetails = () => {
       return true;
     }
   }
+
+  // Fetch the specific rental property
+  useEffect(() => {
+    const docRef = doc(db, "rentals", params.id);
+    getDoc(docRef).then((doc) => {
+      dispatch({type: "success", payload: doc.data()})
+    }).catch((error) => {
+      dispatch({type: "failed", payload: error.message})
+    })
+  }, []);
+  console.log(rental);
   return (
     <section className=" flex border-2  h-[600px] flex-wrap container mx-auto">
       <div className="left-section w-full lg:w-[50%] h-full ">
