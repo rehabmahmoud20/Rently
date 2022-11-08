@@ -1,6 +1,5 @@
 // C O M P O N E N T S
 import SideMenu from './Sidemenu/SideMenu';
-import DeleteUserContent from './ItemsContent/DeleteUserContent';
 import GenunisPointsContent from './ItemsContent/GenunisPointsContent';
 import HistoryContent from './ItemsContent/HistoryContent';
 import InboxContent from './ItemsContent/InboxContent';
@@ -18,10 +17,6 @@ const Profile = () => {
             <SideMenu />
             <div className="container">
                 <Routes>
-                    <Route
-                        path="delete-account"
-                        element={<DeleteUserContent />}
-                    />
                     <Route path="genuis" element={<GenunisPointsContent />} />
                     <Route path="history" element={<HistoryContent />} />
                     <Route path="inbox" element={<InboxContent />} />

@@ -67,7 +67,7 @@ const PersonalInfoContent = () => {
             <div className="relative py-3 flex flex-col sm:flex-row gap-3 sm:gap-0 sm:items-center border-b border-gray-100">
                 <label
                     htmlFor="email"
-                    className="w-full sm:w-44 font-bold text-base  dark:text-white"
+                    className="w-full sm:w-44 font-medium text-lg  dark:text-white"
                 >
                     Email
                 </label>
@@ -76,14 +76,14 @@ const PersonalInfoContent = () => {
                     id="email"
                     type="text"
                     value={userData.email}
-                    className={`border-0 text-gray-800 text-base rounded-sm focus:ring-transparent focus:border-transparent block w-full p-2.5 dark:placeholder-gray-400 dark:text-white`}
+                    className={`border-0 text-gray-500 text-base rounded-sm focus:ring-transparent focus:border-transparent block w-full p-2.5 dark:placeholder-gray-400 dark:text-white`}
                 />
             </div>
             {/* USER NAME */}
             <div className="relative py-3 flex flex-col sm:flex-row gap-3 sm:gap-0 sm:items-center border-b border-gray-100">
                 <label
                     htmlFor="username"
-                    className="w-full sm:w-44 font-bold text-base  dark:text-white"
+                    className="w-full sm:w-44 font-medium text-lg  dark:text-white"
                 >
                     Username
                 </label>
@@ -102,14 +102,14 @@ const PersonalInfoContent = () => {
                     }}
                     className={`${
                         changeDetails ? 'bg-gray-100' : ''
-                    } border-0 text-gray-800 text-base rounded-sm focus:ring-transparent focus:border-transparent block w-full p-2.5 dark:placeholder-gray-400 dark:text-white`}
+                    } border-0 text-gray-500 text-base rounded-sm focus:ring-transparent focus:border-transparent block w-full p-2.5 dark:placeholder-gray-400 dark:text-white`}
                 />
             </div>
             {/* BIO */}
             <div className="relative py-3 flex flex-col sm:flex-row gap-3 sm:gap-0 sm:items-center border-b border-gray-100">
                 <label
                     htmlFor="bio"
-                    className="w-full sm:w-44 font-bold text-base  dark:text-white"
+                    className="w-full sm:w-44 font-medium text-lg  dark:text-white"
                 >
                     Bio
                 </label>
@@ -128,7 +128,7 @@ const PersonalInfoContent = () => {
                     rows="3"
                     className={`${
                         changeDetails ? 'bg-gray-100' : ''
-                    } resize-none text-base h-fit border-0 text-gray-800 rounded-sm focus:ring-transparent focus:border-transparent block w-full p-2.5 dark:placeholder-gray-400 dark:text-white`}
+                    } resize-none text-base h-fit border-0 text-gray-500 rounded-sm focus:ring-transparent focus:border-transparent block w-full p-2.5 dark:placeholder-gray-400 dark:text-white`}
                     placeholder="Your Bio..."
                 ></textarea>
             </div>
@@ -136,7 +136,7 @@ const PersonalInfoContent = () => {
             <div className="relative py-3 flex flex-col sm:flex-row gap-3 sm:gap-0 sm:items-center border-b border-gray-100">
                 <label
                     htmlFor="phone"
-                    className="w-full sm:w-44 font-bold text-base dark:text-white"
+                    className="w-full sm:w-44 font-medium text-lg dark:text-white"
                 >
                     Phone
                 </label>
@@ -155,7 +155,7 @@ const PersonalInfoContent = () => {
                     }}
                     className={`${
                         changeDetails ? 'bg-gray-100' : ''
-                    } border-0 text-gray-800 text-base rounded-sm focus:ring-transparent focus:border-transparent block w-full p-2.5 dark:placeholder-gray-400 dark:text-white`}
+                    } border-0 text-gray-500 text-base rounded-sm focus:ring-transparent focus:border-transparent block w-full p-2.5 dark:placeholder-gray-400 dark:text-white`}
                 />
             </div>
         </div>
