@@ -1,15 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { getDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../firebase.config';
 import { IoCheckmarkDone } from 'react-icons/io5';
 import { FiEdit3 } from 'react-icons/fi';
 import { toast } from 'react-toastify';
+import './avatar.css';
+import userPic from '../images/user-avatar.png';
+import { MdOutlineFileUpload } from 'react-icons/md';
+
 const PersonalInfoContent = () => {
     const auth = getAuth();
     const [userData, setUserData] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [changeDetails, setChangeDetails] = useState(false);
+    const [photo, setPhoto] = useState(userPic);
     const changeState = () => {
         setChangeDetails((prevState) => !prevState);
     };
@@ -18,7 +23,29 @@ const PersonalInfoContent = () => {
         const docRef = doc(db, 'users', userID);
         const docSnapshot = await getDoc(docRef);
         setUserData(docSnapshot.data());
+        setPhoto(docSnapshot.data().avatar);
         setIsLoading(false);
+    };
+    // UPLOAD IMAGE
+    const profilePhoto = useRef(null);
+    // UPLOAD IMAGE HANDLER
+    const handleImageUpload = (e, uploadedImage, setPhoto) => {
+        const [file] = e.target.files;
+        if (file) {
+            const reader = new FileReader();
+            const { current } = uploadedImage;
+            current.file = file;
+            reader.onload = (e) => {
+                setPhoto(e.target.result);
+                setUserData((prevState) => {
+                    return {
+                        ...prevState,
+                        avatar: e.target.result,
+                    };
+                });
+            };
+            reader.readAsDataURL(file);
+        }
     };
     useEffect(() => {
         getUserData(auth.currentUser.uid);
@@ -44,7 +71,7 @@ const PersonalInfoContent = () => {
             <p className="text-3xl">Loading....</p>
         </div>
     ) : (
-        <div className="container py-5">
+        <div className="px-10 py-5">
             <h2 className="text-3xl text-gray-800 mb-6 pb-3 border-b border-gray-200 dark:text-white">
                 Personal Information
             </h2>
@@ -63,6 +90,52 @@ const PersonalInfoContent = () => {
                     {changeDetails && 'Save'}
                 </button>
             </div>
+            {/* UPLOAD AVATAR */}
+            <div className="relative py-3 flex flex-col sm:flex-row gap-3 sm:gap-0 sm:items-center border-b border-gray-100">
+                <label
+                    htmlFor="avatar"
+                    className="w-full sm:w-44 font-medium text-lg  dark:text-white"
+                >
+                    Avatar
+                </label>
+                <div
+                    className={`profile_photo block relative`}
+                    style={{
+                        backgroundImage: photo ? `url(${photo})` : '',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center center',
+                        backgroundSize: 'cover',
+                    }}
+                >
+                    <input
+                        type="file"
+                        id="avatar"
+                        accept="image/*"
+                        name="profile_photo"
+                        multiple={false}
+                        ref={profilePhoto}
+                        className={'image_input'}
+                        onChange={(e) =>
+                            handleImageUpload(e, profilePhoto, setPhoto)
+                        }
+                    />
+                    <div
+                        className={`circleuser_image_container`}
+                        onClick={() => profilePhoto.current.click()}
+                    >
+                        {changeDetails && (
+                            <div
+                                className={
+                                    'upload_content absolute bottom-0 right-0 cursor-pointer'
+                                }
+                            >
+                                <MdOutlineFileUpload className="w-10 h-10 rounded-full p-2 text-cyan-600 bg-gray-100 upload-icon" />
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+
             {/* EMAIL */}
             <div className="relative py-3 flex flex-col sm:flex-row gap-3 sm:gap-0 sm:items-center border-b border-gray-100">
                 <label
@@ -76,7 +149,7 @@ const PersonalInfoContent = () => {
                     id="email"
                     type="text"
                     value={userData.email}
-                    className={`border-0 text-gray-500 text-base rounded-sm focus:ring-transparent focus:border-transparent block w-full p-2.5 dark:placeholder-gray-400 dark:text-white`}
+                    className={`border-0 text-gray-500 text-base rounded-sm focus:ring-transparent focus:border-transparent block w-full py-2.5 px-1 dark:placeholder-gray-400 dark:text-white`}
                 />
             </div>
             {/* USER NAME */}
@@ -102,7 +175,7 @@ const PersonalInfoContent = () => {
                     }}
                     className={`${
                         changeDetails ? 'bg-gray-100' : ''
-                    } border-0 text-gray-500 text-base rounded-sm focus:ring-transparent focus:border-transparent block w-full p-2.5 dark:placeholder-gray-400 dark:text-white`}
+                    } border-0 text-gray-500 text-base rounded-sm focus:ring-transparent focus:border-transparent block w-full py-2.5 px-1 dark:placeholder-gray-400 dark:text-white`}
                 />
             </div>
             {/* BIO */}
@@ -128,12 +201,12 @@ const PersonalInfoContent = () => {
                     rows="3"
                     className={`${
                         changeDetails ? 'bg-gray-100' : ''
-                    } resize-none text-base h-fit border-0 text-gray-500 rounded-sm focus:ring-transparent focus:border-transparent block w-full p-2.5 dark:placeholder-gray-400 dark:text-white`}
+                    } resize-none text-base h-fit border-0 text-gray-500 rounded-sm focus:ring-transparent focus:border-transparent block w-full py-2.5 px-1 dark:placeholder-gray-400 dark:text-white`}
                     placeholder="Your Bio..."
                 ></textarea>
             </div>
             {/* PHONE */}
-            <div className="relative py-3 flex flex-col sm:flex-row gap-3 sm:gap-0 sm:items-center border-b border-gray-100">
+            <div className="relative py-3 flex flex-col sm:flex-row gap-3 sm:gap-0 sm:items-center">
                 <label
                     htmlFor="phone"
                     className="w-full sm:w-44 font-medium text-lg dark:text-white"
@@ -155,7 +228,7 @@ const PersonalInfoContent = () => {
                     }}
                     className={`${
                         changeDetails ? 'bg-gray-100' : ''
-                    } border-0 text-gray-500 text-base rounded-sm focus:ring-transparent focus:border-transparent block w-full p-2.5 dark:placeholder-gray-400 dark:text-white`}
+                    } border-0 text-gray-500 text-base rounded-sm focus:ring-transparent focus:border-transparent block w-full py-2.5 px-1 dark:placeholder-gray-400 dark:text-white`}
                 />
             </div>
         </div>
