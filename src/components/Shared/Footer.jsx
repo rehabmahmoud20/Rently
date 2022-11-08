@@ -3,7 +3,6 @@ import homeIcon from '../../assets/images/rently.png'
 
 function Footer() {
   return (
-
     <footer className="sm:pt-16 bg-white sm:p-6 dark:bg-gray-900 border-t-2">
       <div className="md:flex md:justify-between">
         <div className="mb-6 md:mb-0">
