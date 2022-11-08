@@ -40,8 +40,8 @@ const RentalList = () => {
   return (
     <div id="rental-list">
       <div className="container mx-auto">
-        <div className="filter py-5 mb-5">
-          <div className="filter-wrap mx-auto  flex justify-between">
+        <div className="filter py-5">
+          <div className="container filter-wrap mx-auto  flex justify-between">
             <div className="border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
               <Dropdown
                 label="Dropdown"
@@ -152,11 +152,11 @@ const RentalList = () => {
             </div>
           </div>
         </div>
-        <div className="products-list flex w-full mb-5 gap-3">
-          <div className="products w-2/3 flex flex-wrap gap-5 overflow-y-scroll">
+        <div className="products-list">
+          <div className="products flex flex-wrap w-2/3">
             {rentals?.map((item) => {
               return (
-                <RentalCard key={item.id} resp={item} />
+                <RentalCard key={item.id} data={item.data} />
               )
             })}
           </div>

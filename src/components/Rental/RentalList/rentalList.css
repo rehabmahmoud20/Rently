@@ -1,15 +1,32 @@
+.filter {
+  position: fixed;
+  top: 62px;
+  left: 0px;
+  width: 100%;
+  z-index: 3;
+  background-color: white;
+}
+
 .products-list {
-  height: calc(100vh - 164px);
+  width: 100%;
+  position: relative;
+  margin-top: 144px;
+  z-index: 1;
 }
-.products-list .products .product {
-  width: 48%;
-}
-.products-list .products .product .card-top {
-  height: 210px;
+.products-list #map {
+  height: calc(100vh - 144px);
+  position: fixed;
+  top: 144px;
+  width: 31.6666666667%;
+  right: 34.5px;
 }
 .products-list #map .leaflet-container {
   width: 100%;
   height: 100%;
+}
+
+.card-top {
+  height: 250px;
 }
 
 .heart-wrapper {
@@ -27,19 +44,9 @@
   transform: translate(-50%, -50%);
 }
 
-.carousel-list .flex-col {
+.carousel .flex-col {
   padding: 0px;
   position: relative;
-  gap: 0.75rem;
-}
-.carousel-list .change-carousel .scroll-smooth {
-  border-radius: 0px;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-}
-
-.property-button:active {
-  transform: scale(0.98);
 }
 
 /*# sourceMappingURL=rentalList.css.map */
