@@ -81,7 +81,7 @@ const RentalDetails = () => {
           <Carousel>
             {rentalGallery.map((src) => {
               return (
-                <img src={src} alt="rental image" className="h-full w-full" />
+                <img key={Math.random() * 100} src={src} alt="rental image" className="h-full w-full" />
               );
             })}
           </Carousel>
