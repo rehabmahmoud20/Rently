@@ -1,43 +1,78 @@
 import { Navbar } from "flowbite-react";
+import { UseAuthStatus } from "../Hooks/useAuthStatus";
 import rently from "../../assets/images/rently.png";
+import { useSelector } from "react-redux";
 
+// icons
 import { FaHeart } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 // Link
 
 const NavbarComponent = () => {
+  const { isLoggedIn } = UseAuthStatus();
+  const globalAuthState = useSelector(
+    (state) => state.authentication.isLoggedin
+  );
+  console.log(globalAuthState);
   return (
     <div>
       <Navbar
         fluid={true}
         rounded={true}
-        className="md:border-b-2  rounded-none md-divide-gray-200"
+        className="md:border-b-2  rounded-none md-divide-gray-200 container mx-auto"
       >
-        <div className="flex items-center" >
-        <Navbar.Brand 
-        href="http://localhost:3000">
+        <Link to="/">
           <img src={rently} className="mr-3  w-15 h-10" alt="Flowbite Logo" />
-        </Navbar.Brand>
-
-          <Link to="/rental-list" className="hidden md:block  text-lg" >Rent</Link>
-        </div>
+        </Link>
 
         <Navbar.Toggle />
         <Navbar.Collapse>
-        <Link to="/rental-list" className="block md:hidden  py-3 border-b-2 divide-gray-200 " >Rent</Link>
-
-          <Link to="/add-rental" className=" text-lg py-3 border-b-2 divide-gray-200 md:border-none md:py-0 dark:text-white">Manage rentals</Link>
-          <Link to="/signin" className=" text-lg py-3 border-b-2 divide-gray-200 md:border-none md:py-0">Sign in</Link>
-
-          <Link to="/signup" className=" text-lg py-3 border-b-2 divide-gray-200 md:border-none md:py-0">Sign up</Link>
-          <Link to="/favourits" className="  py-3 border-b-2 divide-gray-200 md:border-none md:py-0">
-            <FaHeart className=" text-red-600 text-2xl" />
+          <Link
+            to="/rental-list"
+            className="  font-bold py-3 border-b-2 divide-gray-200 md:border-none md:py-0 dark:text-white"
+          >
+            Rent
           </Link>
 
-          <Link to="/profile/*" className="py-3 border-b-2 divide-gray-200 md:border-none md:py-0">
-            <FaUserCircle className="text-gray-600 text-2xl " />
-          </Link>
+          {isLoggedIn ? (
+            <>
+              <Link
+                to="/add-rental"
+                className=" font-bold py-3 border-b-2 divide-gray-200 md:border-none md:py-0 dark:text-white"
+              >
+                Manage rentals
+              </Link>
+              <Link
+                to="/favourits"
+                className=" font-bold py-3 border-b-2 divide-gray-200 md:border-none md:py-0 dark:text-white"
+              >
+                Favourites
+              </Link>
+              <Link
+                to="/profile/*"
+                className="font-bold py-3 border-b-2 divide-gray-200 md:border-none md:py-0 dark:text-white"
+              >
+                <FaUserCircle className="text-gray-600 text-2xl " />
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/signin"
+                className=" font-bold py-3 border-b-2 divide-gray-200 md:border-none md:py-0"
+              >
+                Sign in
+              </Link>
+
+              <Link
+                to="/signup"
+                className=" font-bold py-3 border-b-2 divide-gray-200 md:border-none md:py-0 dark:text-white"
+              >
+                Sign up
+              </Link>
+            </>
+          )}
         </Navbar.Collapse>
       </Navbar>
     </div>

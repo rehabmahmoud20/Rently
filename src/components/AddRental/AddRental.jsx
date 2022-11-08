@@ -13,6 +13,7 @@ const options = [
 const AddRental = () => {
   const [image, setImage] = useState([]);
   // convert images to base64
+  // فيه شوية عك هنا يولاد محدش يجي جمبه عشان ممسحلكمش الريبو خالص وقد اعذر من انذر;😡
   const convert2Base64 = (files) => {  
     for(const file of files) {
       const reader = new FileReader();
