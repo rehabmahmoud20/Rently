@@ -18,6 +18,7 @@ import AddRental from "./components/AddRental/AddRental";
 import NavbarComponent from "./components/Shared/NavbarComponent";
 import Footer from "./components/Shared/Footer";
 import NotFoundPage from "./components/Shared/NotFoundPage";
+import Spinner from "./components/Shared/Spinner";
 import { UseAuthStatus } from "./components/Hooks/useAuthStatus";
 function App() {
   const { isLoggedIn } = UseAuthStatus();
@@ -38,6 +39,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="FAQ" element={<FAQ />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/spinner" element={<Spinner />} />
         </Routes>
         {/* toast container "alert from react toastify" don't add it again ❗*/}
         <ToastContainer autoClose={5000} />
