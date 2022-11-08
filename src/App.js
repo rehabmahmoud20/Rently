@@ -17,6 +17,7 @@ import About from "./components/About/About";
 import AddRental from "./components/AddRental/AddRental";
 import NavbarComponent from "./components/Shared/NavbarComponent";
 import Footer from "./components/Shared/Footer";
+import NotFoundPage from "./components/Shared/NotFoundPage";
 function App() {
   return (
     <BrowserRouter>
@@ -32,9 +33,9 @@ function App() {
           <Route path="rental-details" element={<RentalDetails />} />
           <Route path="rental-list" element={<RentalList />} />
           <Route path="add-rental" element={<AddRental />} />
-
           <Route path="about" element={<About />} />
           <Route path="FAQ" element={<FAQ />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         {/* toast container "alert from react toastify" don't add it again ❗*/}
         <ToastContainer autoClose={5000} />
