@@ -50,7 +50,7 @@ const NavbarComponent = () => {
                 Favourites
               </Link>
               <Link
-                to="/profile/*"
+                to="/profile"
                 className="font-bold py-3 border-b-2 divide-gray-200 md:border-none md:py-0 dark:text-white"
               >
                 <FaUserCircle className="text-gray-600 text-2xl " />
