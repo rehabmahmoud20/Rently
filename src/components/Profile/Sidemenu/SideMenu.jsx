@@ -9,24 +9,24 @@ import DeleteUser from './DeleteUser';
 import Avatar from './Avatar';
 const SideMenu = () => {
     return (
-            <aside
-                className="h-screen w-fit sm:min-w-max select-none shadow-lg shadow-zinc-400 transition-all"
-                aria-label="Sidebar"
-            >
-                <Avatar />
-                <div className="overflow-y-auto py-4 px-3 rounded dark:bg-gray-800">
-                    <ul className="space-y-2">
-                        <GenunisPoints />
-                        <PersonalInfo />
-                        <Inbox />
-                        <Payment />
-                        <Properties />
-                        <History />
-                        <Logout />
-                        <DeleteUser />
-                    </ul>
-                </div>
-            </aside>
+        <aside
+            className="h-screen w-fit sm:min-w-max select-none border-r border-gray-100 transition-all"
+            aria-label="Sidebar"
+        >
+            <Avatar />
+            <div className="overflow-y-auto py-4 px-3 rounded dark:bg-gray-800">
+                <ul className="space-y-2">
+                    <GenunisPoints />
+                    <PersonalInfo />
+                    <Inbox />
+                    <Payment />
+                    <Properties />
+                    <History />
+                    <Logout />
+                    <DeleteUser />
+                </ul>
+            </div>
+        </aside>
     );
 };
 
