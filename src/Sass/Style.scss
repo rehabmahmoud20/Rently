@@ -36,11 +36,6 @@ input:-webkit-autofill:active {
         max-width: 90% !important;
     }
 }
-
-option {
-    background-color: aqua !important;
-}
-
 /* scroll bar style */
 ::-webkit-scrollbar {
     width: 7px;
@@ -53,4 +48,12 @@ option {
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #374151;
+}
+
+#reviews
+    > div
+    > div
+    > div.absolute.top-0.right-0.flex.h-full.items-center.justify-center.px-4.focus\:outline-none
+    > button {
+    color: black !important;
 }
