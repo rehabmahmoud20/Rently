@@ -51,21 +51,12 @@
   font-family: "Poppins";
   src: url("../assets/fonts/Poppins-Regular.ttf");
 }
-@font-face {
-  font-family: "ElMessiri";
-  src: url("../assets/fonts/ElMessiri-Medium.ttf");
-}
 body {
   font-family: "Poppins";
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "ElMessiri";
+html {
+  scroll-behavior: smooth !important;
 }
 
 /* transparent background on autocomplete inputs*/
@@ -91,10 +82,6 @@ input:-webkit-autofill:active {
     max-width: 90% !important;
   }
 }
-option {
-  background-color: aqua !important;
-}
-
 /* scroll bar style */
 ::-webkit-scrollbar {
   width: 7px;
