@@ -1,10 +1,1 @@
-{
-    "version": 3,
-    "sourceRoot": "",
-    "sources": [
-        "rentalList.scss"
-    ],
-    "names": [],
-    "mappings": "AAAA;EACI;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AACA;EACI;;AACA;EAEI;;;AAKZ;EACI;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;;AACA;EACI;EACA;EACA;EACA;EACA;;AACA;EACI;EACA;;;AAKZ;EACI;;;AAEJ;EACI;EACA;EACA;EACA;EACA;EACA;;AACA;EACI;EACA;EACA;EACA;;;AAKJ;EACI;EACA",
-    "file": "rentalList.css"
-}
+{"version":3,"sourceRoot":"","sources":["rentalList.scss"],"names":[],"mappings":"AASA;EACI;EACA;EACA;EACA;EACA;EACA;;;AAGJ;EACI;EACA;EACA;EACA;;AACA;EACI;EACA;EACA;EACA;EACA;;AACA;EACI;EACA;;;AAKZ;EACI;;;AAEJ;EACI;EACA;EACA;EACA;EACA;EACA;;AACA;EACI;EACA;EACA;EACA;;;AAKJ;EACI;EACA","file":"rentalList.css"}

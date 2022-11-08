@@ -14,6 +14,7 @@ const Recommended = ({ listings }) => {
       <div className='properties-card-container grid lg:grid-cols-3 gap-24'>
         {listings.map(list => (
           <Card
+            key={Math.random() * 100}
             imgAlt='Meaningful alt text for an image that is not purely decorative'
             imgSrc={list.images[0]}
           >

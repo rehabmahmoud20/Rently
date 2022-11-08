@@ -1,19 +1,9 @@
 @import './base/mixin', './base/variables', './base/functions';
 // text
 @include fontFamily('Poppins', '../assets/fonts/Poppins-Regular.ttf');
-// heading
-@include fontFamily('ElMessiri', '../assets/fonts/ElMessiri-Medium.ttf');
 
 body {
     font-family: 'Poppins';
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: 'ElMessiri';
 }
 
 /* transparent background on autocomplete inputs*/
