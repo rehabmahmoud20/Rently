@@ -4,7 +4,6 @@ import rently from "../../assets/images/rently.png";
 import { useSelector } from "react-redux";
 
 // icons
-import { FaHeart } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 // Link
@@ -14,7 +13,6 @@ const NavbarComponent = () => {
   const globalAuthState = useSelector(
     (state) => state.authentication.isLoggedin
   );
-  console.log(globalAuthState);
   return (
     <div>
       <Navbar

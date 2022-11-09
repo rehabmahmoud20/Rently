@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Loader from './components/loader/Loader.jsx'
 import Signup from './components/Auth/Signup';
 import Signin from './components/Auth/Signin';
 import ForgetPassword from './components/Auth/ForgetPassword';
@@ -41,6 +42,8 @@ function App() {
                     <Route path="add-rental" element={<AddRental />} />
                     <Route path="about" element={<About />} />
                     <Route path="FAQ" element={<FAQ />} />
+                    <Route path="loader" element={<Loader />} />
+
                 </Routes>
                 {/* toast container "alert from react toastify" don't add it again ❗*/}
                 <ToastContainer autoClose={5000} />

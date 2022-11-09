@@ -30,13 +30,16 @@ const PersonalInfoContent = () => {
     const profilePhoto = useRef(null);
     // UPLOAD IMAGE HANDLER
     const handleImageUpload = (e, uploadedImage, setPhoto) => {
+        console.log([...e.target.files])
         const [file] = e.target.files;
         if (file) {
+            console.log(file)
             const reader = new FileReader();
             const { current } = uploadedImage;
             current.file = file;
             reader.onload = (e) => {
                 setPhoto(e.target.result);
+                console.log(e.target.result)
                 setUserData((prevState) => {
                     return {
                         ...prevState,
@@ -112,11 +115,11 @@ const PersonalInfoContent = () => {
                         id="avatar"
                         accept="image/*"
                         name="profile_photo"
-                        multiple={false}
+                        multiple={true}
                         ref={profilePhoto}
                         className={'image_input'}
                         onChange={(e) =>
-                            handleImageUpload(e, profilePhoto, setPhoto)
+                        handleImageUpload(e, profilePhoto, setPhoto)
                         }
                     />
                     <div
