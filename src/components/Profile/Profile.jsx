@@ -6,14 +6,13 @@ import InboxContent from './ItemsContent/InboxContent';
 import PaymentContent from './ItemsContent/PaymentContent';
 import PersonalInfoContent from './ItemsContent/PersonalInfoContent';
 import PropertiesContent from './ItemsContent/PropertiesContent';
-import { UseAuthStatus } from '../Hooks/useAuthStatus';
+import NotFoundPage from '../Shared/NotFoundPage';
 
 // A U T H
 import { Routes, Route } from 'react-router-dom';
 const Profile = () => {
-    const { isLoggedIn, checkingStatus } = UseAuthStatus();
     return (
-        <section className="user-profile min-h-screen flex">
+        <section className="user-profile flex">
             <SideMenu />
             <div className="container">
                 <Routes>
@@ -23,6 +22,7 @@ const Profile = () => {
                     <Route path="payment-method" element={<PaymentContent />} />
                     <Route path="/" element={<PersonalInfoContent />} />
                     <Route path="properties" element={<PropertiesContent />} />
+                    <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </div>
         </section>

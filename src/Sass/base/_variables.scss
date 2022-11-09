@@ -1,4 +1,3 @@
-
 /*------------- New Styles -------------*/
 
 /*
@@ -16,7 +15,7 @@
 
     all headers => {
         font-family: Messiry
-        
+
         <h2 className="text-3xl text-gray-800">Header Text</h2>
         <h3 className="text-2xl text-gray-800">Header Text</h3>
         <h4 className="text-xl text-gray-800">Header Text</h4>
@@ -43,7 +42,7 @@
     // Button
 
         <button type="button" class="text-white bg-cyan-600 hover:bg-cyan-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2.5 mr-2 mb-2 dark:bg-cyan-600 dark:hover:bg-cyan-800 focus:outline-none dark:focus:ring-cyan-800">Default</button>
-        
+
         button:active {
             transform: scale(0.95)
         }
