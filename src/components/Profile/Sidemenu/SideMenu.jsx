@@ -21,7 +21,7 @@ const SideMenu = () => {
             id: 2,
             icon: BiUser,
             content: 'Personal Information',
-            link: '/profile/',
+            link: '/profile',
         },
         {
             id: 3,
