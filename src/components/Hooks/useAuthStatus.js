@@ -19,7 +19,7 @@ export const UseAuthStatus = () => {
                 ...docSnapshot.data(),
                 id: userID,
             })
-         );
+        );
     };
     useEffect(() => {
         if (isMounted) {
@@ -29,6 +29,8 @@ export const UseAuthStatus = () => {
                     setIsLoggedIn(true);
                     dispatch(authActions.authStatus(true));
                     getUserData(user.uid);
+                } else {
+                    dispatch(authActions.authStatus(false));
                 }
                 setCheckingStatus(false);
             });
