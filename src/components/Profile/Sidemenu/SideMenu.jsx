@@ -50,7 +50,7 @@ const SideMenu = () => {
     ];
     return (
         <aside
-            className="h-screen w-fit sm:min-w-max select-none border-r border-gray-100 transition-all"
+            className="w-fit sm:min-w-max select-none border-r border-gray-100 transition-all"
             aria-label="Sidebar"
         >
             <Avatar />
