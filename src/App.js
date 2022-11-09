@@ -27,12 +27,18 @@ function App() {
             <main>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="signin" element={<Signin />} />
-                    <Route path="signup" element={<Signup />} />
-                    <Route
-                        path="forget-password"
-                        element={<ForgetPassword />}
-                    />
+                    {!isLoggedIn && (
+                        <Route path="signin" element={<Signin />} />
+                    )}
+                    {!isLoggedIn && (
+                        <Route path="signup" element={<Signup />} />
+                    )}
+                    {!isLoggedIn && (
+                        <Route
+                            path="forget-password"
+                            element={<ForgetPassword />}
+                        />
+                    )}
                     <Route path="favourits" element={<Favourits />} />
                     {isLoggedIn && (
                         <Route path="profile/*" element={<Profile />} />
