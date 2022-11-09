@@ -37,7 +37,7 @@ const PaymentContent = () => {
     const [currentOpt, setCurrentOpt] = useState(masterCard);
     return (
         <section className="px-5 sm:px-10 py-5">
-            <h2 className="text-5xl font-bold mb-3 text-cyan-600 w-fit mx-auto lg:mx-0">
+            <h2 className="text-4xl font-bold text-cyan-600 w-fit mx-auto lg:mx-0">
                 Payment Method
             </h2>
             <div className="flex flex-wrap lg:flex-nowrap justify-between items-center gap-6">

@@ -67,7 +67,7 @@ const PersonalInfoContent = () => {
         <>
             {updatedData ? (
                 <section className="px-5 sm:px-10 py-5">
-                    <h2 className="text-3xl text-gray-800 mb-3 pb-3 w-fit mx-auto md:mx-0 dark:text-white">
+                    <h2 className="text-4xl font-bold text-cyan-600 w-fit mx-auto lg:mx-0">
                         Personal Information
                     </h2>
                     <div className="text-end">
