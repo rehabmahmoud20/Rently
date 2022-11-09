@@ -15,7 +15,7 @@ const PaymentContent = () => {
         if (
             cardNumber !== '' &&
             typeof +cardNumber === 'number' &&
-            cardNumber.length === 12
+            cardNumber.length === 16
         ) {
             toast.success('Payment Method added successfully');
         } else {
@@ -37,22 +37,22 @@ const PaymentContent = () => {
     const [currentOpt, setCurrentOpt] = useState(masterCard);
     return (
         <section className="px-5 sm:px-10 py-5">
-            <h2 className="text-3xl mb-5 w-fit mx-auto md:mx-0">
+            <h2 className="text-5xl font-bold mb-3 text-cyan-600 w-fit mx-auto lg:mx-0">
                 Payment Method
             </h2>
-            <div className="flex flex-wrap md:flex-nowrap justify-between items-center gap-6">
-                <div className="w-full md:w-1/2">
+            <div className="flex flex-wrap lg:flex-nowrap justify-between items-center gap-6">
+                <div className="w-full lg:w-1/2">
                     <img
                         src={require('../images/payment-method.gif')}
                         alt="add payment"
                         className="mx-auto w-fit object-cover"
                     />
                 </div>
-                <div className="w-full md:w-1/2">
-                    <h3 className="text-2xl text-bold mb-3 text-cyan-600 w-fit mx-auto md:mx-0">
+                <div className="w-full lg:w-1/2">
+                    <h3 className="text-2xl text-bold mb-3 w-fit mx-auto lg:mx-0">
                         Add Payment Method
                     </h3>
-                    <p className="text-gray-500 mb-3 text-base w-fit mx-auto md:mx-0">
+                    <p className="text-gray-500 mb-3 text-base w-fit mx-auto lg:mx-0">
                         Provide Your Credit Card Information
                     </p>
                     {/* ENTER PAYMENT */}
@@ -106,7 +106,7 @@ const PaymentContent = () => {
                                 type="text"
                                 id="payment"
                                 ref={paymentRef}
-                                maxLength="12"
+                                maxLength="16"
                                 className="rounded-none rounded-r-lg bg-gray-50 focus:ring-0 text-gray-900  border border-cyan-600 focus:border-cyan-600 block flex-1 min-w-0 w-full text-md p-2.5  dark:bg-gray-700 dark:border-0 dark:placeholder-gray-400 dark:text-white "
                                 placeholder="**** - **** - **** - ****"
                             />
