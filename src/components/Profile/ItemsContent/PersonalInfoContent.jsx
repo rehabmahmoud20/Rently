@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import userPic from '../images/user-avatar.png';
 import { MdOutlineFileUpload } from 'react-icons/md';
 import { useSelector, useDispatch } from 'react-redux';
+import Spinner from '../../Shared/Spinner';
 import { userActions } from '../../Store/user';
 import './avatar.css';
 const PersonalInfoContent = () => {
@@ -62,12 +63,11 @@ const PersonalInfoContent = () => {
     useEffect(() => {
         setUpdatedData(userData);
     }, [userData]);
-    // SPINNER NEEDED
     return (
         <>
             {updatedData ? (
-                <div className="px-10 py-5">
-                    <h2 className="text-3xl text-gray-800 mb-3 pb-3 border-b border-gray-200 dark:text-white">
+                <section className="px-5 sm:px-10 py-5">
+                    <h2 className="text-3xl text-gray-800 mb-3 pb-3 w-fit mx-auto md:mx-0 dark:text-white">
                         Personal Information
                     </h2>
                     <div className="text-end">
@@ -236,9 +236,9 @@ const PersonalInfoContent = () => {
                             } border-0 text-gray-500 text-base rounded-sm focus:ring-transparent focus:border-transparent block w-full py-2.5 px-1 dark:placeholder-gray-400 dark:text-white`}
                         />
                     </div>
-                </div>
+                </section>
             ) : (
-                ' Loading...'
+                <Spinner />
             )}
         </>
     );

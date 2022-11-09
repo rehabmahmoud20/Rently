@@ -4,6 +4,7 @@ import { db } from '../../firebase.config';
 import { doc, getDoc } from 'firebase/firestore';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../Store/user';
+import { authActions } from '../Store/authentication';
 export const UseAuthStatus = () => {
     const isMounted = useRef(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,7 +14,6 @@ export const UseAuthStatus = () => {
     const getUserData = async (userID) => {
         const docRef = doc(db, 'users', userID);
         const docSnapshot = await getDoc(docRef);
-        console.log('from hooks', docSnapshot.data());
         dispatch(
             userActions.updateUserData({
                 ...docSnapshot.data(),
@@ -25,9 +25,9 @@ export const UseAuthStatus = () => {
         if (isMounted) {
             const auth = getAuth();
             onAuthStateChanged(auth, (user) => {
-                console.log(checkingStatus);
                 if (user) {
                     setIsLoggedIn(true);
+                    dispatch(authActions.authStatus(true));
                     getUserData(user.uid);
                 }
                 setCheckingStatus(false);

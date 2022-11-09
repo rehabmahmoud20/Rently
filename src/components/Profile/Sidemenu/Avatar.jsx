@@ -7,7 +7,7 @@ const Avatar = () => {
     return (
         <div
             className="p-3 cursor-pointer"
-            onClick={() => navigate('/profile/')}
+            onClick={() => navigate('/profile')}
         >
             <div className="flex gap-0 sm:gap-2 justify-center">
                 <img
@@ -15,7 +15,7 @@ const Avatar = () => {
                     src={userData.avatar ? userData.avatar : userPic}
                     alt="profile"
                 />
-                <div className="font-medium text-lg dark:text-white hidden sm:block transition-all duration-500">
+                <div className="font-medium text-lg dark:text-white hidden md:block transition-all duration-500">
                     <div className="dark:text-white text-center">
                         {userData ? userData.username : ''}
                     </div>

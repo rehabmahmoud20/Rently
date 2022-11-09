@@ -10,9 +10,6 @@ export const userSlice = createSlice({
         updateUserData(state, action) {
             state.userData = { ...action.payload };
         },
-        setIsLoading(state, action) {
-            state.isLoading = action.payload;
-        },
     },
 });
 export const userActions = userSlice.actions;
