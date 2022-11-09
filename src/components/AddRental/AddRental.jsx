@@ -142,7 +142,7 @@ const sendData = async (data) => {
   // console.log(dataCopy)
   try {
     const docRef = await addDoc(collection(db, "rentals"), dataCopy);
-   // const sendData = await setDoc(doc(db,'rentals'))
+  //  const sendData = await setDoc(doc(db,'rentals'),dataCopy)
     console.log(dataCopy)
     toast.success("data is sent");
   } catch (error) {

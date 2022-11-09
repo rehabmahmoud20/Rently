@@ -244,5 +244,4 @@ const PersonalInfoContent = () => {
         </>
     );
 };
-
 export default PersonalInfoContent;

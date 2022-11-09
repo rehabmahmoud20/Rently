@@ -19,7 +19,7 @@ export const UseAuthStatus = () => {
                 ...docSnapshot.data(),
                 id: userID,
             })
-        );
+         );
     };
     useEffect(() => {
         if (isMounted) {
