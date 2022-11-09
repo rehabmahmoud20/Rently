@@ -28,6 +28,7 @@ const PersonalInfoContent = () => {
     const handleImageUpload = (e, uploadedImage, setProfilePic) => {
         const [file] = e.target.files;
         if (file) {
+            console.log(file)
             const reader = new FileReader();
             const { current } = uploadedImage;
             current.file = file;
