@@ -33,7 +33,7 @@ const NavbarComponent = () => {
 
           <Link
             to="/rental-list"
-            className="h-fit text-lg  font-bold py-3 border-b-2 divide-gray-200 md:border-none  dark:text-white"
+            className="h-fit  font-bold py-3 border-b-2 divide-gray-200 md:border-none  dark:text-white"
           >
             Rent
           </Link>
@@ -42,13 +42,13 @@ const NavbarComponent = () => {
             <>
               <Link
                 to="/add-rental"
-                className="h-fit text-lg font-bold py-3 border-b-2 divide-gray-200 md:border-none  dark:text-white"
+                className="h-fit font-bold py-3 border-b-2 divide-gray-200 md:border-none  dark:text-white"
               >
                 Manage rentals
               </Link>
               <Link
                 to="/favourits"
-                className="h-fit text-lg font-bold py-3 border-b-2 divide-gray-200 md:border-none dark:text-white"
+                className="h-fit font-bold py-3 border-b-2 divide-gray-200 md:border-none dark:text-white"
               >
                 Favourites
               </Link>
@@ -67,14 +67,14 @@ const NavbarComponent = () => {
             <>
               <Link
                 to="/signin"
-                className="h-fit  text-lg font-bold py-3 border-b-2 divide-gray-200 md:border-none "
+                className="h-fit  font-bold py-3 border-b-2 divide-gray-200 md:border-none "
               >
                 Sign in
               </Link>
 
               <Link
                 to="/signup"
-                className="h-fit  text-lg font-bold py-3  divide-gray-200   dark:text-white"
+                className="h-fit  font-bold py-3  divide-gray-200   dark:text-white"
               >
                 Sign up
               </Link>
