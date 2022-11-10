@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import PropertyCard from './propertyCard';
+import RentalCard from '../../Rental/RentalList/RentalCard';
 import { db } from '../../../firebase.config';
 import {
     collection,
@@ -28,29 +29,25 @@ const PropertiesContent = () => {
             const querySnap = await getDocs(q);
             const rents = [];
             querySnap.forEach((doc) => {
-                console.log(propertiesId);
                 const data = doc.data();
                 data.id = doc.id;
-                console.log(data);
                 propertiesId.includes(data.id) && rents.push(data);
-                console.log(rents);
                 setProperties(rents);
             });
         } catch (error) {
-            console.log(error);
             toast.error('Something went wrong !');
         }
     };
     useEffect(() => {
         setPropertiesId(userData.properties);
-        getProperties();
+        // getProperties();
     }, [userData]);
     return (
         <section className="px-5 sm:px-10 py-5">
             <h2 className="text-4xl font-bold mb-6 text-cyan-600 w-fit mx-auto lg:mx-0">
                 Your Properties
             </h2>
-            <p className="font-bold text-lg mb-3 w-fit mx-auto lg:mx-0">
+            <p className=" font-bold text-gray-500 w-fit mx-auto lg:mx-0 mb-6 text-xl">
                 Total properties : {properties.length}
             </p>
             {properties.length === 0 && (
@@ -74,7 +71,7 @@ const PropertiesContent = () => {
                 </div>
             )}
             {properties.length > 0 && (
-                <div className="flex flex-wrap lg:flex-nowrap justify-between gap-10 items-center">
+                <div className="flex flex-wrap lg:flex-nowrap justify-start gap-10 items-start">
                     {properties.map((property) => {
                         return (
                             <PropertyCard key={property.id} list={property} />

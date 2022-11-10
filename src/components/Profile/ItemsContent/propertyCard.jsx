@@ -3,11 +3,13 @@ import { Rating } from 'flowbite-react';
 import { TbBath } from 'react-icons/tb';
 import { BiBed, BiExpand } from 'react-icons/bi';
 import { Card } from 'flowbite-react';
+import { MdModeEdit, MdDelete } from 'react-icons/md';
+
 const PropertyCard = (props) => {
     const rentalsList = props.list;
     return (
         <Card
-            className="w-full lg:w-fit"
+            className="w-full lg:w-1/2 relative"
             imgAlt="Meaningful alt text for an image that is not purely decorative"
             imgSrc={rentalsList.images[0]}
         >
@@ -46,6 +48,20 @@ const PropertyCard = (props) => {
                         {rentalsList.aboutRental.area} m<sup>2</sup>
                     </span>
                 </div>
+            </div>
+            <div className="absolute flex gap-2 top-4 right-4">
+                <span
+                    title="Edit"
+                    className="bg-white rounded-full p-2 cursor-pointer opacity-50 hover:opacity-100 transition transition-500"
+                >
+                    <MdModeEdit className="text-cyan-600 text-xl" />
+                </span>
+                <span
+                    title="Delete"
+                    className="bg-white rounded-full p-2 cursor-pointer opacity-50 hover:opacity-100 transition transition-500"
+                >
+                    <MdDelete className="text-cyan-600 text-xl" />
+                </span>
             </div>
         </Card>
     );

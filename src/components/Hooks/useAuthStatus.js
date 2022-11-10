@@ -9,6 +9,7 @@ export const UseAuthStatus = () => {
     const isMounted = useRef(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [checkingStatus, setCheckingStatus] = useState(true);
+    console.log(checkingStatus);
     // ADD USER DATA IN REDUX STORE
     const dispatch = useDispatch();
     const getUserData = async (userID) => {
@@ -33,6 +34,7 @@ export const UseAuthStatus = () => {
                     dispatch(authActions.authStatus(false));
                 }
                 setCheckingStatus(false);
+                dispatch(authActions.setIsLoading(false));
             });
         }
         return () => {

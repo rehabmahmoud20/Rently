@@ -23,26 +23,26 @@ import {
 import { toast } from 'react-toastify';
 const Home = () => {
     const [listings, setListings] = useState([]);
-    useEffect(() => {
-        const fetchRents = async () => {
-            try {
-                // Get a ref
-                const rentsRef = collection(db, 'rentals');
-                // Create a query
-                const q = query(rentsRef, limit(3));
-                // Execute the query
-                const querySnap = await getDocs(q);
-                const rents = [];
-                querySnap.forEach((doc) => {
-                    rents.push(doc.data());
-                });
-                setListings(rents);
-            } catch (error) {
-                toast.error('Could not fetch rents');
-            }
-        };
-        fetchRents();
-    }, []);
+    // useEffect(() => {
+    //     const fetchRents = async () => {
+    //         try {
+    //             // Get a ref
+    //             const rentsRef = collection(db, 'rentals');
+    //             // Create a query
+    //             const q = query(rentsRef, limit(3));
+    //             // Execute the query
+    //             const querySnap = await getDocs(q);
+    //             const rents = [];
+    //             querySnap.forEach((doc) => {
+    //                 rents.push(doc.data());
+    //             });
+    //             setListings(rents);
+    //         } catch (error) {
+    //             toast.error('Could not fetch rents');
+    //         }
+    //     };
+    //     fetchRents();
+    // }, []);
     console.log('listings', listings);
     return (
         <>
