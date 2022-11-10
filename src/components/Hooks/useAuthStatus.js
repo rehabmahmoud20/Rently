@@ -37,6 +37,7 @@ export const UseAuthStatus = () => {
                 dispatch(authActions.setIsLoading(false));
             });
         }
+        setCheckingStatus(false);
         return () => {
             isMounted.current = false;
         };

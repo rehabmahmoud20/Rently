@@ -1,14 +1,10 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-const Overview = () => {
-  const position = [51.505, -0.09];
+const Overview = (props) => {
+  const position = [props.data.location.lat, props.data.location.lng];
   return (
     <div id="overview" className="h-auto mb-4">
       <p className="text-2xl mb-2">overview</p>
-      <p className="mb-2 text-neutral-400">
-        3 Bedrooms+Den ; 2.5 Bathrooms, Brand New Kitchen, Stainless Steel
-        Appliances, Dishwasher, Microwave, Formica Countertops, Private Garage,
-        Corner Unit.
-      </p>
+      <p className="mb-2 text-neutral-400">{props.data.overview}</p>
 
       <div className="w-full h-[300px]">
         <MapContainer
