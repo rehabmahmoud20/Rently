@@ -2,15 +2,21 @@ import userPic from '../Profile/images/user-avatar.png';
 import { Navbar } from 'flowbite-react';
 import { UseAuthStatus } from '../Hooks/useAuthStatus';
 import rently from '../../assets/images/rently.png';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { rentalsActions } from '../Store/rentals';
 import { Link } from 'react-router-dom';
+
 const NavbarComponent = () => {
     const userData = { ...useSelector((state) => state.user.userData) };
+    const dispatch = useDispatch();
     const { isLoggedIn } = UseAuthStatus();
     const globalAuthState = useSelector(
         (state) => state.authentication.isLoggedin
     );
     console.log(globalAuthState);
+    const handleClick = () => {
+        dispatch(rentalsActions.updateFetchData(true));
+    }
     return (
         <Navbar
             fluid={true}
@@ -27,6 +33,7 @@ const NavbarComponent = () => {
             <Navbar.Toggle />
             <Navbar.Collapse className="items-center">
                 <Link
+                    onClick={handleClick}
                     to="/rental-list"
                     className="h-fit text-lg  font-bold py-3 border-b-2 divide-gray-200 md:border-none  dark:text-white"
                 >

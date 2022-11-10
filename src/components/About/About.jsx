@@ -7,10 +7,16 @@ import { BsPersonBadgeFill } from "react-icons/bs";
 import { MdOutlineMapsHomeWork } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { rentalsActions } from "../Store/rentals";
 
 const About = () => {
   const [showFacts, setShowFacts] = useState(false);
+  const dispatch = useDispatch();
   const myRef = useRef();
+  const handleRoute = () => {
+    dispatch(rentalsActions.updateFetchData(true));
+  }
   useEffect(() => {
     const observer = new IntersectionObserver((entries, observer) => {
       const entry = entries[0];
@@ -78,7 +84,7 @@ const About = () => {
                 <p className="text-base text-gray-600 mb-5">Join hundreds of our special clients already using our site. Rently is the easiest way for travelers to find your property, compare the top results and make a faster booking decision.</p>
                 
                 <p className="text-base text-gray-600 mb-10">We care about one thing: finding you the perfect vacation rental.</p>
-                <Link to="/rental-list">
+                <Link to="/rental-list" onClick={handleRoute}>
                   <button type="button" className="rental-button text-white bg-cyan-600 hover:bg-cyan-800 font-medium rounded-lg text-sm px-12 py-3 mr-2 mb-2 dark:bg-cyan-600 dark:hover:bg-cyan-800 focus:outline-none dark:focus:ring-cyan-800">Find a rental</button>
                 </Link>
               </div>
