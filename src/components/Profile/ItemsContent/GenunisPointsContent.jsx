@@ -16,14 +16,14 @@ const GenunisPointsContent = () => {
     }, [userData]);
     return userData ? (
         <section className="px-5 sm:px-10 py-5">
-            <h2 className="text-5xl font-bold text-cyan-600 w-fit mx-auto lg:mx-0">
+            <h2 className="text-4xl font-bold text-cyan-600 w-fit mx-auto lg:mx-0">
                 Genuis Program
             </h2>
             {/* Hero */}
-            <div className="flex flex-wrap lg:flex-nowrap justify-between items-center py-5 gap-6">
+            <div className="flex flex-wrap lg:flex-nowrap justify-between items-start py-5 gap-6">
                 <div className="w-full lg:w-1/2">
-                    <h3 className="text-2xl font-bold mb-3 text-cyan-600 w-fit mx-auto lg:mx-0">
-                        Genuis
+                    <h3 className="text-2xl font-base mb-3 text-cyan-600 w-fit mx-auto lg:mx-0">
+                        Genuis Points
                     </h3>
                     <p className="mb-6 font-bold text-xl w-fit mx-auto lg:mx-0">
                         Rently's loyalty program
@@ -55,31 +55,40 @@ const GenunisPointsContent = () => {
                             Genius discounts
                         </p>
                         <div className="flex flex-wrap justify-between items-center gap-3">
-                            <div className="block p-4 mx-auto  max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <div className="block p-6  max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                                 <h5 className="mb-3 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
                                     Genius Level 1
                                 </h5>
                                 <p className="font-normal text-gray-500 dark:text-gray-400">
-                                    <TbDiscount className="text-cyan-600 text-xl mr-1 inline" />{' '}
+                                    <TbDiscount className="text-cyan-600 text-2xl mr-1 inline" />{' '}
                                     10% discounts
                                 </p>
                             </div>
-                            <div className="block p-4 mx-auto max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <div className="block p-6 max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                                 <h5 className="mb-3 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
                                     Genius Level 2
                                 </h5>
                                 <p className="font-normal text-gray-500 dark:text-gray-400">
-                                    <TbDiscount className="text-cyan-600 text-xl mr-1 inline" />{' '}
+                                    <TbDiscount className="text-cyan-600 text-2xl mr-1 inline" />{' '}
                                     15% discounts
                                 </p>
                             </div>
-                            <div className="block p-4 mx-auto max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <div className="block p-6 max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                                 <h5 className="mb-3 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
                                     Genius Level 3
                                 </h5>
                                 <p className="font-normal text-gray-500 dark:text-gray-400">
-                                    <TbDiscount className="text-cyan-600 text-xl mr-1 inline" />{' '}
+                                    <TbDiscount className="text-cyan-600 text-2xl mr-1 inline" />{' '}
                                     20% discounts
+                                </p>
+                            </div>
+                            <div className="block p-6 max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                                <h5 className="mb-3 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
+                                    Genius Level 4
+                                </h5>
+                                <p className="font-normal text-gray-500 dark:text-gray-400">
+                                    <TbDiscount className="text-cyan-600 text-2xl mr-1 inline" />{' '}
+                                    25% discounts
                                 </p>
                             </div>
                         </div>

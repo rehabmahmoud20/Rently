@@ -10,8 +10,8 @@ const Logout = () => {
     const navigate = useNavigate();
     const logoutHandler = () => {
         auth.signOut();
-        dispatch(authActions.authStatus(false));
         navigate('/');
+        dispatch(authActions.authStatus(false));
     };
     return (
         <li className="text-sm font-bold rounded-lg text-gray-700 opacity-70 hover:opacity-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all transition-500">
