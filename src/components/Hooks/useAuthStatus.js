@@ -29,6 +29,8 @@ export const UseAuthStatus = () => {
                     setIsLoggedIn(true);
                     dispatch(authActions.authStatus(true));
                     getUserData(user.uid);
+                } else {
+                    dispatch(authActions.authStatus(false));
                 }
                 setCheckingStatus(false);
             });
