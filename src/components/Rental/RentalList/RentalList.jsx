@@ -36,13 +36,13 @@ const RentalList = () => {
       }
     }
     fetchRentals();
-  }, []);
+  }, [rentals]);
   return (
     <div id="rental-list">
       <div className="container mx-auto">
         <div className="filter py-5 mb-5">
-          <div className="filter-wrap mx-auto  flex justify-between">
-            <div className="border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
+          <div className="filter-wrap mx-auto flex justify-between">
+            <div className="filter-option border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
               <Dropdown
                 label="Dropdown"
                 inline={true}>
@@ -60,7 +60,7 @@ const RentalList = () => {
                 </Dropdown.Item>
               </Dropdown>
             </div>
-            <div className="border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
+            <div className="filter-option border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
               <Dropdown
                 label="Dropdown"
                 inline={true}>
@@ -78,7 +78,7 @@ const RentalList = () => {
                 </Dropdown.Item>
               </Dropdown>
             </div>
-            <div className="border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
+            <div className="filter-option border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
               <Dropdown
                 label="Dropdown"
                 inline={true}>
@@ -96,7 +96,7 @@ const RentalList = () => {
                 </Dropdown.Item>
               </Dropdown>
             </div>
-            <div className="border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
+            <div className="filter-option border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
               <Dropdown
                 label="Dropdown"
                 inline={true}>
@@ -114,7 +114,7 @@ const RentalList = () => {
                 </Dropdown.Item>
               </Dropdown>
             </div>
-            <div className="border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
+            <div className="filter-option border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
               <Dropdown
                 label="Dropdown"
                 inline={true}>
@@ -132,7 +132,7 @@ const RentalList = () => {
                 </Dropdown.Item>
               </Dropdown>
             </div>
-            <div className="border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
+            <div className="filter-option border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
               <Dropdown
                 label="Dropdown"
                 inline={true}>

@@ -5,10 +5,10 @@ import { BiBath, BiArea } from "react-icons/bi";
 import { GoLocation } from "react-icons/go";
 import { Link } from "react-router-dom";
 
-const RentalDetails = ({resp}) => {
+const RentalCard = ({resp}) => {
   return (
     <div className="product mb-3">
-      <div className="max-w-sm bg-white rounded-lg border border-gray-100 shadow-md dark:bg-gray-800 dark:border-gray-700">
+      <div className="prod-wrapper max-w-sm bg-white rounded-lg border border-gray-100 shadow-md dark:bg-gray-800 dark:border-gray-700">
         <div className="carousel-list">
           <Card>
             <div className="heart-wrapper bg-gray-50 cursor-pointer rounded-full">
@@ -24,14 +24,14 @@ const RentalDetails = ({resp}) => {
               </Carousel>
             </div>
             <div className="card-text px-4 py-2">
-              <h4 className="text-xl text-gray-800 mb-2">
+              <h4 className="text-base md:text-lg lg:text-xl text-gray-800 mb-2">
                 {resp.data.name}
               </h4>
               <div className="flex justify-between mb-3">
-                <p className="price-text text-cyan-600">
+                <p className="price-text text-cyan-600 text-sm lg:text-base">
                   {resp.data.price} EGP<span className="day text-gray-600">/Month</span>
                 </p>
-                <p className="text-sm text-gray-600 flex items-center">
+                <p className="text-sm lg:text-base text-gray-600 flex items-center">
                   <AiFillStar className="mr-1 text-lg text-yellow-300"/> 
                   <span className="mr-2">{resp.data.reviews[0].rate}/5</span>
                   <span>
@@ -45,16 +45,16 @@ const RentalDetails = ({resp}) => {
                   </span>
                 </p>
               </div>
-              <p className="text-sm text-gray-600 flex mb-3 items-center">
+              <p className="text-gray-600 flex mb-3 items-center">
                 <GoLocation className="mr-3 text-lg text-cyan-600"/>
-                <span>{resp.data.address}</span>
+                <span className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">{resp.data.address}</span>
               </p>
               <div className="details flex justify-between flex-wrap mb-3">
                 <p className="text-sm text-gray-600 w-1/2 mb-3 flex items-center">
                   <FaBed className="mr-3 text-lg"/>
-                  <span>{resp.data.aboutRental.rooms} rooms</span>
+                  <span className="text-sm">{resp.data.aboutRental.rooms} rooms</span>
                 </p>
-                <p className="text-sm text-gray-600 w-1/2 mb-3 flex items-center">
+                <p className="bathrooms text-sm text-gray-600 w-1/2 mb-3 flex items-center">
                   <BiBath className="mr-3 text-lg"/>
                   <span>{resp.data.aboutRental.bathroom} bathrooms</span>
                 </p>
@@ -77,4 +77,4 @@ const RentalDetails = ({resp}) => {
   )
 }
 
-export default RentalDetails;
+export default RentalCard;
