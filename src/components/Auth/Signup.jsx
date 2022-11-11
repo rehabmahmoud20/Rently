@@ -6,7 +6,7 @@ import { IoEyeOutline, IoEyeOffOutline, IoLogoGoogle } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 // A U T H E N T I C A T I O N
 import { db } from '../../firebase.config';
-import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -42,7 +42,7 @@ const Signup = () => {
             delete userData.password;
             delete userData.confirmPassword;
             delete userData.terms;
-            userData.timestamp = serverTimestamp();
+            userData.timestamp = new Date().toDateString();
             // MORE RELATED DATA ADDED
             userData.bio = '';
             userData.avatar = '';

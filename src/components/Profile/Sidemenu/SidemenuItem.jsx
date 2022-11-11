@@ -19,7 +19,7 @@ const SidemenuItem = (props) => {
                 className="flex items-center p-2 rounded-lg dark:text-white"
             >
                 <Icon className="flex-shrink-0 w-10 sm:w-6 h-6 transition-all duration-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="flex-1 ml-3 whitespace-nowrap hidden sm:block transition-all duration-500">
+                <span className="flex-1 ml-3 whitespace-nowrap hidden md:block transition-all duration-500">
                     {itemContent}
                 </span>
             </Link>
