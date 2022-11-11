@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     isLoggedin: false,
-    checkingStatus: true,
+    isLoading: true,
 };
 
 export const authSlice = createSlice({
@@ -11,10 +11,9 @@ export const authSlice = createSlice({
         authStatus(state, action) {
             state.isLoggedin = action.payload;
         },
-        checkingStatus(state, action) {
-            state.checkingStatus = action.payload;
+        setIsLoading(state, action) {
+            state.isLoading = action.payload;
         },
     },
 });
 export const authActions = authSlice.actions;
-

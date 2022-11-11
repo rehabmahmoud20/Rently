@@ -13,32 +13,32 @@ import Spinner from "../../Shared/Spinner";
 const RentalList = () => {
   const [rentals, setRentals] = useState([]);
   const state = useSelector((state) => state.rentals.fetchRentals);
-  useEffect(() => {
-    if (state == true) {
-      const fetchRentals = async () => {
-        try {
-          // get rentals
-          const colRef = collection(db, "rentals");
-          // Create Query
-          const q = query(colRef);
-          // Execute Query
-          const querySnap = await getDocs(q);
-          let listings = [];
-          querySnap.forEach((doc) => {
-            listings.push({
-              id: doc.id,
-              data: doc.data(),
-            });
-          });
-          // Set State
-          setRentals(listings);
-        } catch (error) {
-          toast.error("Couldn't fetch data");
-        }
-      };
-      fetchRentals();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (state == true) {
+  //     const fetchRentals = async () => {
+  //       try {
+  //         // get rentals
+  //         const colRef = collection(db, "rentals");
+  //         // Create Query
+  //         const q = query(colRef);
+  //         // Execute Query
+  //         const querySnap = await getDocs(q);
+  //         let listings = [];
+  //         querySnap.forEach((doc) => {
+  //           listings.push({
+  //             id: doc.id,
+  //             data: doc.data(),
+  //           });
+  //         });
+  //         // Set State
+  //         setRentals(listings);
+  //       } catch (error) {
+  //         toast.error("Couldn't fetch data");
+  //       }
+  //     };
+  //     fetchRentals();
+  //   }
+  // }, []);
   return (
     <div id="rental-list">
       {rentals.length == 0 ? (

@@ -15,47 +15,47 @@ import SearchBar from './SearchBar';
 import './home.css';
 
 const Home = () => {
-    const [listings, setListings] = useState([]);
-    useEffect(() => {
-        const fetchRents = async () => {
-            try {
-                // Get a ref
-                const rentsRef = collection(db, 'rentals');
-                // Create a query
-                const q = query(rentsRef, limit(3));
-                // Execute the query
-                const querySnap = await getDocs(q);
-                const rents = [];
-                querySnap.forEach((doc) => {
-                    rents.push(doc.data());
-                });
-                setListings(rents);
-            } catch (error) {
-                toast.error('Could not fetch rents');
-            }
-        };
-        fetchRents();
-    }, []);
-    return (
-        <>
+  const [listings, setListings] = useState([]);
+  useEffect(() => {
+    const fetchRents = async () => {
+      try {
+        // Get a ref
+        const rentsRef = collection(db, 'rentals');
+        // Create a query
+        const q = query(rentsRef, limit(3));
+        // Execute the query
+        const querySnap = await getDocs(q);
+        const rents = [];
+        querySnap.forEach((doc) => {
+          rents.push(doc.data());
+        });
+        setListings(rents);
+      } catch (error) {
+        toast.error('Could not fetch rents');
+      }
+    };
+    fetchRents();
+  }, []);
+  return (
+    <>
 
-            <HomeHero />
+      <HomeHero />
 
-            <SearchBar />
+      <SearchBar />
 
-            <Services />
+      <Services />
 
-            <WhyUs />
+      <WhyUs />
 
-            {listings && listings.length > 0 ? (
-                <Recommended listings={listings} />
-            ) : (
-                <></>
-            )}
+      {listings && listings.length > 0 ? (
+        <Recommended listings={listings} />
+      ) : (
+        <></>
+      )}
 
-            <Testimonials />
+      <Testimonials />
 
-        </>
-    );
+    </>
+  );
 };
 export default Home;
