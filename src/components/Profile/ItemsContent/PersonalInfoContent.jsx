@@ -7,16 +7,16 @@ import { FiEdit3 } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import userPic from '../images/user-avatar.png';
 import { MdOutlineFileUpload } from 'react-icons/md';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Spinner from '../../Shared/Spinner';
 import { userActions } from '../../Store/user';
 import './avatar.css';
-const PersonalInfoContent = () => {
+const PersonalInfoContent = (props) => {
     const auth = getAuth();
     const dispatch = useDispatch();
-    const userData = useSelector((state) => state.user.userData);
+    // const userData = props.userData;
     // STATES
-    const [updatedData, setUpdatedData] = useState(null);
+    const [updatedData, setUpdatedData] = useState(props.userData);
     const [changeDetails, setChangeDetails] = useState(false);
     const [profilePic, setProfilePic] = useState(userPic);
     // EDIT / CHANGE HANDLER
@@ -62,8 +62,9 @@ const PersonalInfoContent = () => {
     };
     // SET USER DATA
     useEffect(() => {
-        setUpdatedData(userData);
-    }, [userData]);
+        setUpdatedData(props.userData);
+        console.log(props.userData);
+    }, [props.userData]);
     return (
         <>
             {updatedData ? (

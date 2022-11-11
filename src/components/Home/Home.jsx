@@ -34,7 +34,7 @@ const Home = () => {
         toast.error('Could not fetch rents');
       }
     };
-    fetchRents();
+    // fetchRents();
   }, []);
   return (
     <>
