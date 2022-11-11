@@ -3,8 +3,8 @@ import homeIcon from '../../assets/images/rently.png'
 
 function Footer() {
   return (
-    <footer className="sm:pt-16 bg-white sm:p-6 dark:bg-gray-900 border-t-2">
-      <div className="md:flex md:justify-between">
+    <footer className="py-6 bg-white dark:bg-gray-900 border-t-2">
+      <div className="md:flex md:justify-between container">
         <div className="mb-6 md:mb-0">
           <a href="#" className="flex items-center no-underline	text-teal-400">
             <img src={homeIcon} className="mr-3 h-8 text-teal-400" alt="Rently Logo" />
@@ -47,7 +47,7 @@ function Footer() {
         </div>
       </div>
       <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-      <div className="sm:flex sm:items-center sm:justify-between">
+      <div className="sm:flex sm:items-center sm:justify-between container">
         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 <a href="#" className="hover:underline">Rently</a>. All Rights Reserved.
         </span>
         <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
