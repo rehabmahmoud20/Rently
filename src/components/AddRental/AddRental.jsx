@@ -14,10 +14,7 @@ import { db } from "../../firebase.config";
 import {
   collection,
   addDoc,
-  getDocs,
   doc,
-  setDoc,
-  serverTimestamp,
   getDoc,
   updateDoc,
 } from "firebase/firestore";
@@ -144,6 +141,7 @@ const AddRental = () => {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm();
   return (
@@ -151,6 +149,7 @@ const AddRental = () => {
       <form
         onSubmit={handleSubmit((data) => {
           sendData(data)
+          reset()
         })}
       >
         <section className="about-rental">

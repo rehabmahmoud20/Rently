@@ -10,6 +10,7 @@ import NotFoundPage from '../Shared/NotFoundPage';
 
 // A U T H
 import { Routes, Route } from 'react-router-dom';
+import EditRental from '../EditRental/EditRental';
 const Profile = () => {
     return (
         <section className="user-profile flex">
