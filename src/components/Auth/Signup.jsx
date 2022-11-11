@@ -2,7 +2,7 @@ import './auth.css';
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { IoEyeOutline, IoEyeOffOutline, IoLogoGoogle } from 'react-icons/io5';
+import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 // A U T H E N T I C A T I O N
 import { db } from '../../firebase.config';
@@ -42,7 +42,7 @@ const Signup = () => {
             delete userData.password;
             delete userData.confirmPassword;
             delete userData.terms;
-            userData.timestamp = new Date().toDateString();
+            userData.timestamp = new Date();
             // MORE RELATED DATA ADDED
             userData.bio = '';
             userData.avatar = '';
@@ -51,7 +51,10 @@ const Signup = () => {
             userData.requests = [];
             userData.reviews = [];
             userData.history = [];
-            await setDoc(doc(db, 'users', user.uid), userData);
+            await setDoc(doc(db, 'users', user.uid), {
+                ...userData,
+                timestamp: new String(userData.timestamp.toDateString()),
+            });
             navigate('/');
         } catch (error) {
             toast.error('Something went wrong try again ❗');

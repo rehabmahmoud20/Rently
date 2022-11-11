@@ -1,5 +1,4 @@
 import Logout from './Logout';
-import DeleteUser from './DeleteUser';
 import Avatar from './Avatar';
 // ICONS
 import { IoTrophyOutline } from 'react-icons/io5';
@@ -67,7 +66,6 @@ const SideMenu = () => {
                         );
                     })}
                     <Logout />
-                    <DeleteUser />
                 </ul>
             </div>
         </aside>
