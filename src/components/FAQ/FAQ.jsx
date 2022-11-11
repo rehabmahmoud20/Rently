@@ -1,9 +1,13 @@
-import React from 'react'
+import FAQAccordion from "./FAQAccordion";
+import FAQHero from "./FAQHero";
 
-const FAQ = () => {
+function FAQ() {
   return (
-    <div>FAQ</div>
-  )
+    <>
+      <FAQHero />
+      <FAQAccordion />
+    </>
+  );
 }
 
-export default FAQ
+export default FAQ;
