@@ -21,7 +21,6 @@ import Spinner from './components/Shared/Spinner';
 import { useSelector } from 'react-redux';
 function App() {
     const isLoggedIn = useSelector((state) => state.authentication.isLoggedin);
-    const isLoading = useSelector((state) => state.authentication.isLoading);
     return (
         <BrowserRouter>
             <NavbarComponent />

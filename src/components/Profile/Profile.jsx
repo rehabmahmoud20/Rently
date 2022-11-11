@@ -13,7 +13,6 @@ import { Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Spinner from '../Shared/Spinner';
 const Profile = () => {
-    const isLoading = useSelector((state) => state.authentication.isLoading);
     return (
         <section className="user-profile flex">
             <SideMenu />
