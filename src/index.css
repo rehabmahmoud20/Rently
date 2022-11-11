@@ -1,3 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+#root > nav > div > div > ul {
+    align-items: center !important;
+}

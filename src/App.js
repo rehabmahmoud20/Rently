@@ -22,6 +22,7 @@ import { useSelector } from 'react-redux';
 import TermsAndConditions from './components/TermsAndConditions/TermsAndConditions';
 function App() {
     const isLoggedIn = useSelector((state) => state.authentication.isLoggedin);
+    const isLoading = useSelector((state) => state.authentication.isLoading);
     return (
         <BrowserRouter>
             <NavbarComponent />
@@ -40,19 +41,47 @@ function App() {
                             element={<ForgetPassword />}
                         />
                     )}
-                    <Route path="favourits" element={<Favourits />} />
-                    {isLoggedIn && (
-                        <Route path="profile/*" element={<Profile />} />
-                    )}
+                    <Route
+                        path="favourits"
+                        element={
+                            !isLoggedIn && !isLoading ? (
+                                <NotFoundPage />
+                            ) : isLoggedIn && !isLoading ? (
+                                <Favourits />
+                            ) : (
+                                <Spinner />
+                            )
+                        }
+                    />
+                    <Route
+                        path="profile/*"
+                        element={
+                            !isLoggedIn && !isLoading ? (
+                                <NotFoundPage />
+                            ) : isLoggedIn && !isLoading ? (
+                                <Profile />
+                            ) : (
+                                <Spinner />
+                            )
+                        }
+                    />
+                    <Route
+                        path="add-rental"
+                        element={
+                            !isLoggedIn && !isLoading ? (
+                                <NotFoundPage />
+                            ) : isLoggedIn && !isLoading ? (
+                                <AddRental />
+                            ) : (
+                                <Spinner />
+                            )
+                        }
+                    />
                     <Route
                         path="rental-details/:id"
                         element={<RentalDetails />}
                     />
                     <Route path="rental-list" element={<RentalList />} />
-                    <Route path="terms-and-conditions" element={<TermsAndConditions />} />
-
-                    <Route path="add-rental" element={<AddRental />} />
-
                     <Route path="about" element={<About />} />
                     <Route path="FAQ" element={<FAQ />} />
                     <Route path="*" element={<NotFoundPage />} />
