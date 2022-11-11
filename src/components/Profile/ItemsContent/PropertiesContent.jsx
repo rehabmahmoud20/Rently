@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { userActions } from '../../Store/user';
 import { Modal, Button } from 'flowbite-react';
 import PropertyCard from './propertyCard';
-import RentalCard from '../../Rental/RentalList/RentalCard';
 import { db } from '../../../firebase.config';
 import {
     collection,
@@ -58,7 +57,7 @@ const PropertiesContent = () => {
                 ...userData,
                 properties: propertiesId.filter((s) => s !== id),
             });
-            const docRef = await doc(db, 'rentals', id);
+            const docRef = doc(db, 'rentals', id);
             await deleteDoc(docRef);
             dispatch(
                 userActions.updateUserData({
@@ -69,6 +68,7 @@ const PropertiesContent = () => {
             setShowModal(false);
             toast.success('Property Deleted Successfully !');
         } catch (error) {
+            console.log(error);
             toast.error('Something went wrong !');
         }
     };

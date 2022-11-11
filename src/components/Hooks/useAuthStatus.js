@@ -18,6 +18,7 @@ export const UseAuthStatus = () => {
         dispatch(
             userActions.updateUserData({
                 ...docSnapshot.data(),
+                timestamp: new Date().toDateString(),
                 id: userID,
             })
         );
