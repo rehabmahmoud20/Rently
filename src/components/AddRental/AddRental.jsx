@@ -12,16 +12,6 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 // *firbase sending all data
 import { db } from '../../firebase.config';
 import {
-<<<<<<< HEAD
-  collection,
-  addDoc,
-  doc,
-  getDoc,
-  updateDoc,
-} from "firebase/firestore";
-
-
-=======
     collection,
     addDoc,
     getDocs,
@@ -31,7 +21,6 @@ import {
     getDoc,
     updateDoc,
 } from 'firebase/firestore';
->>>>>>> 5ec5c69a2abf5566af156432262bb01d85847636
 
 // rental options
 const options = [
@@ -40,6 +29,8 @@ const options = [
 ];
 
 const AddRental = () => {
+    const [imageFiles, setImageFiles] = useState([]);
+    const [images, setImages] = useState([]);
     const [imageUrls, setImageUrls] = useState([
         'https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80',
         'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=874&q=80',
@@ -47,7 +38,45 @@ const AddRental = () => {
         'https://images.unsplash.com/photo-1505691723518-36a5ac3be353?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
         'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=658&q=80',
     ]);
+    
     const auth = getAuth();
+    const convertToBase64= (e)=>{
+        const images = [], fileReaders = [];
+        const { files } = e.target;
+        console.log(e.target.files,files)
+        const myfilesArr = Array.from(files)
+        console.log(myfilesArr)
+        // setImageFiles([...myfilesArr])
+        // console.log(imageFiles)
+        // console.log(fileReaders)
+        if (myfilesArr.length) {
+            myfilesArr.forEach((file) => {
+              const fileReader = new FileReader();  //create file reader for each image
+              fileReaders.push(fileReader);
+            //   console.log(fileReaders)
+              fileReader.onload = (e) => {
+                // console.log(result)
+                const { result } = e.target;
+                console.log(result)
+              // setImage([...reader.result.toString()]);
+      
+                if (result) {
+                  images.push(result)  //[] of  base 64 for each image
+                }
+                if (images.length === myfilesArr.length ) {
+                  setImages(images);
+                  console.log(images)
+            //       console.log(images)
+            //    console.log(fileReaders)
+                }
+              }
+              fileReader.readAsDataURL(file);
+      
+            })
+          };
+          console.log(images)
+          console.log(fileReaders)
+    }
 
     // & update the user data upon adding rental
     const updateUserData = async (rentalId) => {
@@ -87,72 +116,6 @@ const AddRental = () => {
         let newDate = new Date(availableDate).toDateString();
         console.log(newDate);
 
-<<<<<<< HEAD
- 
-  const {
-    register,
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors },
-  } = useForm();
-  return (
-    <section className="container mx-auto py-12">
-      <form
-        onSubmit={handleSubmit((data) => {
-          sendData(data)
-          reset()
-        })}
-      >
-        <section className="about-rental">
-          <h2 className=" mb-6 text-3xl text-cyan-600">Rental information</h2>
-         <div className="p-8 mb-20 shadow-lg shadow-gray-300 rounded-2xl">
-         <div className="grid md:grid-cols-2 md:gap-10">
-            {/* RENTAL NAME */}
-            <div className="relative z-0 mb-6 w-full group">
-              <input
-                type="text"
-                name="rentalName"
-                id="floating_text"
-                placeholder=" "
-                className="my-2 block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-cyan-600 focus:outline-none focus:ring-0 focus:border-cyan-600 peer"
-                {...register("rentalName", { required: "This is required" })}
-              />
-              {errors.rentalName?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                  {errors.rentalName.message}
-                </p>
-              )}
-              <label
-                htmlFor="floating_text"
-                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-              >
-                Rental name
-              </label>
-            </div>
-            {/* adress */}
-            <div className="relative z-0 mb-6 w-full group">
-              <input
-                type="text"
-                name="address"
-                id="floating_address"
-                className="block my-2 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-cyan-600 focus:outline-none focus:ring-0 focus:border-cyan-600 peer"
-                placeholder=" "
-                {...register("address", { required: "This is required" })}
-              />
-              {errors.address?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                  {errors.address.message}
-                </p>
-              )}
-              <label
-                htmlFor="floating_address"
-                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-              >
-                address
-              </label>
-            </div>
-=======
         const dataCopy = {
             name: rentalName,
             overview: 'lorem 5000000000000000000000',
@@ -162,7 +125,7 @@ const AddRental = () => {
             gender,
             price: +Price,
             hostID: auth.currentUser.uid,
-            images: imageUrls,
+            images: images,
             location: { lng: 29.97773, lat: 31.25526 },
             aboutRental: {
                 area,
@@ -213,19 +176,34 @@ const AddRental = () => {
             toast.error('data is is not sent');
         }
     };
->>>>>>> 5ec5c69a2abf5566af156432262bb01d85847636
+    const handlechange = (e)=>{
+        // console.log('hhhhhhhhhhhh')
+        convertToBase64(e)
+    }
 
     const {
         register,
         handleSubmit,
         control,
+        reset,
         formState: { errors },
-    } = useForm();
+    } = useForm( {mode: 'onChange'});
     return (
         <section className="container mx-auto py-12">
+            {
+        images.length > 0 ?
+          <div>
+            {
+              images.map((image, idx) => {
+                return <p key={idx}> <img src= { image } alt="" /> </p>
+              })
+            }
+          </div> : null
+      }
             <form
                 onSubmit={handleSubmit((data) => {
                     sendData(data);
+                    reset()
                 })}
             >
                 <section className="about-rental">
@@ -714,15 +692,17 @@ const AddRental = () => {
                             accept="image/*"
                             max="5"
                             multiple
-                            {...register('images', {
-                                required: 'This is required',
-                            })}
+                            onChange={handlechange}
+                            // {...register('images', {
+                            //     required: 'This is required',
+                            // })}
                         />
-                        {errors.images?.type === 'required' && (
+                        {console.log(images)}
+                        {/* {errors.images?.type === 'required' && (
                             <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                                 {errors.images.message}
                             </p>
-                        )}
+                        )} */}
                     </div>
                 </div>
 
