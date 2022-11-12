@@ -17,6 +17,8 @@ const ModalRequest = (props) => {
         register,
         handleSubmit,
         formState: { errors },
+        resetField,
+        reset,
     } = useForm();
     const onSubmit = async (data) => {
         // REQUEST OBJECT
@@ -45,6 +47,7 @@ const ModalRequest = (props) => {
                     requests: [...userData.requests, requestDetails],
                 })
             );
+            reset();
             toast.success('Your request has been sent successfully');
             closeModal();
         } catch (error) {

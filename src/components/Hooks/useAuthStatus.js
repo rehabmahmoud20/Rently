@@ -31,11 +31,12 @@ export const UseAuthStatus = () => {
                     setIsLoggedIn(true);
                     dispatch(authActions.authStatus(true));
                     getUserData(user.uid);
+                    dispatch(authActions.setIsLoading(false));
                 } else {
                     dispatch(authActions.authStatus(false));
+                    dispatch(authActions.setIsLoading(false));
                 }
                 setCheckingStatus(false);
-                dispatch(authActions.setIsLoading(false));
             });
         }
         setCheckingStatus(false);

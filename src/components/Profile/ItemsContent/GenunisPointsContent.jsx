@@ -31,11 +31,21 @@ const GenunisPointsContent = () => {
                     <p className="font-bold text-base mb-3 w-fit mx-auto lg:mx-0">
                         {username}, you're at Genius Level 1 🎉
                     </p>
-                    <p className=" text-gray-500 text-center lg:text-left text-base mb-3 w-fit mx-auto lg:mx-0">
+                    <p className=" text-gray-500 text-center lg:text-left text-base mb-6 w-fit mx-auto lg:mx-0">
                         Complete 5 stays before Nov 10, 2023
                         <br />
                         to unlock Genius Level 2
                     </p>
+                    <div className="text-center lg:text-left">
+                        <h3 className="text-2xl font-bold mb-3 text-cyan-600 w-fit mx-auto lg:mx-0">
+                            Rent your next property for less
+                        </h3>
+                        <p className="text-gray-500 text-center lg:text-left text-base mb-3 w-fit mx-auto lg:mx-0">
+                            Enjoy discounted properties with
+                            <br />
+                            Genius discounts
+                        </p>
+                    </div>
                     <button
                         onClick={() => {
                             navigate('/rental-list');
@@ -45,54 +55,6 @@ const GenunisPointsContent = () => {
                         Discover
                     </button>
                     {/* Genuis Features */}
-                    <div className="text-center lg:text-left mt-6">
-                        <h3 className="text-2xl font-bold mb-3 text-cyan-600 w-fit mx-auto lg:mx-0">
-                            Rent your next property for less
-                        </h3>
-                        <p className="text-gray-500 text-center lg:text-left text-base mb-3 w-fit mx-auto lg:mx-0">
-                            Enjoy discounted properties with
-                            <br />
-                            Genius discounts
-                        </p>
-                        <div className="flex flex-wrap justify-between items-center gap-3">
-                            <div className="block p-6  max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                                <h5 className="mb-3 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
-                                    Genius Level 1
-                                </h5>
-                                <p className="font-normal text-gray-500 dark:text-gray-400">
-                                    <TbDiscount className="text-cyan-600 text-2xl mr-1 inline" />{' '}
-                                    10% discounts
-                                </p>
-                            </div>
-                            <div className="block p-6 max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                                <h5 className="mb-3 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
-                                    Genius Level 2
-                                </h5>
-                                <p className="font-normal text-gray-500 dark:text-gray-400">
-                                    <TbDiscount className="text-cyan-600 text-2xl mr-1 inline" />{' '}
-                                    15% discounts
-                                </p>
-                            </div>
-                            <div className="block p-6 max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                                <h5 className="mb-3 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
-                                    Genius Level 3
-                                </h5>
-                                <p className="font-normal text-gray-500 dark:text-gray-400">
-                                    <TbDiscount className="text-cyan-600 text-2xl mr-1 inline" />{' '}
-                                    20% discounts
-                                </p>
-                            </div>
-                            <div className="block p-6 max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                                <h5 className="mb-3 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
-                                    Genius Level 4
-                                </h5>
-                                <p className="font-normal text-gray-500 dark:text-gray-400">
-                                    <TbDiscount className="text-cyan-600 text-2xl mr-1 inline" />{' '}
-                                    25% discounts
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 {/* Genuis Image */}
                 <div className="w-full lg:w-1/2">
@@ -101,6 +63,47 @@ const GenunisPointsContent = () => {
                         alt="Genuis Program"
                         className="mx-auto w-fit object-cover"
                     />
+                </div>
+            </div>
+            <h3 className="text-2xl font-bold mb-6 text-cyan-600 w-fit mx-auto lg:mx-0">
+                Genius discounts
+            </h3>
+            <div className="flex flex-wrap justify-center lg:justify-between items-center gap-3">
+                <div className="block p-6  max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h5 className="mb-3 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
+                        Genius Level 1
+                    </h5>
+                    <p className="font-normal text-gray-500 dark:text-gray-400">
+                        <TbDiscount className="text-cyan-600 text-2xl mr-1 inline" />{' '}
+                        10% discounts
+                    </p>
+                </div>
+                <div className="block p-6 max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h5 className="mb-3 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
+                        Genius Level 2
+                    </h5>
+                    <p className="font-normal text-gray-500 dark:text-gray-400">
+                        <TbDiscount className="text-cyan-600 text-2xl mr-1 inline" />{' '}
+                        15% discounts
+                    </p>
+                </div>
+                <div className="block p-6 max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h5 className="mb-3 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
+                        Genius Level 3
+                    </h5>
+                    <p className="font-normal text-gray-500 dark:text-gray-400">
+                        <TbDiscount className="text-cyan-600 text-2xl mr-1 inline" />{' '}
+                        20% discounts
+                    </p>
+                </div>
+                <div className="block p-6 max-w-sm bg-white rounded-lg shadow-md shadow-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h5 className="mb-3 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
+                        Genius Level 4
+                    </h5>
+                    <p className="font-normal text-gray-500 dark:text-gray-400">
+                        <TbDiscount className="text-cyan-600 text-2xl mr-1 inline" />{' '}
+                        25% discounts
+                    </p>
                 </div>
             </div>
         </section>
