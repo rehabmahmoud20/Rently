@@ -10,3 +10,6 @@
     max-height: 300px !important;
     object-fit: cover;
 }
+#overview > div > .leaflet-container {
+    z-index: 0 !important;
+}
