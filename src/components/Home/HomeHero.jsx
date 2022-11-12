@@ -9,7 +9,7 @@ function HomeHero() {
         alt="House"
         className="hero-image w-full h-96 sm:h-screen"
       />
-      <div className="overlay absolute top-0 left-0 bg-black h-full w-full opacity-60 z-10"></div>
+      <div className="overlay absolute top-0 left-0 bg-[#000000a3] h-full w-full z-10"></div>
       <div className="container">
         <div className="get-started absolute left:12 sm:left-28 top-32 z-20">
           <h2 className="text-white text-4xl text-left sm:text-6xl sm:mb-16 mb-6">

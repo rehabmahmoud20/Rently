@@ -16,19 +16,33 @@ import About from './components/About/About';
 import AddRental from './components/AddRental/AddRental';
 import NavbarComponent from './components/Shared/NavbarComponent';
 import Footer from './components/Shared/Footer';
+import { lazy, Suspense } from 'react';
 import NotFoundPage from './components/Shared/NotFoundPage';
 import Spinner from './components/Shared/Spinner';
 import { useSelector } from 'react-redux';
 import TermsAndConditions from './components/TermsAndConditions/TermsAndConditions';
+import Navigate from './components/Shared/Navigate';
+
 function App() {
     const isLoggedIn = useSelector((state) => state.authentication.isLoggedin);
     const isLoading = useSelector((state) => state.authentication.isLoading);
+    const NavigateTop = (e) => {
+        window.scrollTo(0, 0);
+    };
+    const HomeComponent = lazy(() => import('./components/Home/Home'));
     return (
         <BrowserRouter>
             <NavbarComponent />
-            <main>
+            <main className="min-h-screen relative">
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route
+                        path="/"
+                        element={
+                            <Suspense fallback={<Spinner />}>
+                                <HomeComponent />
+                            </Suspense>
+                        }
+                    />
                     <Route
                         path="signin"
                         element={
@@ -110,9 +124,14 @@ function App() {
                     <Route path="FAQ" element={<FAQ />} />
                     <Route path="*" element={<NotFoundPage />} />
                     <Route path="/spinner" element={<Spinner />} />
+                    <Route
+                        path="terms&conditions"
+                        element={<TermsAndConditions />}
+                    />
                 </Routes>
                 {/* toast container "alert from react toastify" don't add it again ❗*/}
                 <ToastContainer autoClose={4000} />
+                <Navigate navigate={NavigateTop} />
             </main>
             <Footer />
         </BrowserRouter>

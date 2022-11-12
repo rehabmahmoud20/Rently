@@ -1,21 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import homeIcon from '../../assets/images/rently.png';
-
 function Footer() {
     return (
         <footer className="py-6 bg-white dark:bg-gray-900 border-t-2">
             <div className="md:flex md:justify-between px-5">
                 <div className="mb-6 md:mb-0">
-                    <a
-                        href="#"
-                        className="flex items-center no-underline	text-teal-400"
+                    <Link
+                        to="/"
+                        className="flex items-center no-underline text-teal-400"
                     >
                         <img
                             src={homeIcon}
                             className="mr-3 h-8 text-teal-400"
                             alt="Rently Logo"
                         />
-                    </a>
+                    </Link>
                 </div>
                 <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                     <div>
@@ -24,28 +24,22 @@ function Footer() {
                         </h2>
                         <ul className="text-gray-600 dark:text-gray-400 pl-0">
                             <li className="mb-4">
-                                <a
-                                    href="/"
-                                    className="hover:underline"
-                                >
+                                <Link to="/" className="hover:underline">
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li className="mb-4">
-                                <a
-                                    href="/rental-list"
+                                <Link
+                                    to="/rental-list"
                                     className="hover:underline"
                                 >
                                     Rental
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a
-                                    href="/about"
-                                    className="hover:underline"
-                                >
+                                <Link to="/about" className="hover:underline">
                                     About
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -57,18 +51,16 @@ function Footer() {
                             <li className="mb-4">
                                 <a
                                     href="https://github.com/rehabmahmoud20/Rently"
+                                    target={'_blank'}
                                     className="hover:underline "
                                 >
                                     Github
                                 </a>
                             </li>
                             <li>
-                                <a
-                                    href="/"
-                                    className="hover:underline"
-                                >
+                                <Link to="/about" className="hover:underline">
                                     Contact us
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -78,19 +70,25 @@ function Footer() {
                         </h2>
                         <ul className="text-gray-600 dark:text-gray-400 pl-0">
                             <li className="mb-4">
-                                <a href="FAQ" className="hover:underline">
+                                <Link to="/FAQ" className="hover:underline">
                                     FAQ
-                                </a>
+                                </Link>
                             </li>
                             <li className="mb-4">
-                                <a href="#" className="hover:underline">
+                                <Link
+                                    to="/terms&conditions"
+                                    className="hover:underline"
+                                >
                                     Privacy Policy
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:underline">
+                                <Link
+                                    to="/terms&conditions"
+                                    className="hover:underline"
+                                >
                                     Terms &amp; Conditions
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -100,16 +98,13 @@ function Footer() {
             <div className="sm:flex sm:items-center sm:justify-between container">
                 <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
                     © 2022{' '}
-                    <a href="#" className="hover:underline">
+                    <Link to="/" className="hover:underline">
                         Rently
-                    </a>
+                    </Link>
                     . All Rights Reserved.
                 </span>
                 <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
-                    <a
-                        href="#"
-                        className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
-                    >
+                    <Link className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
                         <svg
                             className="w-5 h-5"
                             fill="currentColor"
@@ -123,9 +118,9 @@ function Footer() {
                             />
                         </svg>
                         <span className="sr-only">Facebook page</span>
-                    </a>
-                    <a
-                        href="#"
+                    </Link>
+                    <Link
+                        to="/"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                     >
                         <svg
@@ -141,9 +136,9 @@ function Footer() {
                             />
                         </svg>
                         <span className="sr-only">Instagram page</span>
-                    </a>
-                    <a
-                        href="#"
+                    </Link>
+                    <Link
+                        to="/"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                     >
                         <svg
@@ -155,9 +150,9 @@ function Footer() {
                             <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
                         </svg>
                         <span className="sr-only">Twitter page</span>
-                    </a>
-                    <a
-                        href="#"
+                    </Link>
+                    <Link
+                        to="/"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                     >
                         <svg
@@ -173,9 +168,9 @@ function Footer() {
                             />
                         </svg>
                         <span className="sr-only">GitHub account</span>
-                    </a>
-                    <a
-                        href="#"
+                    </Link>
+                    <Link
+                        to="/"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                     >
                         <svg
@@ -191,7 +186,7 @@ function Footer() {
                             />
                         </svg>
                         <span className="sr-only">Dribbbel account</span>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </footer>
