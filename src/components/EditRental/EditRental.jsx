@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 // *form
 import { useForm, Controller } from "react-hook-form";
 // *libraries
 import Select from "react-select";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import { Carousel } from "flowbite-react";
+
 
 // *Auth
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -27,8 +30,10 @@ const EditRental = (prop) => {
 
   const [imagesUrl, setimagesUrl] = useState([]);
   const [rental, setRental] = useState(null);
- 
-
+  const [images, setImages] = useState([]);
+  const [gender, genderShow] = useState(false);
+  const [separateRooms, setseparateRooms] = useState(false);
+ const navigate = useNavigate()
   const params = useParams();
 
   useEffect(() => {
@@ -86,16 +91,15 @@ const EditRental = (prop) => {
      await updateDoc(docRef, rental);
    
       toast.success("data is sent");
-      setRental(null)
+      navigate('/rental-list')
+      // setRental(null)
     } catch (error) {
-      console.log(error);
       toast.error("data is is not sent");
     }
   }
 
   const handlechange = (e) => {
     convertToBase64(e);
-    console.log(imagesUrl)
     // setRental((prv)=>{
     //   return {...prv,images: [...imagesUrl]}
     //     }) 
@@ -109,25 +113,14 @@ const EditRental = (prop) => {
   } = useForm({
     mode: "onChange",
   });
+
   
   return rental ?(
-    <section className="container mx-auto py-12">
+    <section className="px-5 sm:col-px-10  py-5 mr-2 h-screen overflow-auto mb-5">
       <form
         onSubmit={handleUpadteData}
       >
         <section className="about-rental">
-        {imagesUrl.length > 0 ? (
-        <div>
-          {imagesUrl.map((image, idx) => {
-            return (
-              <p key={idx}>
-                
-                <img src={image} alt="" />
-              </p>
-            );
-          })}
-        </div>
-      ) : null}
           <h2 className=" mb-6 text-3xl text-cyan-600">Rental information</h2>
           <div className="p-8 mb-20 shadow-lg shadow-gray-300 rounded-2xl">
             <div className="grid md:grid-cols-2 md:gap-10">
@@ -410,8 +403,8 @@ const EditRental = (prop) => {
             </div>
           </div>
           {/* ===================================================== rental Features ================================================ */}
-          <div className="grid md:grid-cols-4 md:gap-10 mb-5">
-            {/* separate rooms */}
+          <div className="grid md:grid-cols-2 md:gap-10 mb-5">
+              {/* separate rooms */}
             <div className="flex items-center my-4">
               <input
                 id="separateRooms"
@@ -423,6 +416,12 @@ const EditRental = (prop) => {
                   setRental((prv)=>{
                     return {...prv,features: {...prv.features,separateRooms:+e.target.checked}}
                       }) 
+                      if (e.target.checked === true) {
+                        setseparateRooms(true);
+                        genderShow(true);
+                      } else {
+                        genderShow(false);
+                      }
                  }} 
               />
               <label
@@ -432,6 +431,60 @@ const EditRental = (prop) => {
                 Separate rooms
               </label>
             </div>
+             {/* gender */}
+          {gender?( <div className="gender flex items-center">
+            <label className="text-sm text-gray-500 ">Gender</label>
+            <div className="flex items-center">
+             {/* male */}
+  <div className="flex items-center ">
+              <input
+                id="male"
+                type="radio"
+                checked={rental.aboutRental.gender === 'male'}
+                name="gender"
+                className="w-4 h-4 ml-6 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    // return {...prv,aboutRental: {...prv.aboutRental,gender:e.target.value}}
+                      }) 
+                 }}
+              />
+              <label
+                htmlFor="male"
+                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
+                Male
+              </label>
+            </div>
+
+            {/* f e m a l e */}
+            <div className="ml-10 flex items-center ">
+              <input
+                id="female"
+                type="radio"
+                name="gender"
+                className=" w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,aboutRental: {...prv.aboutRental,gender:e.target.value}}
+                      }) 
+                 }}
+              />
+              <label
+                htmlFor="female"
+                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
+                Female
+              </label>
+            </div>
+          </div>
+</div>
+          
+          
+          ):null}
+          </div>
+          <div className="grid md:grid-cols-4 md:gap-10 mb-5">
+          
             {/* air conditioner */}
             <div className="flex items-center my-4">
               <input
@@ -564,53 +617,8 @@ const EditRental = (prop) => {
         </div>
 
         <div className="grid md:grid-cols-2 md:gap-10 p-8 mb-24 shadow-lg shadow-gray-300 rounded-2xl">
-          {/* gender */}
-          <div className="gender">
-            <label className="text-sm text-gray-500 ">Gender</label>
-
-            {/* male */}
-            <div className="flex items-center my-4 ">
-              <input
-                id="male"
-                type="radio"
-                checked={rental.aboutRental.gender === 'male'}
-                name="gender"
-                className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                onChange={(e)=>{
-                  setRental((prv)=>{
-                    // return {...prv,aboutRental: {...prv.aboutRental,gender:e.target.value}}
-                      }) 
-                 }}
-              />
-              <label
-                htmlFor="male"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                Male
-              </label>
-            </div>
-
-            {/* f e m a l e */}
-            <div className="mb-5">
-              <input
-                id="female"
-                type="radio"
-                name="gender"
-                className=" w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                onChange={(e)=>{
-                  setRental((prv)=>{
-                    return {...prv,aboutRental: {...prv.aboutRental,gender:e.target.value}}
-                      }) 
-                 }}
-              />
-              <label
-                htmlFor="female"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                Female
-              </label>
-            </div>
-          </div>
+         
+         
 
           {/* images */}
           <div className="relative z-0 mb-6  group  ">
@@ -629,6 +637,15 @@ const EditRental = (prop) => {
             />
            
           </div>
+          <Carousel slide={false} className="change-carousel w-3/4">
+          {imagesUrl.map((image, idx) => {
+            return (
+              < >
+                <img key={idx} src={image} alt="image" className="h-full" />
+              </>
+            );
+          })}
+        </Carousel>
         </div>
 
         <div className="  mx-auto w-fit">

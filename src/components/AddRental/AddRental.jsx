@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 // *libraries
 import Select from "react-select";
-import { Card, Carousel } from "flowbite-react";
+import { Carousel } from "flowbite-react";
 import { toast } from "react-toastify";
 
 // *Auth
@@ -160,6 +160,7 @@ const AddRental = () => {
   const handlechange = (e) => {
     convertToBase64(e);
   };
+  // handle separate rooms
   const handleSeprateRoomsChange = (e) => {
     if (e.target.checked === true) {
       setseparateRooms(true);
@@ -183,7 +184,6 @@ const AddRental = () => {
         onSubmit={handleSubmit((data) => {
           sendData(data);
           reset();
-          console.log(data);
         })}
       >
         <section className="about-rental">
