@@ -8,7 +8,6 @@ import PersonalInfoContent from './ItemsContent/PersonalInfoContent';
 import PropertiesContent from './ItemsContent/PropertiesContent';
 import NotFoundPage from '../Shared/NotFoundPage';
 import { useSelector } from 'react-redux';
-import AddRental from '../AddRental/AddRental';
 // A U T H
 import { Routes, Route } from 'react-router-dom';
 // import Spinner from '../Shared/Spinner';
@@ -16,6 +15,7 @@ import { db } from '../../firebase.config';
 import { collection, getDocs, query, limit } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
+import EditRental from '../EditRental/EditRental';
 const Profile = () => {
     const userData = useSelector((state) => state.user.userData);
     const [rentals, setRentals] = useState(null);
@@ -74,7 +74,7 @@ const Profile = () => {
                     />
                     <Route
                         path="edit-rental/:id"
-                        element={<AddRental rental={rentals} />}
+                        element={<EditRental rental={rentals} />}
                     />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>

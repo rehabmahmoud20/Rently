@@ -4,6 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 // *libraries
 import Select from "react-select";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 // *Auth
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -13,6 +14,8 @@ import { db } from "../../firebase.config";
 import { collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useEffect } from "react";
 import { async } from "@firebase/util";
+import { type } from "@testing-library/user-event/dist/type";
+import Spinner from "../Shared/Spinner";
 
 // rental options
 const options = [
@@ -20,153 +23,111 @@ const options = [
   { value: "Appartment", label: "Appartment" },
 ];
 
-const EditRental = () => {
-  const [rental, setRental] = useState(false);
-  const [imageUrls, setImageUrls] = useState([
-    "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80",
-    "https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=874&q=80",
-    "https://images.unsplash.com/photo-1449844908441-8829872d2607?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    "https://images.unsplash.com/photo-1505691723518-36a5ac3be353?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=658&q=80",
-  ]);
-  const auth = getAuth();
+const EditRental = (prop) => {
+
+  const [imagesUrl, setimagesUrl] = useState([]);
+  const [rental, setRental] = useState(null);
+ 
+
+  const params = useParams();
+
   useEffect(() => {
-    const getRental = async () => {
-      const rentaRef = doc(db, "rentals", auth.currentUser.uid);
+    const getRentalData = () => {
+      const rentals = prop.rental;
+      
+      const rentalIDTobeEdited = params.id;
+        const rentalTobeEdited = rentals.filter((rental) => {
+          return rental.id === rentalIDTobeEdited;
+        });
+        setRental(...rentalTobeEdited);
 
-      try {
-        const docSnap = await getDoc(rentaRef);
-        if (docSnap.exists()) {
-          setRental(docSnap.data());
-        }
-      } catch (error) {
-        console.log(error);
-        toast.error("Rental doesn't exist");
+  
       }
-      // const rentaRef = doc(db,'rentals',auth.currentUser.uid)
-      // const docSnap = await getDoc(rentaRef)
-      // if(docSnap.exists()){
-      //     setRental(docSnap.data())
-      // }
-    };
-    getRental();
-  }, []);
+    
+    prop.rental&&getRentalData();
 
-  // & update the user data upon adding rental
-  const updateUserData = async (rentalId) => {
-    const userRef = doc(db, "users", auth.currentUser.uid);
-    // get the user data
-    const usersData = await getDoc(userRef);
-    // update the user data
-    const { properties } = usersData.data();
-    const updateUserData = await updateDoc(userRef, {
-      ...usersData.data(),
-      properties: [...properties, rentalId],
-    });
+  }, [prop.rental]);
+
+  const auth = getAuth();
+
+  // convert imagesUrl
+  const convertToBase64 = (e) => {
+    const images = [],
+      fileReaders = [];
+    const { files } = e.target;
+    const myfilesArr = Array.from(files);
+    if (myfilesArr.length) {
+      myfilesArr.forEach((file) => {
+        const fileReader = new FileReader(); //create file reader for each image
+        fileReaders.push(fileReader);
+        fileReader.onload = (e) => {
+          const { result } = e.target;
+          if (result) {
+            images.push(result); //[] of  base 64 for each image
+          }
+          if (images.length === myfilesArr.length) {
+            setimagesUrl(images);
+            // setRental((prv)=>{
+            //   return {...prv,images: {...prv,images:imagesUrl}}
+            //     }) 
+          }
+        };
+        fileReader.readAsDataURL(file);
+      });
+    }
   };
   // & send the user data upon adding rental
-  const sendData = async (data) => {
-    const {
-      area,
-      AvailableRooms,
-      alevator,
-      floor,
-      furnashed,
-      parking,
-      pet,
-      Price,
-      Rooms,
-      gender,
-      address,
-      wifi,
-      availableDate,
-      bathroom,
-      insurance,
-      airConditioner,
-      rentalName,
-      separateRooms,
-      rentalType,
-    } = data;
-    let newDate = new Date(availableDate).toDateString();
-    console.log(newDate);
-
-    const dataCopy = {
-      name: rentalName,
-      overview: "lorem 5000000000000000000000",
-      address,
-      insurance: +insurance,
-      createdAt: new Date().toDateString(),
-      gender,
-      price: +Price,
-      hostID: auth.currentUser.uid,
-      images: imageUrls,
-      location: { lng: 29.97773, lat: 31.25526 },
-      aboutRental: {
-        area,
-        availableDate,
-        availableRooms: +AvailableRooms,
-        bathroom,
-        floor: +floor,
-        rooms: +Rooms,
-        separateRooms,
-        type: rentalType,
-      },
-      features: {
-        airConditioner,
-        alevator,
-        furnashed,
-        parking,
-        pet,
-        wifi,
-      },
-      policy: {
-        info: " sit amet consectetur adipisicing elit. Maxime mollitia,molestiae",
-        rules: [
-          "Available months 6, 12",
-          "This property only accepts cash payments.",
-          "Available for students",
-          "Pets are not allowed",
-        ],
-      },
-      reviews: [
-        {
-          rate: 5,
-          clientID: "",
-          feeedback:
-            "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
-          timestamp: "",
-        },
-      ],
-    };
-    const collecRef = collection(db, "rentals");
+ 
+  const handleUpadteData = async(e)=>{
+    e.preventDefault()
     try {
-      //   console.log(dataCopy);
-      const docRef = await addDoc(collecRef, dataCopy);
-      const { id } = docRef;
-      updateUserData(id);
+    const docRef = doc(db, "rentals",params.id);
+
+     await updateDoc(docRef, rental);
+   
       toast.success("data is sent");
+      setRental(null)
     } catch (error) {
       console.log(error);
       toast.error("data is is not sent");
     }
-  };
+  }
 
+  const handlechange = (e) => {
+    convertToBase64(e);
+    console.log(imagesUrl)
+    // setRental((prv)=>{
+    //   return {...prv,images: [...imagesUrl]}
+    //     }) 
+  };
   const {
     register,
     handleSubmit,
     control,
     reset,
     formState: { errors },
-  } = useForm();
-  return (
+  } = useForm({
+    mode: "onChange",
+  });
+  
+  return rental ?(
     <section className="container mx-auto py-12">
       <form
-        onSubmit={handleSubmit((data) => {
-          sendData(data);
-          reset();
-        })}
+        onSubmit={handleUpadteData}
       >
         <section className="about-rental">
+        {imagesUrl.length > 0 ? (
+        <div>
+          {imagesUrl.map((image, idx) => {
+            return (
+              <p key={idx}>
+                
+                <img src={image} alt="" />
+              </p>
+            );
+          })}
+        </div>
+      ) : null}
           <h2 className=" mb-6 text-3xl text-cyan-600">Rental information</h2>
           <div className="p-8 mb-20 shadow-lg shadow-gray-300 rounded-2xl">
             <div className="grid md:grid-cols-2 md:gap-10">
@@ -176,15 +137,16 @@ const EditRental = () => {
                   type="text"
                   name="rentalName"
                   id="floating_text"
-                  placeholder=" "
+                  placeholder = " "
+                  value = {rental.name}
+                  onChange={(e)=>{
+                   setRental((prv)=>{
+                    return {...prv,name:e.target.value}
+                   })
+                  }}
                   className="my-2 block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-cyan-600 focus:outline-none focus:ring-0 focus:border-cyan-600 peer"
-                  {...register("rentalName", { required: "This is required" })}
                 />
-                {errors.rentalName?.type === "required" && (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                    {errors.rentalName.message}
-                  </p>
-                )}
+               
                 <label
                   htmlFor="floating_text"
                   className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -198,15 +160,21 @@ const EditRental = () => {
                   type="text"
                   name="address"
                   id="floating_address"
+                  value={rental.address}
                   className="block my-2 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-cyan-600 focus:outline-none focus:ring-0 focus:border-cyan-600 peer"
                   placeholder=" "
-                  {...register("address", { required: "This is required" })}
+                  onChange={(e)=>{
+                    setRental((prv)=>{
+                     return {...prv,address:e.target.value}
+                    })
+                   }}
+                  // {...register("address", { required: "This is required" })}
                 />
-                {errors.address?.type === "required" && (
+                {/* {errors.address?.type === "required" && (
                   <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                     {errors.address.message}
                   </p>
-                )}
+                )} */}
                 <label
                   htmlFor="floating_address"
                   className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -222,15 +190,22 @@ const EditRental = () => {
                   type="text"
                   name="insurance"
                   id="floating_insurance"
+                  value={rental.insurance}
                   className="block mb-2 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-cyan-600 focus:outline-none focus:ring-0 focus:border-cyan-600 peer"
                   placeholder=" "
-                  {...register("insurance", { required: "This is required" })}
+                  onChange={(e)=>{
+                    setRental((prv)=>{
+                     return {...prv,insurance:+e.target.value}
+                    })
+                   }}
+                  
+                  // {...register("insurance", { required: "This is required" })}
                 />
-                {errors.insurance?.type === "required" && (
+                {/* {errors.insurance?.type === "required" && (
                   <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                     {errors.insurance.message}
                   </p>
-                )}
+                )} */}
                 <label
                   htmlFor="floating_adress"
                   className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -238,29 +213,35 @@ const EditRental = () => {
                   insurance
                 </label>
               </div>
-              {/* Price */}
+              {/* price */}
               <div className="relative z-0 mb-6 w-full group">
                 <input
                   type="text"
-                  name="Price"
-                  id="floating_Price"
+                  name="price"
+                  id="floating_price"
+                  value={rental.price}
                   className="block mb-2 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-cyan-600 focus:outline-none focus:ring-0 focus:border-cyan-600 peer"
                   placeholder=" "
-                  {...register("Price", { required: "This is required" })}
+                  onChange={(e)=>{
+                    setRental((prv)=>{
+                     return {...prv,price:+e.target.value}
+                    })
+                   }}
+                  // {...register("price", { required: "This is required" })}
                 />
-                {errors.Price?.type === "required" && (
+                {/* {errors.price?.type === "required" && (
                   <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                    {errors.Price.message}
+                    {errors.price.message}
                   </p>
-                )}
+                )} */}
                 <label
                   htmlFor="floating_adress"
                   className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
-                  Price
+                  price
                   <span className="text-cyan-600 ml-2 inline-block">
                     EGP
-                  </span>{" "}
+                  </span>
                   /Month
                 </label>
               </div>
@@ -272,6 +253,7 @@ const EditRental = () => {
                 <Controller
                   name="rentalType"
                   control={control}
+                  value={rental.type}
                   render={({ field }) => (
                     <Select
                       {...field}
@@ -288,17 +270,15 @@ const EditRental = () => {
                 <input
                   type="date"
                   name="availableDate"
+                  value={new Date(rental.aboutRental.availableDate).toISOString().slice(0, 10)}
                   className="my-4   border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full   p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-600 dark:focus:border-cyan-600 datepicker-input"
                   placeholder="Select date"
-                  {...register("availableDate", {
-                    required: "This is required",
-                  })}
+                  onChange={(e)=>{
+                    setRental((prv)=>{
+                     return {...prv,aboutRental:{...prv.aboutRental,availableDate:new Date(e.target.value).toDateString()}}
+                    })
+                   }}
                 />
-                {errors.availableDate?.type === "required" && (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                    {errors.availableDate.message}
-                  </p>
-                )}
               </div>
             </div>
           </div>
@@ -313,15 +293,15 @@ const EditRental = () => {
                 type="text"
                 name="area"
                 id="floating_area"
+                value = {rental.aboutRental.area}
                 className="block my-2 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-cyan-600 focus:outline-none focus:ring-0 focus:border-cyan-600 peer"
                 placeholder=" "
-                {...register("area", { required: "This is required" })}
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,aboutRental: {...prv.aboutRental,area:+e.target.value}}
+                      }) 
+                 }}  
               />
-              {errors.area?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                  {errors.area.message}
-                </p>
-              )}
               <label
                 htmlFor="floating_area"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -335,18 +315,19 @@ const EditRental = () => {
             {/* bathroom */}
             <div className="relative z-0 mb-6 w-full group">
               <input
-                type="text"
+                type="number"
                 name="bathroom"
                 id="floating_bathroom"
+                value={rental.aboutRental.bathroom}
+                min={1}
                 className="block my-2 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-cyan-600 focus:outline-none focus:ring-0 focus:border-cyan-600 peer"
                 placeholder=" "
-                {...register("bathroom", { required: "This is required" })}
-              />
-              {errors.bathroom?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                  {errors.bathroom.message}
-                </p>
-              )}
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,aboutRental: {...prv.aboutRental,bathroom:+e.target.value}}
+                      }) 
+                     }}   
+                  />
               <label
                 htmlFor="floating_bathroom"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -362,17 +343,18 @@ const EditRental = () => {
               <input
                 type="number"
                 name="Rooms"
+                value={rental.aboutRental.rooms}
                 min={1}
                 id="floating_Rooms"
                 className="block my-2 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-cyan-600 focus:outline-none focus:ring-0 focus:border-cyan-600 peer"
                 placeholder=" "
-                {...register("Rooms", { required: "This is required" })}
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,aboutRental: {...prv.aboutRental,rooms:+e.target.value}}
+                      }) 
+                     }} 
               />
-              {errors.Rooms?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                  {errors.Rooms.message}
-                </p>
-              )}
+             
               <label
                 htmlFor="floating_Rooms"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -385,20 +367,17 @@ const EditRental = () => {
               <input
                 type="number"
                 name="AvailableRooms"
+                value={rental.aboutRental.availableRooms}
                 id="floating_Available-rooms"
                 min={1}
                 className="block my-2 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-cyan-600 focus:outline-none focus:ring-0 focus:border-cyan-600 peer"
                 placeholder=" "
-                {...register("AvailableRooms", {
-                  required: "This is required",
-                })}
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,aboutRental: {...prv.aboutRental,availableRooms:+e.target.value}}
+                      }) 
+                     }} 
               />
-              {errors.AvailableRooms?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                  {errors.AvailableRooms.message}
-                </p>
-              )}
-
               <label
                 htmlFor="floating_Available-rooms"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -411,26 +390,17 @@ const EditRental = () => {
               <input
                 type="number"
                 name="floor"
+                value={rental.aboutRental.floor}
                 id="floating_Floor"
                 min={1}
                 className="block my-2 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-cyan-600 focus:outline-none focus:ring-0 focus:border-cyan-600 peer"
                 placeholder=" "
-                {...register("floor", { required: "This is required" })}
-                {...register("floor", {
-                  required: "This is required",
-                  max: { value: 30, message: "Highest floor is 30" },
-                })}
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,aboutRental: {...prv.aboutRental,floor:+e.target.value}}
+                      }) 
+                     }} 
               />
-              {errors.floor?.type === "required" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                  {errors.floor.message}
-                </p>
-              )}
-              {errors.Floor?.type === "max" && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                  {errors.Floor.message}
-                </p>
-              )}
               <label
                 htmlFor="floating_Floor"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -439,9 +409,6 @@ const EditRental = () => {
               </label>
             </div>
           </div>
-          {/* </div> */}
-
-          {/* </section> */}
           {/* ===================================================== rental Features ================================================ */}
           <div className="grid md:grid-cols-4 md:gap-10 mb-5">
             {/* separate rooms */}
@@ -449,10 +416,14 @@ const EditRental = () => {
               <input
                 id="separateRooms"
                 type="checkbox"
-                value=""
+                checked={rental.features.separateRooms}
                 name="separateRooms"
-                {...register("separateRooms")}
                 className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,features: {...prv.features,separateRooms:+e.target.checked}}
+                      }) 
+                 }} 
               />
               <label
                 htmlFor="separateRooms"
@@ -464,12 +435,17 @@ const EditRental = () => {
             {/* air conditioner */}
             <div className="flex items-center my-4">
               <input
+            
                 id="air-conditioner"
                 type="checkbox"
-                value=""
+                checked={rental.features.airConditioner}
                 name="airConditioner"
                 className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                {...register("airConditioner")}
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,features: {...prv.features,airConditioner:e.target.checked}}
+                      }) 
+                 }} 
               />
               <label
                 htmlFor="air-conditioner"
@@ -483,10 +459,14 @@ const EditRental = () => {
               <input
                 id="alevator"
                 type="checkbox"
-                value=""
+                checked={rental.features.alevator}
                 name="alevator"
                 className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                {...register("alevator")}
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,features: {...prv.features,alevator:e.target.checked}}
+                      }) 
+                 }} 
               />
               <label
                 htmlFor="alevator"
@@ -500,10 +480,14 @@ const EditRental = () => {
               <input
                 id="furnashed"
                 type="checkbox"
-                value=""
+                checked={rental.features.furnashed}
                 name="furnashed"
                 className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                {...register("furnashed")}
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,features: {...prv.features,furnashed:e.target.checked}}
+                      }) 
+                 }}
               />
               <label
                 htmlFor="furnashed"
@@ -518,10 +502,14 @@ const EditRental = () => {
               <input
                 id="parking"
                 type="checkbox"
-                value=""
+                checked={rental.features.parking}
                 name="parking"
                 className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                {...register("parking")}
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,features: {...prv.features,parking:e.target.checked}}
+                      }) 
+                 }}
               />
               <label
                 htmlFor="parking"
@@ -535,10 +523,14 @@ const EditRental = () => {
               <input
                 id="pet"
                 type="checkbox"
-                value=""
+                checked={rental.features.pet}
                 name="pet"
                 className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                {...register("pet")}
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,features: {...prv.features,pet:e.target.checked}}
+                      }) 
+                 }}
               />
               <label
                 htmlFor="pet"
@@ -553,9 +545,13 @@ const EditRental = () => {
                 id="wifi"
                 name="wifi"
                 type="checkbox"
-                value=""
+                checked={rental.features.wifi}
                 className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                {...register("wifi")}
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,features: {...prv.features,wifi:e.target.checked}}
+                      }) 
+                 }}
               />
               <label
                 htmlFor="wifi"
@@ -577,10 +573,14 @@ const EditRental = () => {
               <input
                 id="male"
                 type="radio"
-                value="male"
+                checked={rental.aboutRental.gender === 'male'}
                 name="gender"
                 className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                {...register("gender")}
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    // return {...prv,aboutRental: {...prv.aboutRental,gender:e.target.value}}
+                      }) 
+                 }}
               />
               <label
                 htmlFor="male"
@@ -595,10 +595,13 @@ const EditRental = () => {
               <input
                 id="female"
                 type="radio"
-                value="female"
                 name="gender"
                 className=" w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                {...register("gender")}
+                onChange={(e)=>{
+                  setRental((prv)=>{
+                    return {...prv,aboutRental: {...prv.aboutRental,gender:e.target.value}}
+                      }) 
+                 }}
               />
               <label
                 htmlFor="female"
@@ -622,13 +625,9 @@ const EditRental = () => {
               accept="image/*"
               max="5"
               multiple
-              {...register("images", { required: "This is required" })}
+              onChange={handlechange}
             />
-            {errors.images?.type === "required" && (
-              <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                {errors.images.message}
-              </p>
-            )}
+           
           </div>
         </div>
 
@@ -642,7 +641,8 @@ const EditRental = () => {
         </div>
       </form>
     </section>
-  );
+  ):<Spinner/>;
+
 };
 
 export default EditRental;
