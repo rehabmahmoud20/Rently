@@ -10,74 +10,30 @@ import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../../Store/user";
 import { useEffect } from "react";
 const ModalRequest = (props) => {
-    const userData = { ...useSelector((state) => state.user.userData) };
-    const [hostData, setHostData] = useState(null);
-    const auth = getAuth();
-    const prams = useParams();
-    const dispatch = useDispatch();
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        resetField,
-        reset,
-    } = useForm();
-    const onSubmit = async (data) => {
-        // REQUEST OBJECT
-        const requestDetails = {
-            name: auth.currentUser.displayName,
-            email: data.email,
-            phone: data.phone,
-            message: data.message,
-            type: props.type,
-            clientID: auth.currentUser.uid,
-            rentalID: prams.id,
-            date: data.date,
-            timeStamp: new Date().toDateString(),
-        };
-        try {
-            // ADD REQUEST IN FIREBASE "IN CLIENT HISTORY"
-            const userRef = doc(db, 'users', auth.currentUser.uid);
-            await updateDoc(userRef, {
-                ...userData,
-                history: [
-                    ...userData.history,
-                    {
-                        sentAt: requestDetails.timeStamp,
-                        rentalID: requestDetails.rentalID,
-                        type: requestDetails.type,
-                    },
-                ],
-            });
-            // UPDATE STORE
-            dispatch(
-                userActions.updateUserData({
-                    ...userData,
-                    history: [
-                        ...userData.history,
-                        {
-                            sentAt: requestDetails.timeStamp,
-                            rentalID: requestDetails.rentalID,
-                            type: requestDetails.type,
-                        },
-                    ],
-                })
-            );
-            // ADD REQUEST IN HOST REQUESTS
-            const hostRef = doc(db, 'users', props.hostID);
-            const hostData = await getDoc(doc(db, 'users', props.hostID));
-            await updateDoc(hostRef, {
-                ...hostData.data(),
-                requests: [...hostData.data().requests, requestDetails],
-            });
-            reset();
-            toast.success('Your request has been sent successfully');
-            closeModal();
-            console.log(hostData.data());
-        } catch (error) {
-            console.log(error);
-            toast.error('Something went wrong !');
-        }
+  const userData = { ...useSelector((state) => state.user.userData) };
+  const [hostData, setHostData] = useState(null);
+  const auth = getAuth();
+  const prams = useParams();
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    resetField,
+    reset,
+  } = useForm();
+  const onSubmit = async (data) => {
+    // REQUEST OBJECT
+    const requestDetails = {
+      name: auth.currentUser.displayName,
+      email: data.email,
+      phone: data.phone,
+      message: data.message,
+      type: props.type,
+      clientID: auth.currentUser.uid,
+      rentalID: prams.id,
+      date: data.date,
+      timeStamp: new Date().toDateString(),
     };
     try {
       // ADD REQUEST IN FIREBASE "IN CLIENT HISTORY"
@@ -109,7 +65,6 @@ const ModalRequest = (props) => {
       );
       // ADD REQUEST IN HOST REQUESTS
       const hostRef = doc(db, "users", props.hostID);
-      console.log(props.hostID);
       const hostData = await getDoc(doc(db, "users", props.hostID));
       await updateDoc(hostRef, {
         ...hostData.data(),
