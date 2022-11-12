@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+#root > nav > div > div > ul {
+    align-items: center !important;
+}
+.cards-cont img {
+    min-height: 300px !important;
+    height: 300px !important;
+    max-height: 300px !important;
+    object-fit: cover;
+}

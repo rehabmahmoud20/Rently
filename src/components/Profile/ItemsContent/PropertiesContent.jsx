@@ -1,67 +1,49 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { userActions } from '../../Store/user';
 import { Modal, Button } from 'flowbite-react';
 import PropertyCard from './propertyCard';
+import Spinner from '../../Shared/Spinner';
 import { db } from '../../../firebase.config';
-import {
-    collection,
-    getDocs,
-    query,
-    deleteDoc,
-    updateDoc,
-    limit,
-    doc,
-    getDoc,
-} from 'firebase/firestore';
+import { deleteDoc, updateDoc, doc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { MdModeEdit, MdDelete } from 'react-icons/md';
-const PropertiesContent = () => {
+const PropertiesContent = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     // DATA STATES
-    const userData = useSelector((state) => state.user.userData);
-    const [propertiesId, setPropertiesId] = useState(
-        userData ? userData.properties : []
-    );
+    const [propertiesId, setPropertiesId] = useState([]);
     const [properties, setProperties] = useState([]);
     // DELETE STATES
     const [showModal, setShowModal] = useState(false);
     const [reqId, setReqId] = useState('');
     // GET DATA
-    const getProperties = async () => {
-        try {
-            const listRef = collection(db, 'rentals');
-            const querySnap = await getDocs(query(listRef, limit(10)));
-            const rents = [];
-            querySnap.forEach((doc) => {
-                const data = doc.data();
-                data.id = doc.id;
-                propertiesId.includes(data.id) && rents.push(data);
-                setProperties(rents);
-            });
-        } catch (error) {
-            toast.error('Something went wrong !');
-        }
+    const getProperties = () => {
+        let rents = props.rentalsData;
+        setPropertiesId(props.userData.properties);
+        rents = rents.filter((rent) => {
+            return props.userData.properties.includes(rent.id) && rent;
+        });
+        setProperties(rents);
     };
     // EDIT HANDLER
     const editHandler = (id) => {
-        console.log(id);
+        navigate(`/profile/edit-rental/${id}`);
     };
     // DELETE HANDLER
     const deleteHandler = async (id) => {
         try {
-            const userRef = doc(db, 'users', userData.id);
+            const userRef = doc(db, 'users', props.userData.id);
             await updateDoc(userRef, {
-                ...userData,
+                ...props.userData,
                 properties: propertiesId.filter((s) => s !== id),
             });
             const docRef = doc(db, 'rentals', id);
             await deleteDoc(docRef);
             dispatch(
                 userActions.updateUserData({
-                    ...userData,
+                    ...props.userData,
                     properties: propertiesId.filter((s) => s !== id),
                 })
             );
@@ -73,9 +55,9 @@ const PropertiesContent = () => {
         }
     };
     useEffect(() => {
-        userData && setPropertiesId(userData.properties);
-        getProperties();
-    }, [userData]);
+        props.userData && setPropertiesId(props.userData.properties);
+        props.rentalsData && getProperties();
+    }, [props.userData, props.rentalsData]);
     return (
         <section className="px-5 sm:px-10 py-5">
             <h2 className="text-4xl font-bold mb-6 text-cyan-600 w-fit mx-auto lg:mx-0">
@@ -85,7 +67,7 @@ const PropertiesContent = () => {
                 Total properties : {properties.length}
             </p>
             {/* NO RENTALS ADDED */}
-            {properties.length === 0 && (
+            {props.rentalsData && properties.length === 0 && (
                 <div className="text-center">
                     <p className=" text-gray-500 text-center mb-3 text-lg">
                         You have not added any property yet
@@ -107,12 +89,12 @@ const PropertiesContent = () => {
             )}
             {/* RENDER USER RENTALS */}
             {properties.length > 0 && (
-                <div className="flex flex-wrap lg:flex-nowrap justify-start gap-10 items-start">
+                <div className="flex flex-wrap cards-cont justify-start gap-10 items-start overflow-y-auto max-h-screen">
                     {properties.map((property) => {
                         return (
                             <div
                                 key={property.id}
-                                className="w-full lg:w-1/2 relative"
+                                className="w-full lg:w-2/5 relative"
                             >
                                 <PropertyCard list={property} />
                                 {/* EDIT & DELETE */}
@@ -122,7 +104,7 @@ const PropertiesContent = () => {
                                             editHandler(property.id);
                                         }}
                                         title="Edit"
-                                        className="bg-white rounded-full p-2 cursor-pointer opacity-50 hover:opacity-100 transition transition-500"
+                                        className="bg-white rounded-full p-2 cursor-pointer transition transition-500"
                                     >
                                         <MdModeEdit className="text-cyan-600 text-xl" />
                                     </span>
@@ -132,7 +114,7 @@ const PropertiesContent = () => {
                                             setReqId(property.id);
                                         }}
                                         title="Delete"
-                                        className="bg-white rounded-full p-2 cursor-pointer opacity-50 hover:opacity-100 transition transition-500"
+                                        className="bg-white rounded-full p-2 cursor-pointer transition transition-500"
                                     >
                                         <MdDelete className="text-cyan-600 text-xl" />
                                     </span>
@@ -181,6 +163,7 @@ const PropertiesContent = () => {
                     </Modal>
                 </div>
             )}
+            {!props.rentalsData && <Spinner />}
         </section>
     );
 };

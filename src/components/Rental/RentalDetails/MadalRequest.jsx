@@ -3,13 +3,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { getAuth } from "firebase/auth";
 import { useParams } from "react-router-dom";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase.config";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../../Store/user";
+import { useEffect } from "react";
 const ModalRequest = (props) => {
   const userData = { ...useSelector((state) => state.user.userData) };
+  const [hostData, setHostData] = useState(null);
   const auth = getAuth();
   const prams = useParams();
   const dispatch = useDispatch();
@@ -17,6 +19,8 @@ const ModalRequest = (props) => {
     register,
     handleSubmit,
     formState: { errors },
+    resetField,
+    reset,
   } = useForm();
   const onSubmit = async (data) => {
     // REQUEST OBJECT
@@ -32,28 +36,57 @@ const ModalRequest = (props) => {
       timeStamp: new Date().toDateString(),
     };
     try {
+      // ADD REQUEST IN FIREBASE "IN CLIENT HISTORY"
       const userRef = doc(db, "users", auth.currentUser.uid);
-      // ADD REQUEST IN FIREBASE
       await updateDoc(userRef, {
         ...userData,
-        requests: [...userData.requests, requestDetails],
+        history: [
+          ...userData.history,
+          {
+            sentAt: requestDetails.timeStamp,
+            rentalID: requestDetails.rentalID,
+            type: requestDetails.type,
+          },
+        ],
       });
       // UPDATE STORE
       dispatch(
         userActions.updateUserData({
           ...userData,
-          requests: [...userData.requests, requestDetails],
+          history: [
+            ...userData.history,
+            {
+              sentAt: requestDetails.timeStamp,
+              rentalID: requestDetails.rentalID,
+              type: requestDetails.type,
+            },
+          ],
         })
       );
+      // ADD REQUEST IN HOST REQUESTS
+      const hostRef = doc(db, "users", props.hostID);
+      console.log(props.hostID);
+      const hostData = await getDoc(doc(db, "users", props.hostID));
+      await updateDoc(hostRef, {
+        ...hostData.data(),
+        requests: [...hostData.data().requests, requestDetails],
+      });
+      reset();
       toast.success("Your request has been sent successfully");
       closeModal();
+      console.log(hostData.data());
     } catch (error) {
+      console.log(error);
       toast.error("Something went wrong !");
     }
   };
   const closeModal = () => {
     props.close(false);
   };
+  useEffect(() => {
+    console.log(hostData);
+    console.log(hostData);
+  }, [hostData]);
   return (
     <Modal show={props.show} size="md" popup={true} onClose={closeModal}>
       <Modal.Header />

@@ -16,7 +16,7 @@ const NavbarComponent = () => {
     console.log(globalAuthState);
     const handleClick = () => {
         dispatch(rentalsActions.updateFetchData(true));
-    }
+    };
     return (
         <Navbar
             fluid={true}
@@ -35,7 +35,7 @@ const NavbarComponent = () => {
                 <Link
                     onClick={handleClick}
                     to="/rental-list"
-                    className="h-fit text-lg  font-bold py-3 border-b-2 divide-gray-200 md:border-none  dark:text-white"
+                    className=" text-lg  font-bold border-b-2 divide-gray-200 md:border-none  dark:text-white"
                 >
                     Rent
                 </Link>
@@ -43,19 +43,19 @@ const NavbarComponent = () => {
                     <>
                         <Link
                             to="/add-rental"
-                            className="h-fit text-lg font-bold py-3 border-b-2 divide-gray-200 md:border-none  dark:text-white"
+                            className=" text-lg font-bold border-b-2 divide-gray-200 md:border-none  dark:text-white"
                         >
                             Manage rentals
                         </Link>
                         <Link
                             to="/favourits"
-                            className="h-fit text-lg font-bold py-3 border-b-2 divide-gray-200 md:border-none dark:text-white"
+                            className=" text-lg font-bold border-b-2 divide-gray-200 md:border-none dark:text-white"
                         >
                             Favourites
                         </Link>
                         <Link
                             to="/profile"
-                            className="h-fit font-bold py-3  divide-gray-200  md:py-0  hight-fit dark:text-white"
+                            className=" font-bold  divide-gray-200  md:py-0  hight-fit dark:text-white"
                         >
                             <img
                                 className="w-10 h-10 object-cover rounded-full transition-all duration-500"
@@ -70,14 +70,14 @@ const NavbarComponent = () => {
                     <>
                         <Link
                             to="/signin"
-                            className="h-fit  text-lg font-bold py-3 border-b-2 divide-gray-200 md:border-none "
+                            className="  text-lg font-bold border-b-2 divide-gray-200 md:border-none "
                         >
                             Sign in
                         </Link>
 
                         <Link
                             to="/signup"
-                            className="h-fit  text-lg font-bold py-3  divide-gray-200   dark:text-white"
+                            className="  text-lg font-bold  divide-gray-200   dark:text-white"
                         >
                             Sign up
                         </Link>
