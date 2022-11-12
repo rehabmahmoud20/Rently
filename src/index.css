@@ -4,6 +4,9 @@
 #root > nav > div > div > ul {
     align-items: center !important;
 }
+#root > nav > div > div > ul a {
+    white-space: nowrap;
+}
 .cards-cont img {
     min-height: 300px !important;
     height: 300px !important;
@@ -12,4 +15,13 @@
 }
 #overview > div > .leaflet-container {
     z-index: 0 !important;
+}
+@media (max-width: 786px) {
+    #root > nav > div > div > ul {
+        align-items: flex-start !important;
+    }
+    #root > nav > div > div > ul a {
+        width: 100%;
+        padding: 10px 0;
+    }
 }

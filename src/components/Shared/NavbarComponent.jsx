@@ -35,7 +35,7 @@ const NavbarComponent = () => {
                 <Link
                     onClick={handleClick}
                     to="/rental-list"
-                    className=" text-lg  font-bold border-b-2 divide-gray-200 md:border-none  dark:text-white"
+                    className=" text-lg  font-bold border-b-2 hover:text-cyan-600 transition transition-500 divide-gray-200 md:border-none  dark:text-white"
                 >
                     Rent
                 </Link>
@@ -43,13 +43,13 @@ const NavbarComponent = () => {
                     <>
                         <Link
                             to="/add-rental"
-                            className=" text-lg font-bold border-b-2 divide-gray-200 md:border-none  dark:text-white"
+                            className=" text-lg font-bold border-b-2 hover:text-cyan-600 transition transition-500 divide-gray-200 md:border-none  dark:text-white"
                         >
-                            Manage rentals
+                            Add Rental
                         </Link>
                         <Link
                             to="/favourits"
-                            className=" text-lg font-bold border-b-2 divide-gray-200 md:border-none dark:text-white"
+                            className=" text-lg font-bold border-b-2 hover:text-cyan-600 transition transition-500 divide-gray-200 md:border-none dark:text-white"
                         >
                             Favourites
                         </Link>
@@ -70,14 +70,14 @@ const NavbarComponent = () => {
                     <>
                         <Link
                             to="/signin"
-                            className="  text-lg font-bold border-b-2 divide-gray-200 md:border-none "
+                            className="  text-lg font-bold border-b-2 hover:text-cyan-600 transition transition-500 divide-gray-200 md:border-none "
                         >
                             Sign in
                         </Link>
 
                         <Link
                             to="/signup"
-                            className="  text-lg font-bold  divide-gray-200   dark:text-white"
+                            className="text-lg font-bold  divide-gray-200   hover:text-cyan-600 transition transition-500 dark:text-white"
                         >
                             Sign up
                         </Link>

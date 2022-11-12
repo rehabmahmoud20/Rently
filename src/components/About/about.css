@@ -90,11 +90,9 @@
   h2 {
     text-align: center;
   }
-
   .facts .facts-wrapper {
     grid-template-columns: repeat(1, 1fr);
   }
-
   .easy-search .easy-search-wrapper {
     flex-direction: column;
   }
@@ -103,7 +101,6 @@
     width: 100%;
     text-align: center;
   }
-
   .why-us h2 {
     width: 100% !important;
   }
@@ -118,11 +115,9 @@
   .why-us .why-us-wrapper .why-text {
     padding-left: 0px;
   }
-
   .about-features .feat-wrapper {
     flex-direction: column;
   }
-
   .our-team .team-wrapper {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -132,7 +127,6 @@
   .facts .facts-wrapper {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .about-features .feat-wrapper {
     flex-direction: row;
     flex-wrap: wrap;
@@ -140,7 +134,6 @@
   .about-features .feat-wrapper div {
     width: 40%;
   }
-
   .our-team .team-wrapper {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -150,10 +143,7 @@
   .facts .facts-wrapper {
     grid-template-columns: repeat(3, 1fr);
   }
-
   .our-team .team-wrapper {
     grid-template-columns: repeat(2, 1fr);
   }
-}
-
-/*# sourceMappingURL=about.css.map */
+}/*# sourceMappingURL=about.css.map */

@@ -27,7 +27,7 @@ const Home = () => {
                 const querySnap = await getDocs(q);
                 const rents = [];
                 querySnap.forEach((doc) => {
-                    rents.push(doc.data());
+                    rents.push({ ...doc.data(), id: doc.id });
                 });
                 setListings(rents);
             } catch (error) {

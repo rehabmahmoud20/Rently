@@ -41,7 +41,6 @@
   #rental-list {
     max-width: 100%;
   }
-
   .filter-wrap {
     flex-wrap: wrap;
   }
@@ -49,7 +48,6 @@
     width: 47%;
     margin-bottom: 15px;
   }
-
   .products-list {
     flex-direction: column;
   }
@@ -102,13 +100,10 @@
     width: 24%;
     margin-right: 1%;
   }
-
   .products-list .products .product {
     width: 47% !important;
   }
   .products-list .details {
     flex-direction: row;
   }
-}
-
-/*# sourceMappingURL=rentalList.css.map */
+}/*# sourceMappingURL=rentalList.css.map */
