@@ -87,7 +87,7 @@ function App() {
                     <Route path="/spinner" element={<Spinner />} />
                 </Routes>
                 {/* toast container "alert from react toastify" don't add it again ❗*/}
-                <ToastContainer autoClose={5000} />
+                <ToastContainer autoClose={4000} />
             </main>
             <Footer />
         </BrowserRouter>

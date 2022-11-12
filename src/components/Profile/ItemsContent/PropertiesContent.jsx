@@ -1,20 +1,11 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { userActions } from '../../Store/user';
 import { Modal, Button } from 'flowbite-react';
 import PropertyCard from './propertyCard';
 import Spinner from '../../Shared/Spinner';
 import { db } from '../../../firebase.config';
-import {
-    // collection,
-    // getDocs,
-    // query,
-    deleteDoc,
-    updateDoc,
-    limit,
-    doc,
-    getDoc,
-} from 'firebase/firestore';
+import { deleteDoc, updateDoc, doc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { MdModeEdit, MdDelete } from 'react-icons/md';
@@ -22,11 +13,7 @@ const PropertiesContent = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     // DATA STATES
-    const userData = props.userData;
-    const [rentals, setRentals] = useState(props.rentalsData);
-    // const userData = useSelector((state) => state.user.userData);
     const [propertiesId, setPropertiesId] = useState([]);
-    // userData ? userData.properties : []
     const [properties, setProperties] = useState([]);
     // DELETE STATES
     const [showModal, setShowModal] = useState(false);
@@ -35,7 +22,6 @@ const PropertiesContent = (props) => {
     const getProperties = () => {
         let rents = props.rentalsData;
         setPropertiesId(props.userData.properties);
-        setRentals(props.rentalsData);
         rents = rents.filter((rent) => {
             return props.userData.properties.includes(rent.id) && rent;
         });
@@ -48,16 +34,16 @@ const PropertiesContent = (props) => {
     // DELETE HANDLER
     const deleteHandler = async (id) => {
         try {
-            const userRef = doc(db, 'users', userData.id);
+            const userRef = doc(db, 'users', props.userData.id);
             await updateDoc(userRef, {
-                ...userData,
+                ...props.userData,
                 properties: propertiesId.filter((s) => s !== id),
             });
             const docRef = doc(db, 'rentals', id);
             await deleteDoc(docRef);
             dispatch(
                 userActions.updateUserData({
-                    ...userData,
+                    ...props.userData,
                     properties: propertiesId.filter((s) => s !== id),
                 })
             );
@@ -70,10 +56,8 @@ const PropertiesContent = (props) => {
     };
     useEffect(() => {
         props.userData && setPropertiesId(props.userData.properties);
-        props.rentalsData && setRentals(props.rentalsData);
         props.rentalsData && getProperties();
     }, [props.userData, props.rentalsData]);
-    console.log(props.rentalsData);
     return (
         <section className="px-5 sm:px-10 py-5">
             <h2 className="text-4xl font-bold mb-6 text-cyan-600 w-fit mx-auto lg:mx-0">
@@ -105,12 +89,12 @@ const PropertiesContent = (props) => {
             )}
             {/* RENDER USER RENTALS */}
             {properties.length > 0 && (
-                <div className="flex flex-wrap justify-start gap-10 items-start">
+                <div className="flex flex-wrap cards-cont justify-start gap-10 items-start overflow-y-auto max-h-screen">
                     {properties.map((property) => {
                         return (
                             <div
                                 key={property.id}
-                                className="w-full lg:w-1/3 relative"
+                                className="w-full lg:w-2/5 relative"
                             >
                                 <PropertyCard list={property} />
                                 {/* EDIT & DELETE */}
