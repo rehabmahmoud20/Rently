@@ -28,8 +28,6 @@ const RentalList = () => {
   ]
   const [rentals, setRentals] = useState([]);
   const [filteredRentals, setFiltered] = useState([]);
-  const [locations, setLocations] = useState([]);
-  /* const [filterOptions, setOptions] = useState({gender: "", type: "", price: ""}); */
   useEffect(() => {
     const fetchRentals = async () => {
       try {
@@ -118,12 +116,6 @@ const RentalList = () => {
     });
     setFiltered(filtered)
   }
-  {/*
-  Filter => onSubmit
-  Need to add set filter options
-  onSubmit handler => filter function
-  check if the condition has "all" => update data manually
-*/}
   return (
     <div id="rental-list">
       {rentals.length == 0 ? (
@@ -173,18 +165,11 @@ const RentalList = () => {
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {filteredRentals?.map((item) => {
-                  <Marker position={[item.data.location.lat, item.data.location.lng]}>
-                    <Popup>
-                      A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                  </Marker>
-                })}
-{/*                 <Marker position={[51.505, -0.09]}>
+                <Marker position={[31.2, 29.9]}>
                   <Popup>
                     A pretty CSS3 popup. <br /> Easily customizable.
                   </Popup>
-                </Marker> */}
+                </Marker>
               </MapContainer>
             </div>
           </div>
