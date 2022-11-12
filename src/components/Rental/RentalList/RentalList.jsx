@@ -1,44 +1,129 @@
 import RentalCard from "./RentalCard";
 import "./rentalList.css";
-
+import Select from 'react-select';
 import { useEffect, useState } from "react";
 import { db } from "../../../firebase.config";
-import { Dropdown, Navbar, Button, Card } from "flowbite-react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { collection, getDocs, query } from "firebase/firestore";
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Spinner from "../../Shared/Spinner";
 
 const RentalList = () => {
+  const genderOptions = [
+    { value: 'all', label: 'All' },
+    { value: 'male', label: 'Male' },
+    { value: 'female', label: 'Female' }
+  ]
+  const typeOptions = [
+    { value: 'all', label: 'All' },
+    { value: 'house', label: 'Houses' },
+    { value: 'apartment', label: 'Apartments' }
+  ]
+  const priceOptions = [
+    { value: 'all', label: 'All' },
+    { value: 'low', label: '0 : 1000 EGP' },
+    { value: 'fair', label: '1000 : 2000 EGP' },
+    { value: 'high', label: '2000 : 3000 EGP' },
+    { value: 'expensive', label: '3000+ EGP' }
+  ]
   const [rentals, setRentals] = useState([]);
-  const state = useSelector((state) => state.rentals.fetchRentals);
+  const [filteredRentals, setFiltered] = useState([]);
+  const [locations, setLocations] = useState([]);
+  /* const [filterOptions, setOptions] = useState({gender: "", type: "", price: ""}); */
   useEffect(() => {
-    if (state == true) {
-      const fetchRentals = async () => {
-        try {
-          // get rentals
-          const colRef = collection(db, "rentals");
-          // Create Query
-          const q = query(colRef);
-          // Execute Query
-          const querySnap = await getDocs(q);
-          let listings = [];
-          querySnap.forEach((doc) => {
-            listings.push({
-              id: doc.id,
-              data: doc.data(),
-            });
+    const fetchRentals = async () => {
+      try {
+        // get rentals
+        const colRef = collection(db, "rentals");
+        // Create Query
+        const q = query(colRef);
+        // Execute Query
+        const querySnap = await getDocs(q);
+        let listings = [];
+        querySnap.forEach((doc) => {
+          listings.push({
+            id: doc.id,
+            data: doc.data(),
           });
-          // Set State
-          setRentals(listings);
-        } catch (error) {
-          toast.error("Couldn't fetch data");
-        }
-      };
-      fetchRentals();
-    }
+        });
+        // Set State
+        setRentals(listings);
+        setFiltered(listings);
+      } catch (error) {
+        toast.error("Couldn't fetch data");
+      }
+    };
+    fetchRentals();
   }, []);
+
+  // Filter On Genders
+
+  const filterGenders = (e) => {
+    const filtered = rentals.filter((item) => {
+      if (e.value == "all") {
+        return item
+      }
+      else if (e.value == "female") {
+        return item.data.gender
+      }
+      else {
+        return !item.data.gender
+      }
+    })
+    setFiltered(filtered)
+  }
+
+  // Filter On Type
+  const filterType = (e) => {
+    const filtered = filteredRentals.filter((item) => {
+      if (e.value == "all") {
+        return item
+      }
+      else if (e.value == "house") {
+        return (item.data.aboutRental.type.value == "House" || item.data.aboutRental.type == "House")
+      }
+      else if (e.value == "apartment") {
+        return (item.data.aboutRental.type.value == "Appartment" || item.data.aboutRental.type == "Apartment")
+      }
+      else {
+        console.log(e.value)
+        return toast.error("Not Found");
+        
+      }
+    });
+    setFiltered(filtered)
+  }
+
+  // Filter On Price
+  const filterPrice = (e) => {
+    const filtered = filteredRentals.filter((item) => {
+      if (e.value == "all") {
+        return item
+      }
+      else if (e.value == "low") {
+        return (item.data.price <= 1000)
+      }
+      else if (e.value == "fair") {
+        return (item.data.price > 1000 && item.data.price <= 2000)
+      }
+      else if (e.value == "high") {
+        return (item.data.price > 2000 && item.data.price <= 3000)
+      }
+      else if (e.value == "expensive") {
+        return item.data.price > 3000
+      }
+      else {
+        return toast.error("Not Found")
+      }
+    });
+    setFiltered(filtered)
+  }
+  {/*
+  Filter => onSubmit
+  Need to add set filter options
+  onSubmit handler => filter function
+  check if the condition has "all" => update data manually
+*/}
   return (
     <div id="rental-list">
       {rentals.length == 0 ? (
@@ -46,66 +131,41 @@ const RentalList = () => {
       ) : (
         <div className="container mx-auto">
           <div className="filter py-5 mb-5">
-            <div className="filter-wrap mx-auto flex justify-between">
-              <div className="filter-option border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
-                <Dropdown label="Dropdown" inline={true}>
-                  <Dropdown.Item>Dashboard</Dropdown.Item>
-                  <Dropdown.Item>Settings</Dropdown.Item>
-                  <Dropdown.Item>Earnings</Dropdown.Item>
-                  <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>
+            <div className="filter-wrap mx-auto flex flex-start gap-8">
+              <div className="flex items-center">
+                <span className="text-sm lg:text-base text-gray-600">Gender: &nbsp;</span>
+                <Select 
+                options={genderOptions} 
+                defaultValue="all"
+                onChange={filterGenders}/>
               </div>
-              <div className="filter-option border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
-                <Dropdown label="Dropdown" inline={true}>
-                  <Dropdown.Item>Dashboard</Dropdown.Item>
-                  <Dropdown.Item>Settings</Dropdown.Item>
-                  <Dropdown.Item>Earnings</Dropdown.Item>
-                  <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>
+              <div className="flex items-center">
+                <span className="text-sm lg:text-base text-gray-600">Type: &nbsp;</span>
+                <Select
+                options={typeOptions} 
+                defaultValue="all"
+                onChange={filterType}
+                />
               </div>
-              <div className="filter-option border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
-                <Dropdown label="Dropdown" inline={true}>
-                  <Dropdown.Item>Dashboard</Dropdown.Item>
-                  <Dropdown.Item>Settings</Dropdown.Item>
-                  <Dropdown.Item>Earnings</Dropdown.Item>
-                  <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>
-              </div>
-              <div className="filter-option border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
-                <Dropdown label="Dropdown" inline={true}>
-                  <Dropdown.Item>Dashboard</Dropdown.Item>
-                  <Dropdown.Item>Settings</Dropdown.Item>
-                  <Dropdown.Item>Earnings</Dropdown.Item>
-                  <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>
-              </div>
-              <div className="filter-option border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
-                <Dropdown label="Dropdown" inline={true}>
-                  <Dropdown.Item>Dashboard</Dropdown.Item>
-                  <Dropdown.Item>Settings</Dropdown.Item>
-                  <Dropdown.Item>Earnings</Dropdown.Item>
-                  <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>
-              </div>
-              <div className="filter-option border border-solid rounded-lg text-gray-600 border-gray-300 py-2 px-3">
-                <Dropdown label="Dropdown" inline={true}>
-                  <Dropdown.Item>Dashboard</Dropdown.Item>
-                  <Dropdown.Item>Settings</Dropdown.Item>
-                  <Dropdown.Item>Earnings</Dropdown.Item>
-                  <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>
+              <div className="flex items-center">
+                <span className="text-sm lg:text-base text-gray-600">Price: &nbsp;</span>
+                <Select 
+                options={priceOptions} 
+                defaultValue="all"
+                onChange={filterPrice}
+                />
               </div>
             </div>
           </div>
           <div className="products-list flex w-full mb-5 gap-3">
             <div className="products w-2/3 flex flex-wrap gap-5 overflow-y-scroll">
-              {rentals?.map((item) => {
+              {filteredRentals?.map((item) => {
                 return <RentalCard key={item.id} resp={item} />;
               })}
             </div>
             <div id="map" className="w-1/3">
               <MapContainer
-                center={[51.505, -0.09]}
+                center={[31.2, 29.9]}
                 zoom={13}
                 scrollWheelZoom={true}
               >
@@ -113,11 +173,18 @@ const RentalList = () => {
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={[51.505, -0.09]}>
+                {filteredRentals?.map((item) => {
+                  <Marker position={[item.data.location.lat, item.data.location.lng]}>
+                    <Popup>
+                      A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
+                  </Marker>
+                })}
+{/*                 <Marker position={[51.505, -0.09]}>
                   <Popup>
                     A pretty CSS3 popup. <br /> Easily customizable.
                   </Popup>
-                </Marker>
+                </Marker> */}
               </MapContainer>
             </div>
           </div>

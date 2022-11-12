@@ -29,6 +29,8 @@ const options = [
 ];
 
 const AddRental = () => {
+    const [imageFiles, setImageFiles] = useState([]);
+    const [images, setImages] = useState([]);
     const [imageUrls, setImageUrls] = useState([
         'https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80',
         'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=874&q=80',
@@ -36,7 +38,45 @@ const AddRental = () => {
         'https://images.unsplash.com/photo-1505691723518-36a5ac3be353?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
         'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=658&q=80',
     ]);
+    
     const auth = getAuth();
+    const convertToBase64= (e)=>{
+        const images = [], fileReaders = [];
+        const { files } = e.target;
+        console.log(e.target.files,files)
+        const myfilesArr = Array.from(files)
+        console.log(myfilesArr)
+        // setImageFiles([...myfilesArr])
+        // console.log(imageFiles)
+        // console.log(fileReaders)
+        if (myfilesArr.length) {
+            myfilesArr.forEach((file) => {
+              const fileReader = new FileReader();  //create file reader for each image
+              fileReaders.push(fileReader);
+            //   console.log(fileReaders)
+              fileReader.onload = (e) => {
+                // console.log(result)
+                const { result } = e.target;
+                console.log(result)
+              // setImage([...reader.result.toString()]);
+      
+                if (result) {
+                  images.push(result)  //[] of  base 64 for each image
+                }
+                if (images.length === myfilesArr.length ) {
+                  setImages(images);
+                  console.log(images)
+            //       console.log(images)
+            //    console.log(fileReaders)
+                }
+              }
+              fileReader.readAsDataURL(file);
+      
+            })
+          };
+          console.log(images)
+          console.log(fileReaders)
+    }
 
     // & update the user data upon adding rental
     const updateUserData = async (rentalId) => {
@@ -85,7 +125,7 @@ const AddRental = () => {
             gender,
             price: +Price,
             hostID: auth.currentUser.uid,
-            images: imageUrls,
+            images: images,
             location: { lng: 29.97773, lat: 31.25526 },
             aboutRental: {
                 area,
@@ -136,18 +176,34 @@ const AddRental = () => {
             toast.error('data is is not sent');
         }
     };
+    const handlechange = (e)=>{
+        // console.log('hhhhhhhhhhhh')
+        convertToBase64(e)
+    }
 
     const {
         register,
         handleSubmit,
         control,
+        reset,
         formState: { errors },
-    } = useForm();
+    } = useForm( {mode: 'onChange'});
     return (
         <section className="container mx-auto py-12">
+            {
+        images.length > 0 ?
+          <div>
+            {
+              images.map((image, idx) => {
+                return <p key={idx}> <img src= { image } alt="" /> </p>
+              })
+            }
+          </div> : null
+      }
             <form
                 onSubmit={handleSubmit((data) => {
                     sendData(data);
+                    reset()
                 })}
             >
                 <section className="about-rental">
@@ -636,15 +692,17 @@ const AddRental = () => {
                             accept="image/*"
                             max="5"
                             multiple
-                            {...register('images', {
-                                required: 'This is required',
-                            })}
+                            onChange={handlechange}
+                            // {...register('images', {
+                            //     required: 'This is required',
+                            // })}
                         />
-                        {errors.images?.type === 'required' && (
+                        {console.log(images)}
+                        {/* {errors.images?.type === 'required' && (
                             <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                                 {errors.images.message}
                             </p>
-                        )}
+                        )} */}
                     </div>
                 </div>
 

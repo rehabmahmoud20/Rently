@@ -19,6 +19,7 @@ import Footer from './components/Shared/Footer';
 import NotFoundPage from './components/Shared/NotFoundPage';
 import Spinner from './components/Shared/Spinner';
 import { useSelector } from 'react-redux';
+import TermsAndConditions from './components/TermsAndConditions/TermsAndConditions';
 function App() {
     const isLoggedIn = useSelector((state) => state.authentication.isLoggedin);
     const isLoading = useSelector((state) => state.authentication.isLoading);
