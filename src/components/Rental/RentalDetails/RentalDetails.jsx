@@ -61,7 +61,7 @@ const RentalDetails = () => {
       {rental.loading ? (
         <Spinner />
       ) : (
-        <section className=" flex  lg:h-[600px] flex-wrap container mx-auto min-h-screen">
+        <section className=" flex  lg:h-[600px] flex-wrap container mx-auto ">
           <div className="left-section w-full lg:w-[50%] h-full ">
             <div className="h-[45%] lg:h-[35%] p-4">
               <Request data={rental.data} />
