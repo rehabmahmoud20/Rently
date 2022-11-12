@@ -20,13 +20,19 @@ import NotFoundPage from './components/Shared/NotFoundPage';
 import Spinner from './components/Shared/Spinner';
 import { useSelector } from 'react-redux';
 import TermsAndConditions from './components/TermsAndConditions/TermsAndConditions';
+import Navigate from './components/Shared/Navigate';
+
+
 function App() {
     const isLoggedIn = useSelector((state) => state.authentication.isLoggedin);
     const isLoading = useSelector((state) => state.authentication.isLoading);
+    const NavigateTop = (e) => {
+        window.scrollTo(0, 0);
+    }
     return (
         <BrowserRouter>
             <NavbarComponent />
-            <main>
+            <main className="relative">
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route
@@ -113,6 +119,7 @@ function App() {
                 </Routes>
                 {/* toast container "alert from react toastify" don't add it again ❗*/}
                 <ToastContainer autoClose={4000} />
+                <Navigate navigate={NavigateTop}/>
             </main>
             <Footer />
         </BrowserRouter>

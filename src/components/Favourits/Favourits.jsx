@@ -36,8 +36,16 @@ const Favourits = () => {
   return (
     <div className="favorites py-12">
       <div className="container mx-auto">
-        {properties.length >= 0 ? (
-          <div className="wrap">
+        {!properties? (
+          <Spinner />
+        ) : properties && properties.length == 0 ? (
+          <div>
+              <p className=" font-bold text-gray-500 text-center mb-10 text-xl">
+                Total properties : {properties.length}
+              </p>
+          </div>
+        ) : (
+            <div className="wrap">
               <h2 className="text-4xl font-bold mb-6 text-cyan-600 text-center">
                 Your Favorite List
               </h2>
@@ -46,15 +54,14 @@ const Favourits = () => {
               </p>
               <div className="products w-full flex justify-center flex-wrap gap-10">
                 {properties?.map((item) => {
-                return (
-                <RentalCard key={item.id} resp={item} />
-                )
+                  return (
+                    <RentalCard key={item.id} resp={item} />
+                  )
                 })}
               </div>
-          </div>
-        ) : (
-          <Spinner />
-        )}
+            </div>
+          )
+        }
       </div>
     </div>
   )

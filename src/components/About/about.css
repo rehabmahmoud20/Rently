@@ -44,11 +44,17 @@
 .about-wrapper .easy-search .rental-button:active {
   transform: scale(0.97);
 }
+.about-wrapper .our-team .member .member-wrapper {
+  width: 200px;
+  height: 250px;
+}
 .about-wrapper .our-team .member .member-wrapper .img {
+  height: 100%;
+  width: 100%;
   position: relative;
 }
 .about-wrapper .our-team .member .member-wrapper .img img {
-  height: 550px;
+  height: 100%;
   width: 100%;
 }
 .about-wrapper .our-team .member .member-wrapper .img:hover {
@@ -153,6 +159,12 @@
 
   .our-team .team-wrapper {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* Large Media Query */
+@media all and (min-width: 768px) and (max-width: 1199px) {
+  .team-wrapper {
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 

@@ -32,11 +32,11 @@ const RentalCard = ({ resp }) => {
               <div className="flex justify-between mb-3">
                 <p className="price-text text-cyan-600 text-sm lg:text-base">
                   {resp.data.price} EGP
-                  <span className="day text-gray-600">/Month</span>
+                  <span className="day text-gray-600 overflow-hidden whitespace-nowrap text-ellipsis">/Month</span>
                 </p>
                 <p className="text-sm lg:text-base text-gray-600 flex items-center">
                   <AiFillStar className="mr-1 text-lg text-yellow-300" />
-                  <span className="mr-2">{resp.data.reviews[0].rate}/5</span>
+                  <span className="mr-2 overflow-hidden whitespace-nowrap text-ellipsis">{resp.data.reviews[0].rate}/5</span>
                   <span>
                     {resp.data.reviews[0].rate <= 1
                       ? '"Very Poor"'
@@ -62,17 +62,17 @@ const RentalCard = ({ resp }) => {
               <div className="details flex justify-between flex-wrap mb-3">
                 <p className="text-sm text-gray-600 w-1/2 mb-3 flex items-center">
                   <FaBed className="mr-3 text-lg" />
-                  <span className="text-sm">
+                  <span className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
                     {resp.data.aboutRental.rooms} rooms
                   </span>
                 </p>
                 <p className="bathrooms text-sm text-gray-600 w-1/2 mb-3 flex items-center">
                   <BiBath className="mr-3 text-lg" />
-                  <span>{resp.data.aboutRental.bathroom} bathrooms</span>
+                  <span className="overflow-hidden whitespace-nowrap text-ellipsis">{resp.data.aboutRental.bathroom} bathrooms</span>
                 </p>
                 <p className="text-sm text-gray-600 w-1/2 mb-3 flex items-center">
                   <BiArea className="mr-3 text-lg" />
-                  <span>
+                  <span className="overflow-hidden whitespace-nowrap text-ellipsis">
                     {resp.data.aboutRental.area}m<sup>2</sup>
                   </span>
                 </p>

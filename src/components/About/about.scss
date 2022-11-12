@@ -33,10 +33,14 @@ $columns: (one, 0.75) (two, 1.5) (three, 2.15) (four, 3) (five, 3.75) (six, 4.5)
     .our-team {
         .member {
             .member-wrapper {
+                width: 200px;
+                height: 250px;
                 .img {
+                    height: 100%;
+                    width: 100%;
                     position: relative;
                     img {
-                        height: 550px;
+                        height: 100%;
                         width: 100%;
                     }
                     &:hover {
@@ -163,5 +167,13 @@ $columns: (one, 0.75) (two, 1.5) (three, 2.15) (four, 3) (five, 3.75) (six, 4.5)
         .team-wrapper {
             grid-template-columns: repeat(2, 1fr);
         }
+    }
+}
+
+/* Large Media Query */
+
+@media all and (min-width: 768px) and (max-width: 1199px) {
+    .team-wrapper {
+        grid-template-columns: repeat(3, 1fr) !important;
     }
 }
