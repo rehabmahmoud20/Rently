@@ -65,7 +65,6 @@ const ModalRequest = (props) => {
             );
             // ADD REQUEST IN HOST REQUESTS
             const hostRef = doc(db, 'users', props.hostID);
-            console.log(props.hostID);
             const hostData = await getDoc(doc(db, 'users', props.hostID));
             await updateDoc(hostRef, {
                 ...hostData.data(),
