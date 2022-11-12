@@ -19,36 +19,44 @@ function Footer() {
                 </div>
                 <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                     <div>
-                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                            Resources
+                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white text-left">
+                            Company
                         </h2>
                         <ul className="text-gray-600 dark:text-gray-400 pl-0">
                             <li className="mb-4">
                                 <a
-                                    href="https://flowbite.com/"
+                                    href="/"
                                     className="hover:underline"
                                 >
-                                    Flowbite
+                                    Home
+                                </a>
+                            </li>
+                            <li className="mb-4">
+                                <a
+                                    href="/rental-list"
+                                    className="hover:underline"
+                                >
+                                    Rental
                                 </a>
                             </li>
                             <li>
                                 <a
-                                    href="https://tailwindcss.com/"
+                                    href="/about"
                                     className="hover:underline"
                                 >
-                                    Tailwind CSS
+                                    About
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div>
-                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white text-left">
                             Follow us
                         </h2>
                         <ul className="text-gray-600 dark:text-gray-400 pl-0">
                             <li className="mb-4">
                                 <a
-                                    href="https://github.com/themesberg/flowbite"
+                                    href="https://github.com/rehabmahmoud20/Rently"
                                     className="hover:underline "
                                 >
                                     Github
@@ -56,19 +64,24 @@ function Footer() {
                             </li>
                             <li>
                                 <a
-                                    href="https://discord.gg/4eeurUVvTy"
+                                    href="/"
                                     className="hover:underline"
                                 >
-                                    Discord
+                                    Contact us
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div>
-                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white text-left">
                             Legal
                         </h2>
                         <ul className="text-gray-600 dark:text-gray-400 pl-0">
+                            <li className="mb-4">
+                                <a href="FAQ" className="hover:underline">
+                                    FAQ
+                                </a>
+                            </li>
                             <li className="mb-4">
                                 <a href="#" className="hover:underline">
                                     Privacy Policy
