@@ -7,16 +7,16 @@ const Reviews = () => {
       <p className="text-2xl mb-3">Reviews</p>
       <div className="h-56 sm:h-64 xl:h-48 2xl:h-60">
         <Carousel slide={false}>
-          <Card>
-            <div className="flex ">
-              <div className="w-[30%]">
+          <Card className="h-full">
+            <div className="flex flex-wrap ">
+              <div className="w-full md:w-[30%] mb-3">
                 <p className="mb-2">omima khaled</p>
                 <div className="flex items-center">
                   <img src={egyptflag} alt="" className="w-4 h-4 mr-2" />
                   <span className="text-xs">Egypt</span>
                 </div>
               </div>
-              <div className="w-[70%]">
+              <div className="w-full md:w-[70%]">
                 <p className="text-sm mb-2 neutral-400">
                   "The rooms were clean, very comfortable, and the staff was
                   amazing. They went over and beyond to help make our stay
@@ -36,16 +36,16 @@ const Reviews = () => {
               </div>
             </div>
           </Card>
-          <Card>
-            <div className="flex ">
-              <div className="w-[30%]">
+          <Card className="h-full">
+            <div className="flex flex-wrap ">
+              <div className="w-full md:w-[30%]">
                 <p className="mb-2">omima khaled</p>
                 <div className="flex items-center">
                   <img src={egyptflag} alt="" className="w-4 h-4 mr-2" />
                   <span className="text-xs">Egypt</span>
                 </div>
               </div>
-              <div className="w-[70%]">
+              <div className="w-full md:w-[70%]">
                 <p className="text-sm mb-2">
                   "The rooms were clean, very comfortable, and the staff was
                   amazing. They went over and beyond to help make our stay
@@ -65,16 +65,16 @@ const Reviews = () => {
               </div>
             </div>
           </Card>
-          <Card>
-            <div className="flex ">
-              <div className="w-[30%]">
+          <Card className="h-full">
+            <div className="flex flex-wrap">
+              <div className="w-full md:w-[30%]">
                 <p className="mb-2">omima khaled</p>
                 <div className="flex items-center">
                   <img src={egyptflag} alt="" className="w-4 h-4 mr-2" />
                   <span className="text-xs">Egypt</span>
                 </div>
               </div>
-              <div className="w-[70%]">
+              <div className="w-full md:w-[70%]">
                 <p className="text-sm mb-2">
                   "The rooms were clean, very comfortable, and the staff was
                   amazing. They went over and beyond to help make our stay
