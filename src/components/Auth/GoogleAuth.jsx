@@ -39,7 +39,7 @@ const GoogleAuth = (props) => {
         }
     };
     return (
-        <div className="text-sm mt-5 text-center font-medium text-gray-900 dark:text-gray-300 mb-10">
+        <div className="text-sm mt-5 text-center font-medium text-gray-900 dark:text-gray-300 ">
             {props.page} with Google{' '}
             <GoogleIcon
                 onClick={googleAuthHandler}

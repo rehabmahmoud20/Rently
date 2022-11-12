@@ -7,12 +7,12 @@ function HomeHero() {
       <img
         src={HeroImage}
         alt="House"
-        className="hero-image w-full h-screen"
+        className="hero-image w-full h-96 sm:h-screen"
       />
       <div className="overlay absolute top-0 left-0 bg-black h-full w-full opacity-60 z-10"></div>
       <div className="container">
-        <div className="get-started absolute left-28 top-32 z-20">
-          <h2 className="text-white text-xl sm:text-6xl	mb-16">
+        <div className="get-started absolute left:12 sm:left-28 top-32 z-20">
+          <h2 className="text-white text-4xl text-left sm:text-6xl sm:mb-16 mb-6">
             Find your best
             <br />
             smart real estate

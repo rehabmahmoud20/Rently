@@ -1,7 +1,10 @@
 import { Dropdown, Button } from "flowbite-react";
 import { BiSearchAlt } from 'react-icons/bi'
+import { useNavigate } from "react-router-dom";
 
 function SearchBar() {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="search-container container -mt-48 z-10 relative mx-auto">
@@ -49,9 +52,9 @@ function SearchBar() {
               </Dropdown.Item>
             </Dropdown>
           </div>
-
           <Button
             className="mx-auto w-full md:ml-10 md:mr-10"
+            onClick={() => navigate('/rental-list')}
           >
             Search
             <BiSearchAlt className="ml-2 h-5 w-5" />

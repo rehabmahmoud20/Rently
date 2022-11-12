@@ -13,6 +13,7 @@ import Host from "./Host";
 import Policies from "./Policies";
 import "./rentalDetails.css";
 import Spinner from "../../Shared/Spinner";
+import { useSelector } from "react-redux";
 // Initial Property State
 const initialState = {
   loading: true,
@@ -54,22 +55,23 @@ const RentalDetails = () => {
       });
   }, []);
   console.log(rental.data);
+
   return (
     <>
       {rental.loading ? (
         <Spinner />
       ) : (
-        <section className=" flex border-2  h-[600px] flex-wrap container mx-auto">
+        <section className=" flex  lg:h-[600px] flex-wrap container mx-auto ">
           <div className="left-section w-full lg:w-[50%] h-full ">
-            <div className="h-[45%] md:h-[35%] p-4">
+            <div className="h-[45%] lg:h-[35%] p-4">
               <Request data={rental.data} />
             </div>
-            <div className="h-[55%] md:h-[65%]">
+            <div className="h-[300px] lg:h-[65%]">
               <RentalGallery data={rental.data} />
             </div>
           </div>
-          <div className="right-section w-full lg:w-[50%] border-l-4 h-full  ">
-            <div className="sectionNav h-[10%]">
+          <div className="right-section w-full lg:w-[50%] lg:border-l-2 h-full  ">
+            <div className="sectionNav py-6 lg:py-0  lg:h-[10%]">
               <Header />
             </div>
             <div className="h-[90%] lg:overflow-auto  p-4">
@@ -77,8 +79,8 @@ const RentalDetails = () => {
               <AboutRental data={rental.data.aboutRental} />
               <KeyFeatures data={rental.data.features} />
               <Reviews />
-              <Host />
-              <Policies />
+              <Host data={rental.data.hostID} />
+              <Policies data={rental.data.policy} />
             </div>
           </div>
         </section>

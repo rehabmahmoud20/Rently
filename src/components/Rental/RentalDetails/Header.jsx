@@ -9,7 +9,7 @@ const Header = () => {
     }
   }
   return (
-    <ul className="flex h-full justify-around border-b flex-wrap">
+    <ul className="flex h-full justify-around border-b flex-wrap lg:flex-nowrap">
       <li
         className={`flex items-center h-full cursor-pointer hover:text-cyan-600
     ${
