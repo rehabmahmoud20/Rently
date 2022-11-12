@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 // *libraries
 import Select from "react-select";
-import { v4 as uuidv4 } from "uuid";
+import { Card, Carousel } from "flowbite-react";
 import { toast } from "react-toastify";
 
 // *Auth
@@ -30,7 +30,8 @@ const options = [
 
 const AddRental = () => {
   const [images, setImages] = useState([]);
-
+  const [gender, genderShow] = useState(false);
+  const [separateRooms, setseparateRooms] = useState(false);
   const auth = getAuth();
   const convertToBase64 = (e) => {
     const images = [],
@@ -49,7 +50,7 @@ const AddRental = () => {
             images.push(result); //[] of  base 64 for each image
           }
           if (images.length === myfilesArr.length) {
-            setImages(images); 
+            setImages(images);
           }
         };
         fileReader.readAsDataURL(file);
@@ -91,7 +92,7 @@ const AddRental = () => {
       insurance,
       airConditioner,
       rentalName,
-      separateRooms,
+      // separateRooms,
       rentalType,
     } = data;
     //   timestamp: new Date().toDateString(),
@@ -108,13 +109,13 @@ const AddRental = () => {
       location: { lng: 29.97773, lat: 31.25526 },
       aboutRental: {
         area,
-        gender,
+        gender: gender || null,
         availableDate,
         availableRooms: +AvailableRooms,
         bathroom,
         floor: +floor,
         rooms: +Rooms,
-        separateRooms,
+        separateRooms: separateRooms,
         type: rentalType,
       },
       features: {
@@ -152,11 +153,20 @@ const AddRental = () => {
       updateUserData(id);
       toast.success("data is sent");
     } catch (error) {
+      console.log(error);
       toast.error("data is is not sent");
     }
   };
   const handlechange = (e) => {
     convertToBase64(e);
+  };
+  const handleSeprateRoomsChange = (e) => {
+    if (e.target.checked === true) {
+      setseparateRooms(true);
+      genderShow(true);
+    } else {
+      genderShow(false);
+    }
   };
 
   const {
@@ -168,23 +178,12 @@ const AddRental = () => {
   } = useForm({ mode: "onChange" });
   return (
     <section className="container mx-auto py-12">
-      {images.length > 0 ? (
-        <div>
-          {images.map((image, idx) => {
-            return (
-              <p key={idx}>
-                
-                <img src={image} alt="" />
-              </p>
-            );
-          })}
-        </div>
-      ) : null}
+   
       <form
         onSubmit={handleSubmit((data) => {
           sendData(data);
           reset();
-        console.log(data)
+          console.log(data);
         })}
       >
         <section className="about-rental">
@@ -483,15 +482,15 @@ const AddRental = () => {
 
           {/* </section> */}
           {/* ===================================================== rental Features ================================================ */}
-          <div className="grid md:grid-cols-4 md:gap-10 mb-5">
-            {/* separate rooms */}
-            <div className="flex items-center my-4">
+          <div className="separate-rooms grid md:grid-cols-2 md:gap-10 mb-5">
+              {/* separate rooms */}
+              <div className="flex items-center my-4">
               <input
                 id="separateRooms"
                 type="checkbox"
                 value=""
                 name="separateRooms"
-                {...register("separateRooms")}
+                onChange={handleSeprateRoomsChange}
                 className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
               />
               <label
@@ -501,6 +500,54 @@ const AddRental = () => {
                 Separate rooms
               </label>
             </div>
+             {/* gender */}
+          {gender ? (
+            <div className="gender flex items-center ">
+              <label className="text-sm text-gray-500 mr-6">Gender</label>
+              <div className="flex items-center">
+                {/* male */}
+                <div className="flex items-center  ">
+                  <input
+                    id="male"
+                    type="radio"
+                    value="male"
+                    name="gender"
+                    className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
+                    {...register("gender")}
+                  />
+                  <label
+                    htmlFor="male"
+                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Male
+                  </label>
+                </div>
+
+                {/* f e m a l e */}
+                <div className=" ml-10 flex items-center ">
+                  <input
+                    id="female"
+                    type="radio"
+                    value="female"
+                    name="gender"
+                    className=" w-4  bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
+                    {...register("gender")}
+                  />
+                  <label
+                    htmlFor="female"
+                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
+                    Female
+                  </label>
+                </div>
+              </div>
+            </div>
+          ) : null}
+
+          </div>
+            
+          <div className="grid md:grid-cols-4 md:gap-10 mb-5">
+        
             {/* air conditioner */}
             <div className="flex items-center my-4">
               <input
@@ -607,49 +654,11 @@ const AddRental = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 md:gap-10 p-8 mb-24 shadow-lg shadow-gray-300 rounded-2xl">
-          {/* gender */}
-          <div className="gender">
-            <label className="text-sm text-gray-500 ">Gender</label>
-
-            {/* male */}
-            <div className="flex items-center my-4 ">
-              <input
-                id="male"
-                type="radio"
-                value="male"
-                name="gender"
-                className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                {...register("gender")}
-              />
-              <label
-                htmlFor="male"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                Male
-              </label>
-            </div>
-
-            {/* f e m a l e */}
-            <div className="mb-5">
-              <input
-                id="female"
-                type="radio"
-                value="female"
-                name="gender"
-                className=" w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-0 focus:ring-cyan-100 checked:bg-cyan-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-cyan-600 dark:ring-offset-gray-800"
-                {...register("gender")}
-              />
-              <label
-                htmlFor="female"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                Female
-              </label>
-            </div>
-          </div>
+        <div className="grid md:grid-cols-2 md:gap-10 p-8 mb-24 shadow-lg shadow-gray-300 rounded-2xl items-center">
+         
 
           {/* images */}
+          
           <div className="relative z-0 mb-6  group  ">
             <label className="text-sm text-gray-500  " htmlFor="file_input">
               Upload rental photos
@@ -663,17 +672,20 @@ const AddRental = () => {
               max="5"
               multiple
               onChange={handlechange}
-              // {...register('images', {
-              //     required: 'This is required',
-              // })}
             />
-            {console.log(images)}
-            {/* {errors.images?.type === 'required' && (
-                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                                {errors.images.message}
-                            </p>
-                        )} */}
           </div>
+          {images.length > 0 && (
+        <Carousel slide={false} className="change-carousel w-3/4">
+          {images.map((image, idx) => {
+            return (
+              <>
+                <img key={idx} src={image} alt="image" className="h-full" />
+              </>
+            );
+          })}
+        </Carousel>
+      )}
+
         </div>
 
         <div className="  mx-auto w-fit">
