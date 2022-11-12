@@ -152,9 +152,6 @@
   .our-team .team-wrapper {
     grid-template-columns: repeat(2, 1fr);
   }
-<<<<<<< HEAD
-}/*# sourceMappingURL=about.css.map */
-=======
 }
 /* Large Media Query */
 @media all and (min-width: 768px) and (max-width: 1199px) {
@@ -164,4 +161,3 @@
 }
 
 /*# sourceMappingURL=about.css.map */
->>>>>>> development

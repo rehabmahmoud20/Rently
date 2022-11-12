@@ -26,6 +26,9 @@ import Navigate from './components/Shared/Navigate';
 function App() {
     const isLoggedIn = useSelector((state) => state.authentication.isLoggedin);
     const isLoading = useSelector((state) => state.authentication.isLoading);
+    const NavigateTop = (e) => {
+        window.scrollTo(0, 0);
+    };
     const HomeComponent = lazy(() => import('./components/Home/Home'));
     return (
         <BrowserRouter>
