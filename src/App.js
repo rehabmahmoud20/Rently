@@ -19,6 +19,7 @@ import Footer from './components/Shared/Footer';
 import NotFoundPage from './components/Shared/NotFoundPage';
 import Spinner from './components/Shared/Spinner';
 import { useSelector } from 'react-redux';
+import TermsAndConditions from './components/TermsAndConditions/TermsAndConditions';
 function App() {
     const isLoggedIn = useSelector((state) => state.authentication.isLoggedin);
     const isLoading = useSelector((state) => state.authentication.isLoading);
@@ -28,18 +29,42 @@ function App() {
             <main>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    {!isLoggedIn && (
-                        <Route path="signin" element={<Signin />} />
-                    )}
-                    {!isLoggedIn && (
-                        <Route path="signup" element={<Signup />} />
-                    )}
-                    {!isLoggedIn && (
-                        <Route
-                            path="forget-password"
-                            element={<ForgetPassword />}
-                        />
-                    )}
+                    <Route
+                        path="signin"
+                        element={
+                            isLoggedIn && !isLoading ? (
+                                <NotFoundPage />
+                            ) : !isLoggedIn && !isLoading ? (
+                                <Signin />
+                            ) : (
+                                <Spinner />
+                            )
+                        }
+                    />
+                    <Route
+                        path="signup"
+                        element={
+                            isLoggedIn && !isLoading ? (
+                                <NotFoundPage />
+                            ) : !isLoggedIn && !isLoading ? (
+                                <Signup />
+                            ) : (
+                                <Spinner />
+                            )
+                        }
+                    />
+                    <Route
+                        path="forget-password"
+                        element={
+                            isLoggedIn && !isLoading ? (
+                                <NotFoundPage />
+                            ) : !isLoggedIn && !isLoading ? (
+                                <ForgetPassword />
+                            ) : (
+                                <Spinner />
+                            )
+                        }
+                    />
                     <Route
                         path="favourits"
                         element={
@@ -87,7 +112,7 @@ function App() {
                     <Route path="/spinner" element={<Spinner />} />
                 </Routes>
                 {/* toast container "alert from react toastify" don't add it again ❗*/}
-                <ToastContainer autoClose={5000} />
+                <ToastContainer autoClose={4000} />
             </main>
             <Footer />
         </BrowserRouter>

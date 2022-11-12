@@ -9,20 +9,23 @@ const AboutRental = (props) => {
       <p className="text-2xl mb-2"> About rental</p>
       <div className="flex justify-between flex-wrap w-full">
         <div className="flex items-center mb-6 w-full lg:w-[50%] ">
-          <BiBuildingHouse className="text-cyan-600 text-2xl mr-1" />
+          <BiBuildingHouse className="text-cyan-600 text-2xl mr-2" />
           <p className="font-bold">
-            Type : <span className="font-thin">{props.data.type} </span>
+            Type :{" "}
+            <span className="font-thin">
+              {props.data.type.value || props.data.type}{" "}
+            </span>
           </p>
         </div>
         <div className="flex items-center mb-6 w-full lg:w-[50%]">
-          <MdDateRange className="text-cyan-600 text-2xl mr-1" />
+          <MdDateRange className="text-cyan-600 text-2xl mr-2" />
           <p className="font-bold">
             Avialable date :{" "}
             <span className="font-thin">{props.data.availableDate} </span>
           </p>
         </div>
         <div className="flex items-center mb-6 w-full lg:w-[50%] ">
-          <BiArea className="text-cyan-600 text-2xl mr-1" />
+          <BiArea className="text-cyan-600 text-2xl mr-2" />
           <p className="font-bold">
             Area :
             <span className="font-thin">
@@ -31,25 +34,25 @@ const AboutRental = (props) => {
           </p>
         </div>
         <div className="flex items-center mb-6 w-full lg:w-[50%]">
-          <FaWarehouse className="text-cyan-600 text-2xl mr-1" />
+          <FaWarehouse className="text-cyan-600 text-2xl mr-2" />
           <p className="font-bold">
             Floor : <span className="font-thin">{props.data.floor}</span>
           </p>
         </div>
         <div className="flex items-center mb-6 w-full lg:w-[50%]">
-          <MdOutlineBedroomParent className="text-cyan-600 text-2xl mr-1" />
+          <MdOutlineBedroomParent className="text-cyan-600 text-2xl mr-2" />
           <p className="font-bold">
             Rooms : <span className="font-thin">{props.data.rooms}</span>
           </p>
         </div>
         <div className="flex items-center mb-6 w-full lg:w-[50%]">
-          <FaBath className="text-cyan-600 text-2xl mr-1" />
+          <FaBath className="text-cyan-600 text-2xl mr-2" />
           <p className="font-bold">
             Bathrooms : <span className="font-thin">{props.data.bathroom}</span>
           </p>
         </div>
         <div className="flex items-center mb-6 w-full lg:w-[50%]">
-          <VscPerson className="text-cyan-600 text-2xl mr-1" />
+          <VscPerson className="text-cyan-600 text-2xl mr-2" />
           <p className="font-bold">
             Seperate rooms :
             <span>
@@ -63,7 +66,7 @@ const AboutRental = (props) => {
         </div>
         {props.data.separateRooms ? (
           <div className="flex items-center mb-6 w-full lg:w-[50%]">
-            <MdOutlineBedroomParent className="text-cyan-600 text-2xl mr-1" />
+            <MdOutlineBedroomParent className="text-cyan-600 text-2xl mr-2" />
             <p className="font-bold">
               Available rooms :{" "}
               <span className="font-thin">{props.data.availableRooms}</span>

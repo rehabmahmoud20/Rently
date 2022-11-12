@@ -1,5 +1,5 @@
 import { Card, Carousel } from "flowbite-react";
-import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
 import { FaBed, FaFan } from "react-icons/fa";
 import { BiBath, BiArea } from "react-icons/bi";
 import { GoLocation } from "react-icons/go";
@@ -11,9 +11,6 @@ const RentalCard = ({ resp }) => {
       <div className="prod-wrapper max-w-sm bg-white rounded-lg border border-gray-100 shadow-md dark:bg-gray-800 dark:border-gray-700">
         <div className="carousel-list">
           <Card>
-            <div className="heart-wrapper bg-gray-50 cursor-pointer rounded-full">
-              <AiOutlineHeart className="heart-icon text-red-600 text-lg" />
-            </div>
             <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 card-top">
               <Carousel slide={false} className="change-carousel">
                 {resp.data.images.map((img) => {
