@@ -29,18 +29,42 @@ function App() {
             <main>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    {!isLoggedIn && (
-                        <Route path="signin" element={<Signin />} />
-                    )}
-                    {!isLoggedIn && (
-                        <Route path="signup" element={<Signup />} />
-                    )}
-                    {!isLoggedIn && (
-                        <Route
-                            path="forget-password"
-                            element={<ForgetPassword />}
-                        />
-                    )}
+                    <Route
+                        path="signin"
+                        element={
+                            isLoggedIn && !isLoading ? (
+                                <NotFoundPage />
+                            ) : !isLoggedIn && !isLoading ? (
+                                <Signin />
+                            ) : (
+                                <Spinner />
+                            )
+                        }
+                    />
+                    <Route
+                        path="signup"
+                        element={
+                            isLoggedIn && !isLoading ? (
+                                <NotFoundPage />
+                            ) : !isLoggedIn && !isLoading ? (
+                                <Signup />
+                            ) : (
+                                <Spinner />
+                            )
+                        }
+                    />
+                    <Route
+                        path="forget-password"
+                        element={
+                            isLoggedIn && !isLoading ? (
+                                <NotFoundPage />
+                            ) : !isLoggedIn && !isLoading ? (
+                                <ForgetPassword />
+                            ) : (
+                                <Spinner />
+                            )
+                        }
+                    />
                     <Route
                         path="favourits"
                         element={
