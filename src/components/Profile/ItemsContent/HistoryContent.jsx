@@ -16,7 +16,6 @@ const HistoryContent = (props) => {
                         sentAt: req.sentAt,
                     });
             });
-            console.log(findReq);
             setProperties(findReq);
             return findReq;
         });
