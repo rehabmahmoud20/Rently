@@ -7,6 +7,9 @@ function Footer() {
             <div className="md:flex md:justify-between px-5">
                 <div className="mb-6 md:mb-0">
                     <Link
+                        onClick={() => {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
                         to="/"
                         className="flex items-center no-underline text-teal-400"
                     >
@@ -24,12 +27,27 @@ function Footer() {
                         </h2>
                         <ul className="text-gray-600 dark:text-gray-400 pl-0">
                             <li className="mb-4">
-                                <Link to="/" className="hover:underline">
+                                <Link
+                                    onClick={() => {
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: 'smooth',
+                                        });
+                                    }}
+                                    to="/"
+                                    className="hover:underline"
+                                >
                                     Home
                                 </Link>
                             </li>
                             <li className="mb-4">
                                 <Link
+                                    onClick={() => {
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: 'smooth',
+                                        });
+                                    }}
                                     to="/rental-list"
                                     className="hover:underline"
                                 >
@@ -37,7 +55,16 @@ function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/about" className="hover:underline">
+                                <Link
+                                    onClick={() => {
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: 'smooth',
+                                        });
+                                    }}
+                                    to="/about"
+                                    className="hover:underline"
+                                >
                                     About
                                 </Link>
                             </li>
@@ -58,7 +85,16 @@ function Footer() {
                                 </a>
                             </li>
                             <li>
-                                <Link to="/about" className="hover:underline">
+                                <Link
+                                    onClick={() => {
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: 'smooth',
+                                        });
+                                    }}
+                                    to="/about"
+                                    className="hover:underline"
+                                >
                                     Contact us
                                 </Link>
                             </li>
@@ -70,12 +106,27 @@ function Footer() {
                         </h2>
                         <ul className="text-gray-600 dark:text-gray-400 pl-0">
                             <li className="mb-4">
-                                <Link to="/FAQ" className="hover:underline">
+                                <Link
+                                    onClick={() => {
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: 'smooth',
+                                        });
+                                    }}
+                                    to="/FAQ"
+                                    className="hover:underline"
+                                >
                                     FAQ
                                 </Link>
                             </li>
                             <li className="mb-4">
                                 <Link
+                                    onClick={() => {
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: 'smooth',
+                                        });
+                                    }}
                                     to="/terms&conditions"
                                     className="hover:underline"
                                 >
@@ -84,6 +135,12 @@ function Footer() {
                             </li>
                             <li>
                                 <Link
+                                    onClick={() => {
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: 'smooth',
+                                        });
+                                    }}
                                     to="/terms&conditions"
                                     className="hover:underline"
                                 >
@@ -98,13 +155,24 @@ function Footer() {
             <div className="sm:flex sm:items-center sm:justify-between container">
                 <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
                     © 2022{' '}
-                    <Link to="/" className="hover:underline">
+                    <Link
+                        onClick={() => {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        to="/"
+                        className="hover:underline"
+                    >
                         Rently
                     </Link>
                     . All Rights Reserved.
                 </span>
                 <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
-                    <Link className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                    <Link
+                        onClick={() => {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                    >
                         <svg
                             className="w-5 h-5"
                             fill="currentColor"
@@ -120,6 +188,9 @@ function Footer() {
                         <span className="sr-only">Facebook page</span>
                     </Link>
                     <Link
+                        onClick={() => {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
                         to="/"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                     >
@@ -138,6 +209,9 @@ function Footer() {
                         <span className="sr-only">Instagram page</span>
                     </Link>
                     <Link
+                        onClick={() => {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
                         to="/"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                     >
@@ -152,6 +226,9 @@ function Footer() {
                         <span className="sr-only">Twitter page</span>
                     </Link>
                     <Link
+                        onClick={() => {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
                         to="/"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                     >
@@ -170,6 +247,9 @@ function Footer() {
                         <span className="sr-only">GitHub account</span>
                     </Link>
                     <Link
+                        onClick={() => {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
                         to="/"
                         className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
                     >
