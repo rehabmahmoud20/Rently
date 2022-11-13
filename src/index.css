@@ -8,10 +8,9 @@
     white-space: nowrap;
 }
 .cards-cont img {
-    min-height: 300px !important;
-    height: 300px !important;
-    max-height: 300px !important;
-    object-fit: cover;
+    min-height: 250px !important;
+    height: 250px !important;
+    max-height: 250px !important;
 }
 #overview > div > .leaflet-container {
     z-index: 0 !important;

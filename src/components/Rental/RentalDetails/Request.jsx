@@ -22,7 +22,10 @@ const Request = (props) => {
         <>
             <div className="flex items-center justify-between">
                 <p className="text-4xl font-bold mb-3 text-stone-900">
-                    {props.data.price} £<span className="text-sm">/mo</span>
+                    {props.data.price}{' '}
+                    <span className="font-normal text-cyan-600 text-base">
+                        EGP/MO
+                    </span>
                 </p>
                 <p>
                     {addToFav ? (
@@ -40,7 +43,6 @@ const Request = (props) => {
                             }
                         />
                     )}
-                    Favourite
                 </p>
             </div>
             <div className="flex items-center mb-2">

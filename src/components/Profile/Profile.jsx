@@ -30,14 +30,12 @@ const Profile = () => {
                 rents.push(data);
             });
             setRentals(rents);
-            console.log(rentals);
         } catch (error) {
             toast.error('Something went wrong !');
         }
     };
     useEffect(() => {
         getProperties();
-        console.log(rentals);
     }, []);
     return (
         <section className="user-profile flex">

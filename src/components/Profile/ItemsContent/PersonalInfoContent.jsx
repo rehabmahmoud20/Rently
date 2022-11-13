@@ -28,7 +28,6 @@ const PersonalInfoContent = (props) => {
     const handleImageUpload = (e, uploadedImage, setProfilePic) => {
         const [file] = e.target.files;
         if (file) {
-            console.log(file);
             const reader = new FileReader();
             const { current } = uploadedImage;
             current.file = file;
@@ -63,7 +62,6 @@ const PersonalInfoContent = (props) => {
     // SET USER DATA
     useEffect(() => {
         setUpdatedData(props.userData);
-        console.log(props.userData);
     }, [props.userData]);
     return (
         <>

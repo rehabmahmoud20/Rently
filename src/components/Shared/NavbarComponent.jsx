@@ -9,11 +9,10 @@ import { Link } from 'react-router-dom';
 const NavbarComponent = () => {
     const userData = { ...useSelector((state) => state.user.userData) };
     const dispatch = useDispatch();
-    const { isLoggedIn } = UseAuthStatus();
+    UseAuthStatus();
     const globalAuthState = useSelector(
         (state) => state.authentication.isLoggedin
     );
-    console.log(globalAuthState);
     const handleClick = () => {
         dispatch(rentalsActions.updateFetchData(true));
     };
@@ -84,10 +83,7 @@ const NavbarComponent = () => {
                     </>
                 )}
             </Navbar.Collapse>
-
-            {/* </Navbar.Collapse> */}
         </Navbar>
-        // </div>
     );
 };
 
