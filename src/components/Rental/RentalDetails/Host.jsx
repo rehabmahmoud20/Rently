@@ -35,19 +35,12 @@ const Host = (props) => {
         const docRef = doc(db, 'users', props.data);
         getDoc(docRef)
             .then((doc) => {
-                console.log('dd', doc.data());
                 dispatch({ type: 'success', payload: doc.data() });
             })
             .catch((error) => {
-                console.log('error', error);
                 dispatch({ type: 'failed', payload: error.message });
             });
-
-        console.log(user.data);
     }, [props.data]);
-
-    console.log('userr ', user.data);
-
     return (
         <div id="host" className="h-auto mb-4">
             <p className="text-2xl mb-3">Host</p>
