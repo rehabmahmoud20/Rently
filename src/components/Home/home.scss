@@ -1,0 +1,52 @@
+#root
+    > main
+    > section.testimonials.mb-24.container
+    > div
+    > div
+    > div.absolute.top-0.right-0.flex.h-full.items-center.justify-center.px-4.focus\:outline-none
+    > button {
+    background: #0891b2;
+    border-radius: 50%;
+}
+
+#root
+    > main
+    > section.testimonials.mb-24.container
+    > div
+    > div
+    > div.absolute.top-0.left-0.flex.h-full.items-center.justify-center.px-4.focus\:outline-none
+    > button {
+    background: #0890b250;
+    border-radius: 50%;
+}
+
+#root > main > div.search-container.container > div {
+    height: 80px;
+    align-items: center;
+}
+
+#root
+    > main
+    > div.search-container.container.-mt-48.z-10.relative.mx-auto
+    > div
+    > div:nth-child(1) {
+    padding: 10px 40px;
+    border-right: solid grey 1px;
+}
+
+#root
+    > main
+    > div.search-container.container.-mt-48.z-10.relative.mx-auto
+    > div
+    > div:nth-child(2) {
+    padding: 10px 40px;
+    border-right: solid grey 1px;
+}
+
+#root
+    > main
+    > div.search-container.container.-mt-48.z-10.relative.mx-auto
+    > div
+    > div:nth-child(3) {
+    padding: 10px 40px;
+}

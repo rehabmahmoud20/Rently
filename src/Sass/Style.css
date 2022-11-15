@@ -1,24 +1,100 @@
+/*------------- New Styles -------------*/
 /*
-colors from tailwind are:
-main-color: cyan-600;
-text-light =>text-white
-black: stone-900;
-text => neutral-400;
-rating => yellow-300
-extra for heart => red-600
+
+    colors from tailwind are:
+    main-color: cyan-600;
+    text-light =>text-white
+    black: stone-900;
+    text => neutral-400;
+    rating => yellow-300
+    extra for heart => red-600
+
+
+    // Headers Styles
+
+    all headers => {
+        font-family: Messiry
+
+        <h2 className="text-3xl text-gray-800">Header Text</h2>
+        <h3 className="text-2xl text-gray-800">Header Text</h3>
+        <h4 className="text-xl text-gray-800">Header Text</h4>
+    }
+
+    // Paragraphs Styles
+
+    paragraphs => {
+        global => {
+            font-family: Poppins;
+        }
+        <p className="text-base text-gray-600">THis is text</p>
+        small => {
+            class: text-sm
+        }
+        medium => {
+            class: text-base
+        }
+        large => {
+            class: text-lg
+        }
+    }
+
+    // Button
+
+        <button type="button" class="text-white bg-cyan-600 hover:bg-cyan-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2.5 mr-2 mb-2 dark:bg-cyan-600 dark:hover:bg-cyan-800 focus:outline-none dark:focus:ring-cyan-800">Default</button>
+
+        button:active {
+            transform: scale(0.95)
+        }
+
 */
 @font-face {
   font-family: "Poppins";
   src: url("../assets/fonts/Poppins-Regular.ttf");
 }
-@font-face {
-  font-family: "ElMessiri";
-  src: url("../assets/fonts/ElMessiri-Medium.ttf");
-}
 body {
   font-family: "Poppins";
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "ElMessiri";
+html {
+  scroll-behavior: smooth !important;
+}
+
+/* transparent background on autocomplete inputs*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-color: transparent;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.container {
+  width: 85% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 85% !important;
+}
+
+@media (max-width: 800px) {
+  .container {
+    width: 90% !important;
+    max-width: 90% !important;
+  }
+}
+/* scroll bar style */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #374151;
 }/*# sourceMappingURL=Style.css.map */

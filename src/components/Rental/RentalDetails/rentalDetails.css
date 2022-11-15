@@ -1,0 +1,11 @@
+#reviews > div > div > div.absolute.top-0.right-0.flex.h-full.items-center.justify-center.px-4.focus\:outline-none > button > span > svg {
+  color: rgba(0, 0, 0, 0.525) !important;
+  width: 40px;
+  height: 40px;
+}
+
+#reviews > div > div > div.absolute.top-0.left-0.flex.h-full.items-center.justify-center.px-4.focus\:outline-none > button > span > svg {
+  color: rgba(0, 0, 0, 0.525) !important;
+  width: 40px;
+  height: 40px;
+}/*# sourceMappingURL=rentalDetails.css.map */

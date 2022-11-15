@@ -1,13 +1,42 @@
-@import "./base/mixin","./base/variables","./base/functions";
+@import './base/mixin', './base/variables', './base/functions';
 // text
-@include fontFamily('Poppins',"../assets/fonts/Poppins-Regular.ttf");
-// heading
-@include fontFamily('ElMessiri',"../assets/fonts/ElMessiri-Medium.ttf");
-
-
-body{
+@include fontFamily('Poppins', '../assets/fonts/Poppins-Regular.ttf');
+body {
     font-family: 'Poppins';
 }
-h1,h2,h3,h4,h5,h6{
-    font-family: 'ElMessiri';
+html{
+    scroll-behavior: smooth !important;
+}
+/* transparent background on autocomplete inputs*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    background-color: transparent;
+    transition: background-color 5000s ease-in-out 0s;
+}
+.container {
+    width: 85% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 85% !important;
+}
+@media (max-width: 800px) {
+    .container {
+        width: 90% !important;
+        max-width: 90% !important;
+    }
+}
+/* scroll bar style */
+::-webkit-scrollbar {
+    width: 7px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #1f2937;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #374151;
 }

@@ -1,0 +1,55 @@
+.input_image {
+  display: none;
+}
+
+.user_image_container {
+  width: 100%;
+  height: 100%;
+  background: rgba(14, 52, 88, 0.6);
+  border: 1px dashed white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease-in-out;
+  cursor: pointer;
+}
+.user_image_container:global.circle {
+  border-radius: 50%;
+}
+.user_image_container:hover {
+  border-color: gray;
+}
+.user_image_container:hover :global .upload-icon {
+  transform: translate(0, 4px);
+}
+
+.upload_content {
+  text-align: center;
+}
+.upload_content p {
+  font-size: 14px;
+  line-height: 17px;
+  color: white;
+}
+.upload_content span {
+  font-size: 10px;
+  line-height: 12px;
+  color: white;
+  opacity: 0.6;
+  overflow: visible !important;
+}
+.upload_content :global .upload-icon {
+  transition: all 0.25s ease-in-out;
+}
+
+.image_input {
+  display: none;
+}
+
+.profile_photo {
+  padding: 10px;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  border: 5px solid white;
+}/*# sourceMappingURL=avatar.css.map */

@@ -1,0 +1,109 @@
+#rental-list {
+  min-height: 500px;
+}
+
+.filter-wrap {
+  position: relative;
+  z-index: 100;
+}
+
+.products-list {
+  height: calc(100vh - 164px);
+}
+.products-list .products .product {
+  width: 48%;
+}
+.products-list .products .product .card-top {
+  height: 210px;
+}
+.products-list #map .leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-list .flex-col {
+  padding: 0px;
+  position: relative;
+  gap: 0.75rem;
+}
+.carousel-list .change-carousel .scroll-smooth {
+  border-radius: 0px;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.property-button:active {
+  transform: scale(0.98);
+}
+
+/* XSmall Media Query */
+@media all and (max-width: 1199px) {
+  #rental-list {
+    max-width: 100%;
+  }
+  .filter-wrap {
+    flex-wrap: wrap;
+  }
+  .filter-wrap .filter-option {
+    width: 47%;
+    margin-bottom: 15px;
+  }
+  .products-list {
+    flex-direction: column;
+  }
+  .products-list .products,
+.products-list #map {
+    width: 100%;
+    height: 400px;
+  }
+  .products-list .products {
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+  .products-list #map {
+    height: 400px;
+    max-width: 100%;
+  }
+  .products-list .products .product {
+    width: 100% !important;
+  }
+  .products-list .card-text div:first-of-type {
+    flex-direction: column;
+  }
+  .products-list .card-text div:first-of-type p:first-of-type {
+    margin-bottom: 10px;
+  }
+  .products-list .details {
+    flex-direction: column;
+  }
+  .products-list .details .bathrooms {
+    width: 100%;
+  }
+}
+@media all and (max-width: 350px) {
+  .filter-wrap .filter-option {
+    width: 100%;
+  }
+}
+/* Small Media Query */
+@media all and (min-width: 576px) and (max-width: 767px) {
+  .filter-wrap .filter-option {
+    width: 30%;
+  }
+}
+/* Medium to Large Media Query */
+@media all and (min-width: 768px) and (max-width: 1199px) {
+  .filter-wrap {
+    justify-content: flex-start;
+  }
+  .filter-wrap .filter-option {
+    width: 24%;
+    margin-right: 1%;
+  }
+  .products-list .products .product {
+    width: 47% !important;
+  }
+  .products-list .details {
+    flex-direction: row;
+  }
+}/*# sourceMappingURL=rentalList.css.map */

@@ -1,0 +1,78 @@
+.favorites {
+    min-height: 500px;
+}
+@media all and (max-width: 1199px) {
+    #rental-list {
+        max-width: 100%;
+    }
+    .filter-wrap {
+        flex-wrap: wrap;
+        .filter-option {
+            width: 47%;
+            margin-bottom: 15px;
+        }
+    }
+    .products,
+    #map {
+        width: 100%;
+    }
+    .products {
+        margin-bottom: 20px;
+        max-width: 100%;
+    }
+    #map {
+        height: 400px;
+        max-width: 100%;
+    }
+    .products .product {
+        width: 100% !important;
+    }
+    .card-text div:first-of-type {
+        flex-direction: column;
+        p:first-of-type {
+            margin-bottom: 10px;
+        }
+    }
+    .details {
+        flex-direction: column;
+        .bathrooms {
+            width: 100%;
+        }
+    }
+}
+
+@media all and (max-width: 350px) {
+    .filter-wrap {
+        .filter-option {
+            width: 100%;
+        }
+    }
+}
+
+/* Small Media Query */
+
+@media all and (min-width: 576px) and (max-width: 767px) {
+    .filter-wrap {
+        .filter-option {
+            width: 30%;
+        }
+    }
+}
+
+/* Medium to Large Media Query */
+
+@media all and (min-width: 768px) and (max-width: 1199px) {
+    .filter-wrap {
+        justify-content: flex-start;
+        .filter-option {
+            width: 24%;
+            margin-right: 1%;
+        }
+    }
+    .products .product {
+        width: 47% !important;
+    }
+    .details {
+        flex-direction: row;
+    }
+}
