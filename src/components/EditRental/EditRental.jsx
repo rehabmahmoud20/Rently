@@ -27,8 +27,7 @@ const options = [
 
 const EditRental = (prop) => {
     const [imagesUrl, setimagesUrl] = useState([]);
-    const [rental, setRental] = useState(null);
-    const [images, setImages] = useState([]);
+    const [rental, setRental] = useState('');
     const [gender, genderShow] = useState(false);
     const [separateRooms, setseparateRooms] = useState(false);
     const navigate = useNavigate();
@@ -110,7 +109,7 @@ const EditRental = (prop) => {
     });
 
     return rental ? (
-        <section className="px-5 sm:col-px-10  py-5 mr-2 h-screen overflow-auto mb-5">
+        <section className="px-0 sm:px-5  container py-5  h-screen overflow-auto mb-5">
             <form onSubmit={handleUpadteData}>
                 <section className="about-rental">
                     <h2 className=" mb-6 text-3xl text-cyan-600">
@@ -161,13 +160,8 @@ const EditRental = (prop) => {
                                             };
                                         });
                                     }}
-                                    // {...register("address", { required: "This is required" })}
                                 />
-                                {/* {errors.address?.type === "required" && (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                    {errors.address.message}
-                  </p>
-                )} */}
+                            
                                 <label
                                     htmlFor="floating_address"
                                     className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -195,13 +189,8 @@ const EditRental = (prop) => {
                                         });
                                     }}
 
-                                    // {...register("insurance", { required: "This is required" })}
                                 />
-                                {/* {errors.insurance?.type === "required" && (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                    {errors.insurance.message}
-                  </p>
-                )} */}
+                               
                                 <label
                                     htmlFor="floating_adress"
                                     className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
@@ -226,13 +215,8 @@ const EditRental = (prop) => {
                                             };
                                         });
                                     }}
-                                    // {...register("price", { required: "This is required" })}
                                 />
-                                {/* {errors.price?.type === "required" && (
-                  <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                    {errors.price.message}
-                  </p>
-                )} */}
+                                
                                 <label
                                     htmlFor="floating_adress"
                                     className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-600 peer-focus:dark:text-cyan-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
