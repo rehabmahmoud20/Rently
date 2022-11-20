@@ -100,7 +100,6 @@ const AddRental = () => {
             insurance,
             airConditioner,
             rentalName,
-            // separateRooms,
             rentalType,
         } = data;
         //   timestamp: new Date().toDateString(),
