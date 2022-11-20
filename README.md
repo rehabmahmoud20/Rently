@@ -1,4 +1,6 @@
-[Rently-website]( https://rehabmahmoud20.github.io/Rently/)
+[live-demo]( https://rehabmahmoud20.github.io/Rently/)
+Rently is a real estate rental website through which you can rent a house, apartment or a separate
+room, you can choose the place also based on your gender or you can add your property for rent.
 using : 
 * React JS
 * Redux tool-kit 
