@@ -295,7 +295,7 @@ const About = () => {
                         </div>
                     </div>
                 </div>
-                <div className="our-team bg-gray-200 py-12">
+                {/* <div className="our-team bg-gray-200 py-12">
                     <div className="container mx-auto">
                         <h2 className="uppercase text-3xl text-gray-800 mb-12">
                             meet our team
@@ -443,7 +443,7 @@ const About = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );

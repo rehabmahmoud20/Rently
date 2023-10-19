@@ -54,7 +54,7 @@ const Home = () => {
                 <></>
             )}
             <Testimonials />
-            <div className="our-team bg-gray-200 py-12">
+            {/* <div className="our-team bg-gray-200 py-12">
                 <div className="container mx-auto">
                     <h2 className="text-4xl font-bold mb-8 w-fit mx-auto ">
                         meet our team
@@ -200,7 +200,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };
